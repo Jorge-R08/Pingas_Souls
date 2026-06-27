@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cxdfdhavl83fm"]
+
+[ext_resource type="PackedScene" uid="uid://bovqfstsw35m8" path="res://Scenes/boss_#1.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://d3xwq5aw1hguy" path="res://Scenes/character_body_2d.tscn" id="2_qxrlw"]
+
+[node name="Game" type="Node2D" unique_id=468793922]
+
+[node name="Boss #1" parent="." unique_id=1475328064 instance=ExtResource("1_ebmjs")]
+position = Vector2(420, -624)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1188151655]
+position = Vector2(-22, -324)
+
+[node name="CharacterBody2D" parent="." unique_id=290557556 instance=ExtResource("2_qxrlw")]
+position = Vector2(-533, -64)
