@@ -17,3 +17,5 @@ func setup_hsm() -> void:
 	hsm.add_transition(hsm.ANYSTATE, $LimboHSM/Teleport, &"teleport")
 	hsm.add_transition($LimboHSM/Teleport, $LimboHSM/Idle, &"idle")
 	hsm.add_transition($LimboHSM/Slash, $LimboHSM/Move, &"move")
+	hsm.add_transition($LimboHSM/Teleport, $LimboHSM/Move, &"move")
+	hsm.add_transition($LimboHSM/Teleport, $LimboHSM/Move, &"move")

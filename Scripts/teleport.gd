@@ -22,3 +22,4 @@ func _enter() -> void:
 	await get_tree().create_timer(0.2).timeout
 
 	mob.sprite.visible = true
+	dispatch(&"move")
