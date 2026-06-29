@@ -23,6 +23,8 @@ func _update(delta : float) -> void:
 		dispatch("to_combo1_state")
 	elif Input.is_action_just_pressed("jump") and char.is_on_floor():
 		char.velocity.y = JUMP_VELOCITY
+	elif Input.is_action_just_pressed("dash") and char.is_on_floor():
+		dispatch("to_dash")
 		
 	if !char.is_on_floor():
 		dispatch("to_airborne")

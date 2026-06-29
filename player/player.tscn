@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://civbn82tcb1i3"]
+[gd_scene load_steps=72 format=3 uid="uid://civbn82tcb1i3"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nyopi"]
 [ext_resource type="Texture2D" uid="uid://dxmcjwueyfui7" path="res://Assets/SkeletonKnight/RELEASE/DOWN_SWING.png" id="2_8xs2s"]
@@ -12,6 +12,11 @@
 [ext_resource type="Script" path="res://player/states/running_state.gd" id="8_lm05a"]
 [ext_resource type="Script" path="res://scripts/generic/attack_state.gd" id="11_dg6u1"]
 [ext_resource type="Script" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
+[ext_resource type="Script" path="res://player/states/dash_state.gd" id="13_etibh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mc3e4"]
+atlas = ExtResource("3_f8ymr")
+region = Rect2(0, 0, 170, 125)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ivshq"]
 atlas = ExtResource("2_y3s37")
@@ -224,6 +229,14 @@ region = Rect2(1020, 0, 170, 125)
 [sub_resource type="SpriteFrames" id="SpriteFrames_tank4"]
 animations = [{
 "frames": [{
+"duration": 1.8,
+"texture": SubResource("AtlasTexture_mc3e4")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ivshq")
 }, {
@@ -416,6 +429,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxtt8"]
+size = Vector2(38.25, 51.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_80cd1"]
+radius = 33.0
+height = 98.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_adjok"]
+radius = 31.0
+height = 116.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_83x2s"]
+radius = 13.0
+height = 102.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_nyopi")
@@ -424,21 +450,20 @@ facing_right = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"final_swing"
+animation = &"dash"
 autoplay = "idle"
-frame = 6
 frame_progress = 1.0
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-32.875, -7)
 shape = SubResource("RectangleShape2D_jxtt8")
 
-[node name="attack_hitbox" type="Area2D" parent="."]
-
-[node name="attack_area" type="CollisionShape2D" parent="attack_hitbox"]
-
 [node name="interact_area" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="interact_shape" type="CollisionShape2D" parent="interact_area"]
+metadata/_edit_lock_ = true
 
 [node name="HSM" type="LimboHSM" parent="."]
 
@@ -450,28 +475,55 @@ animation_name = &"idle"
 script = ExtResource("8_lm05a")
 animation_name = &"run"
 
-[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer")]
+[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
 script = ExtResource("11_dg6u1")
 damage = 10
 next_attack = NodePath("../combo2_state")
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 DIR_LOCKOUT_FRAME = 3
+hitzone = NodePath("Area2D")
 animation_name = &"down_swing"
 
-[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer")]
+[node name="Area2D" type="Area2D" parent="HSM/combo1_state"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HSM/combo1_state/Area2D"]
+position = Vector2(8, -15)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_80cd1")
+
+[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
 script = ExtResource("11_dg6u1")
 damage = 20
 next_attack = NodePath("../combo3_state")
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 DIR_LOCKOUT_FRAME = 2
+hitzone = NodePath("Area2D")
 animation_name = &"up_swing"
 
-[node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("combo_reset_timer")]
+[node name="Area2D" type="Area2D" parent="HSM/combo2_state"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HSM/combo2_state/Area2D"]
+position = Vector2(-6, -18)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_adjok")
+
+[node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("combo_reset_timer", "hitzone")]
 script = ExtResource("11_dg6u1")
 damage = 50
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 DIR_LOCKOUT_FRAME = 1
+hitzone = NodePath("Area2D")
 animation_name = &"final_swing"
+
+[node name="Area2D" type="Area2D" parent="HSM/combo3_state"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HSM/combo3_state/Area2D"]
+position = Vector2(37, -6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_83x2s")
 
 [node name="hurt_state" type="LimboState" parent="HSM"]
 
@@ -481,13 +533,20 @@ animation_name = &"final_swing"
 script = ExtResource("12_qdo0p")
 animation_name = &"death"
 
+[node name="dash_state" type="LimboState" parent="HSM"]
+script = ExtResource("13_etibh")
+animation_name = &"dash"
+
 [node name="sound_effects" type="Node" parent="."]
 
 [node name="attack-sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
+metadata/_edit_lock_ = true
 
 [node name="hurt_sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
+metadata/_edit_lock_ = true
 
 [node name="death_sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
+metadata/_edit_lock_ = true
 
 [node name="timers" type="Node" parent="."]
 
@@ -500,9 +559,12 @@ one_shot = true
 [node name="VFXs" type="Node" parent="."]
 
 [node name="parry_sparks_vfx" type="Node2D" parent="VFXs"]
+metadata/_edit_lock_ = true
 
 [node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx"]
+metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VFXs/parry_sparks_vfx"]
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="timers/combo_reset_timer" to="HSM/combo1_state" method="_on_combo_reset_timer_timeout"]
