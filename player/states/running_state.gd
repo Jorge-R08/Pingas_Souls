@@ -1,5 +1,6 @@
 extends CharacterState
 
+#region DEFS
 #region CONSTANTS
 const JUMP_VELOCITY = -400.0
 #endregion
@@ -13,6 +14,7 @@ const JUMP_VELOCITY = -400.0
 
 #region VARS
 #endregion
+#endregion
 
 func _state_specific_enter():
 	pass
@@ -22,15 +24,15 @@ func _update(delta : float) -> void:
 	if char.dir:
 		char.velocity.x = char.dir * SPEED
 	else:
-		char.hsm.dispatch("to_idle")
+		dispatch("to_idle")
 		
 	if Input.is_action_just_pressed("attack"):
-		char.hsm.dispatch("to_attack")
+		dispatch("to_combo1_state")
 	elif Input.is_action_just_pressed("jump") and char.is_on_floor():
 		char.velocity.y = JUMP_VELOCITY
 		
 	if !char.is_on_floor():
-		char.hsm.dispatch("to_airborne")
+		dispatch("to_airborne")
 		
 	char.move_and_slide()
 	char._flip_sprite()

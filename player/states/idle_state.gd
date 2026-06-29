@@ -20,16 +20,16 @@ func _state_specific_enter():
 
 func _update(delta : float) -> void:
 	if Input.is_action_just_pressed("attack"):
-		char.hsm.dispatch("to_attack")
+		dispatch("to_combo1_state")
 	elif Input.is_action_just_pressed("jump") and char.is_on_floor():
 		char.velocity.y = JUMP_VELOCITY
 		
 	if !char.is_on_floor():
-		char.hsm.dispatch("to_airborne")
+		dispatch("to_airborne")
 		
 	char.dir = Input.get_axis("left", "right")
 	if char.dir:
-		char.hsm.dispatch("to_running")
+		dispatch("to_running")
 	else:
 		char.velocity.x = move_toward(char.velocity.x, 0, 300)
 	

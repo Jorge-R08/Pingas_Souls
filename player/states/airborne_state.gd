@@ -1,5 +1,6 @@
 extends CharacterState
 
+#region DEFS
 #region CONSTANTS
 const STOP_SPEED : int = 10
 #endregion
@@ -13,6 +14,7 @@ const STOP_SPEED : int = 10
 
 #region VARS
 #endregion
+#endregion
 
 func _state_specific_enter():
 	pass
@@ -22,7 +24,7 @@ func _update(delta: float) -> void:
 	if not char.is_on_floor():
 		char.velocity += char.get_gravity() * delta
 	else:
-		char.hsm.dispatch("to_idle")
+		dispatch("to_idle")
 	
 	char.dir = Input.get_axis("left", "right")
 	if char.dir:
