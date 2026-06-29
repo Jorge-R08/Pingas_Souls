@@ -24,7 +24,6 @@ func _ready() -> void:
 	_base_char_ready()
 	_char_ready()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -48,8 +47,12 @@ func initiate_state_machine():
 	hsm.add_transition($HSM/combo2_state, $HSM/idle_state, &"to_idle")
 	hsm.add_transition($HSM/combo3_state, $HSM/idle_state, &"to_idle")
 	hsm.add_transition($HSM/airborne_state, $HSM/idle_state, &"to_idle")
+	hsm.add_transition($HSM/dash_state, $HSM/idle_state, &"to_idle")
 
 	hsm.add_transition($HSM/idle_state, $HSM/running_state, &"to_running")
+	
+	hsm.add_transition($HSM/idle_state, $HSM/dash_state, &"to_dash")
+	hsm.add_transition($HSM/running_state, $HSM/dash_state, &"to_dash")
 	
 	hsm.add_transition($HSM/idle_state, $HSM/airborne_state, &"to_airborne")
 	hsm.add_transition($HSM/running_state, $HSM/airborne_state, &"to_airborne")	

@@ -11,7 +11,6 @@ const STOP_SPEED : int = 10
 @export var combo_reset_timer : Timer
 @export var DIR_LOCKOUT_FRAME : int
 @export var SPEED : int = 100
-@export var hitzone : Area2D
 #endregion
 
 #region @ONREADY
