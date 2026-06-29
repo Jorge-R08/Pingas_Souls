@@ -10,13 +10,8 @@ config_version=5
 
 [application]
 
-<<<<<<< HEAD
-config/name="Peanut Butter Debut"
-run/main_scene="res://Levels/player_test_room.tscn"
-=======
 config/name="Pingas Souls"
 run/main_scene="res://Scenes/game.tscn"
->>>>>>> b2fccb4 (Tutorial Boss pt2)
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
