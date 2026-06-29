@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://bovqfstsw35m8"]
+[gd_scene load_steps=75 format=3 uid="uid://bovqfstsw35m8"]
 
 [ext_resource type="Script" path="res://Scripts/boss_#1.gd" id="1_eji2w"]
 [ext_resource type="Texture2D" uid="uid://67faof8tk434" path="res://Assets/Boss #1/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="1_scr8s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/slash.gd" id="5_odio0"]
 [ext_resource type="Script" path="res://Scripts/teleport.gd" id="6_gg46q"]
 [ext_resource type="Script" path="res://ai/tasks/should_slash.gd" id="7_1jcie"]
+[ext_resource type="Script" path="res://ai/tasks/should_teleport.gd" id="7_uvpf4"]
 [ext_resource type="Script" path="res://ai/tasks/move_to_player.gd" id="8_libr5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ekw7q"]
@@ -434,6 +435,9 @@ size = Vector2(200.25, 286.125)
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_wq565"]
 
+[sub_resource type="BTAction" id="BTAction_vuuv8"]
+script = ExtResource("7_uvpf4")
+
 [sub_resource type="BTAction" id="BTAction_8bcb8"]
 custom_name = "ShouldSlash"
 script = ExtResource("7_1jcie")
@@ -442,7 +446,7 @@ script = ExtResource("7_1jcie")
 script = ExtResource("8_libr5")
 
 [sub_resource type="BTSelector" id="BTSelector_64uhu"]
-children = [SubResource("BTAction_8bcb8"), SubResource("BTAction_233tn")]
+children = [SubResource("BTAction_vuuv8"), SubResource("BTAction_8bcb8"), SubResource("BTAction_233tn")]
 
 [sub_resource type="BehaviorTree" id="BehaviorTree_xxdix"]
 blackboard_plan = SubResource("BlackboardPlan_wq565")
