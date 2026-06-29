@@ -8,6 +8,7 @@ extends CharacterState
 @export var damage : int
 @export var next_attack : CharacterState = null
 @export var combo_reset_timer : Timer
+@export var DIR_LOCKOUT_FRAME : int
 #endregion
 
 #region @ONREADY
@@ -18,7 +19,7 @@ extends CharacterState
 #endregion
 
 func _state_specific_enter():
-	char.sprite.animation_finished.connect(self._on_sprite_animation_finished)
+	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
 	combo_reset_timer.stop()
 
@@ -28,6 +29,11 @@ func _update(delta: float) -> void:
 		print("XD")
 		print(next_attack.name)
 		dispatch("to_" + next_attack.name)
+
+	if char.sprite.frame < DIR_LOCKOUT_FRAME:
+		char.dir = Input.get_axis("left", "right")
+		char._flip_sprite()
+
 	
 func _on_sprite_animation_finished():
 	print("animation finished: ", char.sprite.animation)
@@ -40,6 +46,6 @@ func _on_combo_reset_timer_timeout() -> void:
 	dispatch("to_idle")
 	
 func _exit() -> void:
-	char.sprite.animation_finished.disconnect(self._on_sprite_animation_finished)
+	char.sprite.animation_finished.disconnect(_on_sprite_animation_finished)
 	combo_reset_timer.timeout.disconnect(_on_combo_reset_timer_timeout)
 	

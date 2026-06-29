@@ -5,6 +5,8 @@ extends baseChar
 
 #region DEFS
 #region CONSTANTS
+const MAX_HEALTH : int = 100
+const MAX_STAMINA : int = 100
 #endregion
 
 #region @EXPORTS

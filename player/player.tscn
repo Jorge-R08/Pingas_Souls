@@ -424,7 +424,7 @@ facing_right = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"death"
+animation = &"down_swing"
 autoplay = "idle"
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
@@ -453,6 +453,7 @@ script = ExtResource("11_dg6u1")
 damage = 10
 next_attack = NodePath("../combo2_state")
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+DIR_LOCKOUT_FRAME = 3
 animation_name = &"down_swing"
 
 [node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer")]
@@ -460,12 +461,14 @@ script = ExtResource("11_dg6u1")
 damage = 20
 next_attack = NodePath("../combo3_state")
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+DIR_LOCKOUT_FRAME = 2
 animation_name = &"up_swing"
 
 [node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("combo_reset_timer")]
 script = ExtResource("11_dg6u1")
 damage = 50
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+DIR_LOCKOUT_FRAME = 1
 animation_name = &"final_swing"
 
 [node name="hurt_state" type="LimboState" parent="HSM"]
