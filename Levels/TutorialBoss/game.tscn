@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxdfdhavl83fm"]
 
-[ext_resource type="PackedScene" uid="uid://bovqfstsw35m8" path="res://Scenes/boss_#1.tscn" id="1_ebmjs"]
-[ext_resource type="PackedScene" uid="uid://d3xwq5aw1hguy" path="res://Scenes/character_body_2d.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://bovqfstsw35m8" path="res://Levels/TutorialBoss/boss_#1.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://d3xwq5aw1hguy" path="res://Levels/TutorialBoss/character_body_2d.tscn" id="2_qxrlw"]
 
 [node name="Game" type="Node2D"]
 

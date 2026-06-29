@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://d3xwq5aw1hguy"]
 
-[ext_resource type="Script" path="res://Scripts/character_body_2d.gd" id="1_8xpr0"]
+[ext_resource type="Script" path="res://Scripts/TutorialBoss/character_body_2d.gd" id="1_8xpr0"]
 [ext_resource type="Texture2D" uid="uid://dx3a8e07ahw1k" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Idle.png" id="1_wp2t1"]
 [ext_resource type="Texture2D" uid="uid://cpv7725we76s0" path="res://Assets/Skeleton/Sprite Sheets/Skeleton Walk.png" id="2_sk5iq"]
 
