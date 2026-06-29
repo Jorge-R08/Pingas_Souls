@@ -314,7 +314,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lxs3o")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 5.0
 }, {
@@ -424,7 +424,7 @@ facing_right = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"run"
+animation = &"death"
 autoplay = "idle"
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
@@ -448,9 +448,25 @@ animation_name = &"idle"
 script = ExtResource("8_lm05a")
 animation_name = &"run"
 
-[node name="attack_state" type="LimboState" parent="HSM"]
+[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer")]
 script = ExtResource("11_dg6u1")
+damage = 10
+next_attack = NodePath("../combo2_state")
+combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 animation_name = &"down_swing"
+
+[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer")]
+script = ExtResource("11_dg6u1")
+damage = 20
+next_attack = NodePath("../combo3_state")
+combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+animation_name = &"up_swing"
+
+[node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("combo_reset_timer")]
+script = ExtResource("11_dg6u1")
+damage = 50
+combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+animation_name = &"final_swing"
 
 [node name="hurt_state" type="LimboState" parent="HSM"]
 
@@ -471,6 +487,8 @@ animation_name = &"death"
 [node name="timers" type="Node" parent="."]
 
 [node name="combo_reset_timer" type="Timer" parent="timers"]
+wait_time = 0.5
+one_shot = true
 
 [node name="stamina_regen_timer" type="Timer" parent="timers"]
 
@@ -481,3 +499,5 @@ animation_name = &"death"
 [node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VFXs/parry_sparks_vfx"]
+
+[connection signal="timeout" from="timers/combo_reset_timer" to="HSM/combo1_state" method="_on_combo_reset_timer_timeout"]

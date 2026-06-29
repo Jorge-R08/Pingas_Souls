@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name baseChar
 
+#region DEFS
 #region @EXPORTS
 @export var sprite : AnimatedSprite2D
 @export var facing_right : bool = false
@@ -12,6 +13,7 @@ class_name baseChar
 
 #region VARS
 var dir : int = 0
+#endregion
 #endregion
 
 func _char_ready():
@@ -42,7 +44,9 @@ func initiate_state_machine():
 	
 	hsm.add_transition($HSM/running_state, $HSM/idle_state, &"to_idle")
 	hsm.add_transition($HSM/hurt_state, $HSM/idle_state, &"to_idle")
-	hsm.add_transition($HSM/attack_state, $HSM/idle_state, &"to_idle")
+	hsm.add_transition($HSM/combo1_state, $HSM/idle_state, &"to_idle")
+	hsm.add_transition($HSM/combo2_state, $HSM/idle_state, &"to_idle")
+	hsm.add_transition($HSM/combo3_state, $HSM/idle_state, &"to_idle")
 	hsm.add_transition($HSM/airborne_state, $HSM/idle_state, &"to_idle")
 
 	hsm.add_transition($HSM/idle_state, $HSM/running_state, &"to_running")
@@ -50,11 +54,16 @@ func initiate_state_machine():
 	hsm.add_transition($HSM/idle_state, $HSM/airborne_state, &"to_airborne")
 	hsm.add_transition($HSM/running_state, $HSM/airborne_state, &"to_airborne")	
 	
-	hsm.add_transition($HSM/running_state, $HSM/attack_state, &"to_attack")
-	hsm.add_transition($HSM/idle_state, $HSM/attack_state, &"to_attack")
-	
+	hsm.add_transition($HSM/running_state, $HSM/combo1_state, &"to_combo1_state")
+	hsm.add_transition($HSM/idle_state, $HSM/combo1_state, &"to_combo1_state")
+	hsm.add_transition($HSM/combo1_state, $HSM/combo2_state, &"to_combo2_state")
+	hsm.add_transition($HSM/combo2_state, $HSM/combo3_state, &"to_combo3_state")
+
 	hsm.add_transition($HSM/running_state, $HSM/hurt_state, &"to_hurt")
-	hsm.add_transition($HSM/attack_state, $HSM/hurt_state, &"to_hurt")
+	hsm.add_transition($HSM/combo1_state, $HSM/hurt_state, &"to_hurt")
+	hsm.add_transition($HSM/combo2_state, $HSM/hurt_state, &"to_hurt")
+	hsm.add_transition($HSM/combo3_state, $HSM/hurt_state, &"to_hurt")
+
 	hsm.add_transition($HSM/idle_state, $HSM/hurt_state, &"to_hurt")
 	
 	hsm.add_transition($HSM/hurt_state, $HSM/death_state, &"to_death")
