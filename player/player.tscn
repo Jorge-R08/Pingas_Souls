@@ -424,8 +424,10 @@ facing_right = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"down_swing"
+animation = &"final_swing"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jxtt8")
