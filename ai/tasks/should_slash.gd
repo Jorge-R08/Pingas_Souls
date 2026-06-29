@@ -1,21 +1,20 @@
-extends BTAction
+extends BehaviorTreeState
 
 func _tick(delta: float) -> Status:
-	var mob: Boss1 = agent as Boss1
-	if mob == null:
+	if boss == null:
 		return FAILURE
-
-	if mob.hsm.get_active_state().name == "Slash":
+	
+	if boss.hsm.get_active_state().name == "Slash":
 		return SUCCESS
 
-	if mob.ray_cast_left.is_colliding():
-		if mob.ray_cast_left.get_collider() == mob.target:
-			mob.hsm.dispatch(&"slash")
+	if boss.ray_cast_left.is_colliding():
+		if boss.ray_cast_left.get_collider() == boss.target:
+			boss.hsm.dispatch(&"slash")
 			return SUCCESS
 
-	if mob.ray_cast_right.is_colliding():
-		if mob.ray_cast_right.get_collider() == mob.target:
-			mob.hsm.dispatch(&"slash")
+	if boss.ray_cast_right.is_colliding():
+		if boss.ray_cast_right.get_collider() == boss.target:
+			boss.hsm.dispatch(&"slash")
 			return SUCCESS
 
 	return FAILURE

@@ -454,9 +454,10 @@ root_task = SubResource("BTSelector_64uhu")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_rfpxg"]
 
-[node name="Boss #1" type="CharacterBody2D"]
+[node name="Boss #1" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_eji2w")
 speed = 60.0
+sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-41, 314)
@@ -476,21 +477,21 @@ target_position = Vector2(-132, 0)
 position = Vector2(59, 551)
 target_position = Vector2(121, 0)
 
-[node name="LimboHSM" type="LimboHSM" parent="."]
+[node name="HSM" type="LimboHSM" parent="."]
 
-[node name="Idle" type="LimboState" parent="LimboHSM"]
+[node name="Idle" type="LimboState" parent="HSM"]
 script = ExtResource("3_b8nok")
 animation_name = &"Idle"
 
-[node name="Move" type="LimboState" parent="LimboHSM"]
+[node name="Move" type="LimboState" parent="HSM"]
 script = ExtResource("4_pt446")
 animation_name = &"Move"
 
-[node name="Slash" type="LimboState" parent="LimboHSM"]
+[node name="Slash" type="LimboState" parent="HSM"]
 script = ExtResource("5_odio0")
 animation_name = &"Slash"
 
-[node name="Teleport" type="LimboState" parent="LimboHSM"]
+[node name="Teleport" type="LimboState" parent="HSM"]
 script = ExtResource("6_gg46q")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
