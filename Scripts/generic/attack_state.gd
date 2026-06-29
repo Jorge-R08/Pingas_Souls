@@ -1,8 +1,5 @@
-# meta-name: Default
-# meta-description: Base template with regions
-# meta-default: true
+extends CharacterState
 
-extends Node
 
 #region DEFS
 #region CONSTANTS
@@ -18,12 +15,10 @@ extends Node
 #endregion
 #endregion
 
-#region FUNCS
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _state_specific_enter():
+	pass
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-#endregion
