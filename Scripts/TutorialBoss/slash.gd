@@ -1,5 +1,5 @@
 class_name Slash
-extends CharacterState
+extends BossState
 
 func _enter() -> void:
 	super()

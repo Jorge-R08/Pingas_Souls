@@ -1,9 +1,8 @@
-extends BTAction
+extends BehaviorTreeState
 
 func _tick(delta: float) -> Status:
-	var mob: Boss1 = agent as Boss1
-	if mob == null:
+	if boss == null:
 		return FAILURE
 
-	mob.hsm.dispatch(&"move")
+	boss.hsm.dispatch(&"move")
 	return SUCCESS
