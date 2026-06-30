@@ -19,6 +19,7 @@ extends CharacterState
 func _state_specific_enter() -> void:
 	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 	char.sprite.self_modulate = Color(0,0,0,200)
+	char.set_collision_layer_value(2,0)
 
 func _update(delta: float) -> void:
 	
@@ -30,6 +31,7 @@ func _update(delta: float) -> void:
 	
 func _on_sprite_animation_finished():
 	char.sprite.self_modulate = Color(1,1,1,1)
+	char.set_collision_layer_value(2,1)
 	dispatch("to_idle")
 	
 #endregion
