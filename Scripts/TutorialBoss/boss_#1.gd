@@ -1,11 +1,9 @@
-class_name Boss1
+class_name BaseBoss
 extends baseChar
 
 @export var speed: float = 100.0
 @export var target: CharacterBody2D
-
-@onready var ray_cast_left: RayCast2D = $RayCast2DLeft
-@onready var ray_cast_right: RayCast2D = $RayCast2DRight
+@export var health: int
 
 func _char_ready() -> void:
 	hsm.add_transition($HSM/Idle, $HSM/Move, &"move")

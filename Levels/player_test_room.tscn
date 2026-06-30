@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cyfoa8iy5abik" path="res://Assets/environment/Graveyard1.png" id="2_70ud4"]
 [ext_resource type="PackedScene" uid="uid://bovqfstsw35m8" path="res://Levels/TutorialBoss/boss_#1.tscn" id="3_prbjx"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58ydm"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vejev"]
 texture = ExtResource("2_70ud4")
 0:0/0 = 0
 1:0/0 = 0
@@ -278,7 +278,7 @@ texture = ExtResource("2_70ud4")
 
 [sub_resource type="TileSet" id="TileSet_vshyp"]
 physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_58ydm")
+sources/2 = SubResource("TileSetAtlasSource_vejev")
 
 [node name="PlayerTestRoom" type="Node2D"]
 
@@ -292,6 +292,6 @@ tile_map_data = PackedByteArray("AAD5/wIAAgADAAAAAAD6/wIAAgADAAAAAAD7/wIAAgADAAA
 tile_set = SubResource("TileSet_vshyp")
 
 [node name="Boss #1" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_prbjx")]
-position = Vector2(695, -599)
+position = Vector2(707, -593)
 collision_layer = 4
 target = NodePath("../Player")

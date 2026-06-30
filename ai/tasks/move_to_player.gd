@@ -1,8 +1,14 @@
 extends BehaviorTreeState
 
+var tutorial_boss: TutorialBoss
+
+func _enter() -> void:
+	super()
+	tutorial_boss = boss as TutorialBoss
+
 func _tick(delta: float) -> Status:
-	if boss == null:
+	if tutorial_boss == null:
 		return FAILURE
 
-	boss.hsm.dispatch(&"move")
+	tutorial_boss.hsm.dispatch(&"move")
 	return SUCCESS
