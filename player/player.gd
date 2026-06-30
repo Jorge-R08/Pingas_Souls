@@ -13,6 +13,7 @@ const MAX_STAMINA : int = 100
 #endregion
 
 #region @ONREADY
+@onready var body_hitbox: CollisionShape2D = $body_hitbox
 #endregion
 
 #region VARS
@@ -21,6 +22,8 @@ const MAX_STAMINA : int = 100
 
 func _char_ready():
 	print("PLAYER READY")
+	
 
 func _physics_process(delta: float) -> void:
 	pass
+	
