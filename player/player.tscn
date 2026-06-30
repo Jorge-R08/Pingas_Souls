@@ -444,6 +444,7 @@ radius = 13.0
 height = 102.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+collision_layer = 2
 script = ExtResource("1_nyopi")
 sprite = NodePath("sprite")
 facing_right = true
