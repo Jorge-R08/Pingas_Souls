@@ -4,6 +4,8 @@ extends baseChar
 @export var speed: float = 100.0
 @export var target: CharacterBody2D
 @export var health: int
+@onready var ray_cast_left: RayCast2D = $RayCast2DLeft
+@onready var ray_cast_right: RayCast2D = $RayCast2DRight
 
 func _char_ready() -> void:
 	hsm.add_transition($HSM/Idle, $HSM/Move, &"move")
