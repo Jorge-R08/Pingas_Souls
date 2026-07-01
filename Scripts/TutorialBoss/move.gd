@@ -12,14 +12,9 @@ func _update(delta: float) -> void:
 	boss.velocity = Vector2(direction_x * boss.speed, 0)
 
 	var ray_length: float = 200.0
-	var direction_left: Vector2 = (boss.target.global_position - boss.ray_cast_left.global_position).normalized()
 	var direction_right: Vector2 = (boss.target.global_position - boss.ray_cast_right.global_position).normalized()
 
-	if boss.sprite.flip_h:
-		boss.ray_cast_right.target_position = direction_right * ray_length
-		boss.ray_cast_right.force_raycast_update()
-	else:
-		boss.ray_cast_left.target_position = direction_left * ray_length
-		boss.ray_cast_left.force_raycast_update()
+	boss.ray_cast_right.target_position = direction_right * ray_length
+	boss.ray_cast_right.force_raycast_update()
 
 	boss.move_and_slide()
