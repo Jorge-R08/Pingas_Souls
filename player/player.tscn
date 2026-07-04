@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b8mx3u1l03sc3" path="res://Assets/SkeletonKnight/RELEASE/WALK.png" id="6_wg0p0"]
 [ext_resource type="Script" path="res://player/states/idle_state.gd" id="7_jq37t"]
 [ext_resource type="Script" path="res://player/states/running_state.gd" id="8_lm05a"]
-[ext_resource type="Script" path="res://scripts/generic/attack_state.gd" id="11_dg6u1"]
+[ext_resource type="Script" path="res://scripts/generic/states/attack_state.gd" id="11_dg6u1"]
 [ext_resource type="Script" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
 [ext_resource type="Script" path="res://player/states/dash_state.gd" id="13_etibh"]
 
