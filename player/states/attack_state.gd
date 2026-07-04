@@ -22,7 +22,8 @@ var post_attack : bool = false
 #endregion
 #endregion
 
-func _state_specific_enter():
+func _enter():
+	super()
 	post_attack = false
 	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
@@ -31,7 +32,6 @@ func _state_specific_enter():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _update(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and (next_attack != null) and !combo_reset_timer.is_stopped():
-		print("XD")
 		print(next_attack.name)
 		dispatch("to_" + next_attack.name)
 
@@ -47,7 +47,6 @@ func _update(delta: float) -> void:
 		char.move_and_slide()
 	
 func _on_sprite_animation_finished():
-	print("animation finished: ", char.sprite.animation)
 	post_attack = true
 	if next_attack:
 		combo_reset_timer.start()

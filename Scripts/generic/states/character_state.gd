@@ -14,18 +14,15 @@ func _enter() -> void:
 		push_error("Agent is not Character")
 		return
 
-	if animation_name != "":
+	if animation_name != char.sprite.animation:
 		char.sprite.play(animation_name)
 
-	char = agent as baseChar
 	_setup_exports()
-	_state_specific_enter()
 	char._flip_sprite()
 	
-	
-#to be overwritte if needed
+func _update(delta: float) -> void:
+	pass
+
+#to be overwritten if needed
 func _setup_exports():
 	pass
-	
-func _state_specific_enter():
-	push_error("WARNING STATE DID NOT OVERRIDE THE _state_specific_enter() FUNCTION")

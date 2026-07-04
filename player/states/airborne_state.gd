@@ -16,8 +16,8 @@ const STOP_SPEED : int = 10
 #endregion
 #endregion
 
-func _state_specific_enter():
-	pass
+func _enter():
+	super()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _update(delta: float) -> void:

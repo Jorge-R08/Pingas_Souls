@@ -15,8 +15,8 @@ const JUMP_VELOCITY = -400.0
 #endregion
 #endregion
 
-func _state_specific_enter():
-	pass
+func _enter():
+	super()
 
 func _update(delta : float) -> void:
 	if Input.is_action_just_pressed("attack"):

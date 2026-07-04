@@ -2,9 +2,15 @@ extends CharacterBody2D
 class_name baseChar
 
 #region DEFS
+
+#region CONSTANTS
+const MAX_HEALTH : int = 100
+#endregion
+
 #region @EXPORTS
 @export var sprite : AnimatedSprite2D
 @export var facing_right : bool = false
+@export var hitzones : Node2D
 #endregion
 
 #region @ONREADY
@@ -13,6 +19,7 @@ class_name baseChar
 
 #region VARS
 var dir : int = 0
+var curr_health : int = MAX_HEALTH
 #endregion
 #endregion
 
@@ -21,25 +28,21 @@ func _char_ready():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_base_char_ready()
-	_char_ready()
+	sprite.flip_h = true if !facing_right else false
+	initiate_state_machine()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	_adjust_hitboxes()
 	
 func _flip_sprite():
 	if dir == 1:
 		sprite.flip_h = false
 	elif dir == -1:
 		sprite.flip_h = true
-		
-func _base_char_ready():
-	sprite.flip_h = true if !facing_right else false
-	initiate_state_machine()
 	
 func initiate_state_machine():
-	hsm.initial_state = $HSM/Move
+	hsm.initial_state = $HSM/idle_state
 	
 	hsm.add_transition($HSM/running_state, $HSM/idle_state, &"to_idle")
 	hsm.add_transition($HSM/hurt_state, $HSM/idle_state, &"to_idle")
@@ -66,12 +69,19 @@ func initiate_state_machine():
 	hsm.add_transition($HSM/combo1_state, $HSM/hurt_state, &"to_hurt")
 	hsm.add_transition($HSM/combo2_state, $HSM/hurt_state, &"to_hurt")
 	hsm.add_transition($HSM/combo3_state, $HSM/hurt_state, &"to_hurt")
-
 	hsm.add_transition($HSM/idle_state, $HSM/hurt_state, &"to_hurt")
 	
 	hsm.add_transition($HSM/hurt_state, $HSM/death_state, &"to_death")
-	
-	#hsm.add_event_handler(&"to_hurt", hurt_state._on_hurt_enter)
-	
+		
 	hsm.initialize(self)
 	hsm.set_active(true)
+
+func take_damage(_dmg: int, _dmg_direction: int) -> void:
+	curr_health = max(0, curr_health - _dmg)
+		
+func _adjust_hitboxes():
+	if sprite.flip_h:
+		hitzones.scale.x = -1
+	else:
+		hitzones.scale.x = 1
+		

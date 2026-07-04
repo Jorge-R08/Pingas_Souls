@@ -1,11 +1,8 @@
 extends baseChar
-
-#TODO:
-# fix the sprite moving when flip_h is changed because of the offset in the sprite itself
+class_name player
 
 #region DEFS
 #region CONSTANTS
-const MAX_HEALTH : int = 100
 const MAX_STAMINA : int = 100
 #endregion
 
@@ -17,13 +14,19 @@ const MAX_STAMINA : int = 100
 #endregion
 
 #region VARS
-#endregion
+var curr_stamina : int = MAX_STAMINA
 #endregion
 
-func _char_ready():
+#endregion
+
+func _ready():
+	super()
+	hsm.add_event_handler(&"to_hurt", $HSM/hurt_state._on_hurt_enter)
 	print("PLAYER READY")
-	
 
-func _physics_process(delta: float) -> void:
-	pass
-	
+func _process(delta : float) -> void:
+	super(delta)
+
+func take_damage(_dmg: int, _dmg_direction: int) -> void:
+	super(_dmg, _dmg_direction)
+	hsm.dispatch(&"to_hurt", {"dmg":_dmg,"dmg_dir":_dmg_direction})

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://bovqfstsw35m8"]
+[gd_scene load_steps=76 format=3 uid="uid://bovqfstsw35m8"]
 
 [ext_resource type="Script" path="res://Scripts/TutorialBoss/tutorial_boss.gd" id="1_rwvuq"]
 [ext_resource type="Texture2D" uid="uid://67faof8tk434" path="res://Assets/Boss #1/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="1_scr8s"]
@@ -454,22 +454,27 @@ root_task = SubResource("BTSelector_64uhu")
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_rfpxg"]
 
-[node name="Boss #1" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jile0"]
+radius = 137.0
+height = 366.0
+
+[node name="Boss #1" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitzones")]
 script = ExtResource("1_rwvuq")
 sprite = NodePath("AnimatedSprite2D")
+hitzones = NodePath("attack_hitzones")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-33, 425)
 scale = Vector2(2.33333, 2.60117)
 sprite_frames = SubResource("SpriteFrames_y8bso")
 animation = &"Slash"
+frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-36.5, 518.531)
+position = Vector2(-2, 91)
 shape = SubResource("RectangleShape2D_qnpof")
 
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
-position = Vector2(1, 547)
+position = Vector2(0, 150)
 target_position = Vector2(121, 0)
 collision_mask = 2
 
@@ -483,8 +488,11 @@ animation_name = &"Idle"
 script = ExtResource("4_pt446")
 animation_name = &"Move"
 
-[node name="Slash" type="LimboState" parent="HSM"]
+[node name="Slash" type="LimboState" parent="HSM" node_paths=PackedStringArray("hitzone")]
 script = ExtResource("5_odio0")
+hit_frame = 9
+hitzone = NodePath("../../attack_hitzones/slash")
+dmg = 5
 animation_name = &"Slash"
 
 [node name="Teleport" type="LimboState" parent="HSM"]
@@ -493,3 +501,15 @@ script = ExtResource("6_gg46q")
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = SubResource("BehaviorTree_xxdix")
 blackboard_plan = SubResource("BlackboardPlan_rfpxg")
+
+[node name="attack_hitzones" type="Node2D" parent="."]
+
+[node name="slash" type="Area2D" parent="attack_hitzones"]
+position = Vector2(2, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/slash"]
+position = Vector2(-124, 72)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jile0")
