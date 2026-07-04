@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b8mx3u1l03sc3" path="res://Assets/SkeletonKnight/RELEASE/WALK.png" id="6_wg0p0"]
 [ext_resource type="Script" path="res://player/states/idle_state.gd" id="7_jq37t"]
 [ext_resource type="Script" path="res://player/states/running_state.gd" id="8_lm05a"]
-[ext_resource type="Script" path="res://scripts/generic/states/attack_state.gd" id="11_dg6u1"]
+[ext_resource type="Script" path="res://Scripts/generic/states/attack_state.gd" id="11_qkeca"]
 [ext_resource type="Script" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
 [ext_resource type="Script" path="res://player/states/dash_state.gd" id="13_etibh"]
 
@@ -476,14 +476,8 @@ animation_name = &"idle"
 script = ExtResource("8_lm05a")
 animation_name = &"run"
 
-[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
-script = ExtResource("11_dg6u1")
-damage = 10
-next_attack = NodePath("../combo2_state")
-combo_reset_timer = NodePath("../../timers/combo_reset_timer")
-DIR_LOCKOUT_FRAME = 3
-hitzone = NodePath("Area2D")
-animation_name = &"down_swing"
+[node name="combo1_state" type="LimboState" parent="HSM"]
+script = ExtResource("11_qkeca")
 
 [node name="Area2D" type="Area2D" parent="HSM/combo1_state"]
 visible = false
@@ -493,13 +487,10 @@ position = Vector2(8, -15)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_80cd1")
 
-[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
-script = ExtResource("11_dg6u1")
+[node name="combo2_state" type="LimboState" parent="HSM"]
+script = ExtResource("11_qkeca")
 damage = 20
-next_attack = NodePath("../combo3_state")
-combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 DIR_LOCKOUT_FRAME = 2
-hitzone = NodePath("Area2D")
 animation_name = &"up_swing"
 
 [node name="Area2D" type="Area2D" parent="HSM/combo2_state"]
@@ -510,12 +501,10 @@ position = Vector2(-6, -18)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_adjok")
 
-[node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("combo_reset_timer", "hitzone")]
-script = ExtResource("11_dg6u1")
+[node name="combo3_state" type="LimboState" parent="HSM"]
+script = ExtResource("11_qkeca")
 damage = 50
-combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 DIR_LOCKOUT_FRAME = 1
-hitzone = NodePath("Area2D")
 animation_name = &"final_swing"
 
 [node name="Area2D" type="Area2D" parent="HSM/combo3_state"]

@@ -39,7 +39,7 @@ func _base_char_ready():
 	initiate_state_machine()
 	
 func initiate_state_machine():
-	hsm.initial_state = $HSM/idle_state
+	hsm.initial_state = $HSM/Move
 	
 	hsm.add_transition($HSM/running_state, $HSM/idle_state, &"to_idle")
 	hsm.add_transition($HSM/hurt_state, $HSM/idle_state, &"to_idle")

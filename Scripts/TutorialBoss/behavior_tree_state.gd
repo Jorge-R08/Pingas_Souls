@@ -1,10 +1,10 @@
 class_name BehaviorTreeState
 extends BTAction
 
-var boss: Boss1
+var boss: BaseBoss
 
 func _enter() -> void:
-	boss = agent as Boss1
+	boss = agent as BaseBoss
 
 	if boss == null:
 		push_error("BehaviorTreeState agent is not Boss1")

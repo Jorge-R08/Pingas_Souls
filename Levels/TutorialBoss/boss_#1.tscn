@@ -1,6 +1,6 @@
 [gd_scene load_steps=75 format=3 uid="uid://bovqfstsw35m8"]
 
-[ext_resource type="Script" path="res://Scripts/TutorialBoss/boss_#1.gd" id="1_eji2w"]
+[ext_resource type="Script" path="res://Scripts/TutorialBoss/tutorial_boss.gd" id="1_rwvuq"]
 [ext_resource type="Texture2D" uid="uid://67faof8tk434" path="res://Assets/Boss #1/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="1_scr8s"]
 [ext_resource type="Script" path="res://Scripts/TutorialBoss/idle.gd" id="3_b8nok"]
 [ext_resource type="Script" path="res://Scripts/TutorialBoss/move.gd" id="4_pt446"]
@@ -431,7 +431,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
-size = Vector2(200.25, 286.125)
+size = Vector2(155, 227.063)
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_wq565"]
 
@@ -455,27 +455,21 @@ root_task = SubResource("BTSelector_64uhu")
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_rfpxg"]
 
 [node name="Boss #1" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
-script = ExtResource("1_eji2w")
-speed = 60.0
+script = ExtResource("1_rwvuq")
 sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-41, 314)
-scale = Vector2(3.52778, 3.96484)
+position = Vector2(-33, 425)
+scale = Vector2(2.33333, 2.60117)
 sprite_frames = SubResource("SpriteFrames_y8bso")
 animation = &"Slash"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-29, 481.063)
+position = Vector2(-36.5, 518.531)
 shape = SubResource("RectangleShape2D_qnpof")
 
-[node name="RayCast2DLeft" type="RayCast2D" parent="."]
-position = Vector2(-132, 550)
-target_position = Vector2(-132, 0)
-collision_mask = 2
-
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
-position = Vector2(59, 551)
+position = Vector2(1, 547)
 target_position = Vector2(121, 0)
 collision_mask = 2
 
