@@ -451,9 +451,9 @@ facing_right = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"dash"
+animation = &"final_swing"
 autoplay = "idle"
-frame_progress = 1.0
+frame = 1
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
 visible = false
@@ -476,8 +476,13 @@ animation_name = &"idle"
 script = ExtResource("8_lm05a")
 animation_name = &"run"
 
-[node name="combo1_state" type="LimboState" parent="HSM"]
+[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
 script = ExtResource("11_qkeca")
+next_attack = NodePath("../combo2_state")
+combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+DIR_LOCKOUT_FRAME = 2
+hitzone = NodePath("Area2D")
+animation_name = &"down_swing"
 
 [node name="Area2D" type="Area2D" parent="HSM/combo1_state"]
 visible = false
@@ -487,10 +492,13 @@ position = Vector2(8, -15)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_80cd1")
 
-[node name="combo2_state" type="LimboState" parent="HSM"]
+[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
 script = ExtResource("11_qkeca")
 damage = 20
-DIR_LOCKOUT_FRAME = 2
+next_attack = NodePath("../combo3_state")
+combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+DIR_LOCKOUT_FRAME = 1
+hitzone = NodePath("Area2D")
 animation_name = &"up_swing"
 
 [node name="Area2D" type="Area2D" parent="HSM/combo2_state"]
@@ -501,10 +509,11 @@ position = Vector2(-6, -18)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_adjok")
 
-[node name="combo3_state" type="LimboState" parent="HSM"]
+[node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("combo_reset_timer", "hitzone")]
 script = ExtResource("11_qkeca")
 damage = 50
-DIR_LOCKOUT_FRAME = 1
+combo_reset_timer = NodePath("../../timers/combo_reset_timer")
+hitzone = NodePath("Area2D")
 animation_name = &"final_swing"
 
 [node name="Area2D" type="Area2D" parent="HSM/combo3_state"]
