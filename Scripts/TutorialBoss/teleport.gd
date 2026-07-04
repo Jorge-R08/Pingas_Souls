@@ -4,7 +4,7 @@ extends BossState
 @export var teleport_distance: float = 550.0
 const FIXED_Y: float = -624.0
 
-func _enter(cargo_dict = null) -> void:
+func _enter() -> void:
 	super()
 
 	boss.sprite.visible = false

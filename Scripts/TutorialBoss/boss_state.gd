@@ -3,7 +3,7 @@ class_name BossState
 
 var boss: BaseBoss
 
-func _enter( ) -> void:
+func _enter() -> void:
 	super()
 
 	boss = char as BaseBoss
