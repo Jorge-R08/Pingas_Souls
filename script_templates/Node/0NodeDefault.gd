@@ -4,6 +4,7 @@
 
 extends Node
 
+#region DEFS
 #region CONSTANTS
 #endregion
 
@@ -14,6 +15,7 @@ extends Node
 #endregion
 
 #region VARS
+#endregion
 #endregion
 
 #region FUNCS

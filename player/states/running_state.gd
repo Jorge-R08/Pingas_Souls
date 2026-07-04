@@ -1,17 +1,43 @@
-extends LimboState
+extends CharacterState
 
-@export var SPEED : int = 1000
+#region DEFS
+#region CONSTANTS
+const JUMP_VELOCITY = -400.0
+#endregion
 
-# maybe change this to be 2 function calls: A "generic entes" that will be shared by all child classes,
-# and then a "specific enter" that is just the custom functioanlity
-func _enter() -> void:
-	agent.speed = agent.INITIAL_SPEED
-	_setup_exports()
-	print("ENTERING RUNNING STATE")
-	agent._flip_sprite()
+#region @EXPORTS
+@export var SPEED : int = 300
+#endregion
 
-func _update(delta : float) -> void:
+#region @ONREADY
+#endregion
+
+#region VARS
+#endregion
+#endregion
+
+func _state_specific_enter():
 	pass
+	
+func _update(delta : float) -> void:
+	char.dir = Input.get_axis("left", "right")
+	if char.dir:
+		char.velocity.x = char.dir * SPEED
+	else:
+		dispatch("to_idle")
+		
+	if Input.is_action_just_pressed("attack"):
+		dispatch("to_combo1_state")
+	elif Input.is_action_just_pressed("jump") and char.is_on_floor():
+		char.velocity.y = JUMP_VELOCITY
+	elif Input.is_action_just_pressed("dash") and char.is_on_floor():
+		dispatch("to_dash")
+		
+	if !char.is_on_floor():
+		dispatch("to_airborne")
+		
+	char.move_and_slide()
+	char._flip_sprite()
 
 func _setup_exports():
-	agent.speed = SPEED
+	pass
