@@ -16,7 +16,8 @@ extends CharacterState
 #endregion
 
 #region FUNCS
-func _state_specific_enter() -> void:
+func _enter():
+	super()
 	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 	char.sprite.self_modulate = Color(0,0,0,200)
 	char.set_collision_layer_value(2,0)
