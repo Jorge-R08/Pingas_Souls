@@ -7,7 +7,8 @@ extends baseChar
 @onready var ray_cast_left: RayCast2D = $RayCast2DLeft
 @onready var ray_cast_right: RayCast2D = $RayCast2DRight
 
-func _char_ready() -> void:
+func _ready() -> void:
+	super()
 	hsm.add_transition($HSM/Idle, $HSM/Move, &"move")
 	hsm.add_transition($HSM/Move, $HSM/Idle, &"idle")
 

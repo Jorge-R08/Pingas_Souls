@@ -292,6 +292,7 @@ tile_map_data = PackedByteArray("AAD5/wIAAgADAAAAAAD6/wIAAgADAAAAAAD7/wIAAgADAAA
 tile_set = SubResource("TileSet_vshyp")
 
 [node name="Boss #1" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_prbjx")]
-position = Vector2(707, -593)
+position = Vector2(579, -191)
 collision_layer = 4
 target = NodePath("../Player")
+health = 100
