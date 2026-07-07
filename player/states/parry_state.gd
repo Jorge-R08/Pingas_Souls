@@ -1,0 +1,68 @@
+extends PlayerState
+
+#region DEFS
+#region CONSTANTS
+#endregion
+
+#region @EXPORTS
+@export var sparks_vfx : Node2D 
+@export var sparks_x_offset : int = 20
+@export var sparks_y_offset : int = -35
+#endregion
+
+#region @ONREADY
+@onready var parry_reset_timer : Timer = %parry_reset_timer
+#endregion
+
+#region VARS
+#endregion
+var sparks_sprite : AnimatedSprite2D
+var sparks_audio : AudioStreamPlayer2D
+#endregion
+
+#region FUNCS
+# Called when the node enters the scene tree for the first time.
+func _enter() -> void:
+	super()
+	sparks_sprite = sparks_vfx.get_children().filter(func(xd): return xd is AnimatedSprite2D)[0]
+	sparks_audio = sparks_vfx.get_children().filter(func(xd): return xd is AudioStreamPlayer2D)[0]
+	
+	sparks_sprite.animation_finished.connect(_on_spark_animation_finished)
+	parry_reset_timer.timeout.connect(_on_parry_reset_timer_timeout)
+	
+	play_sparks_vfx(Vector2(char.position.x, char.position.y), "parry")
+
+func _update(delta : float) -> void:
+	super(delta)
+	
+	if Input.is_action_just_pressed("attack"):
+		char.sprite.self_modulate = Color(0,0,0,200)
+		dispatch("to_riposte")
+	
+func play_sparks_vfx(spark_position: Vector2, spark_type: String = "default"):
+	sparks_vfx.global_position = spark_position + Vector2(sparks_x_offset, sparks_y_offset)*(-1 if char.sprite.flip_h else 1)
+	sparks_sprite.visible = true
+	
+	match spark_type:
+		"parry":
+			sparks_vfx.modulate = Color.ORANGE_RED
+			sparks_vfx.scale = Vector2(1.5, 1.5) 
+			sparks_audio.pitch_scale = 1.0
+			sparks_audio.volume_db = -12.0
+		"block":
+			sparks_vfx.modulate = Color.YELLOW 
+			sparks_vfx.scale = Vector2(1.0, 1.0) 
+			sparks_audio.pitch_scale = 0.7
+			sparks_audio.volume_db = -18.000
+	sparks_sprite.play("default") 
+	sparks_audio.play()
+	
+
+
+func _on_spark_animation_finished():
+	sparks_vfx.visible = false
+
+func _on_parry_reset_timer_timeout() -> void:
+	dispatch("to_idle")
+
+#endregion

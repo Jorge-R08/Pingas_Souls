@@ -1,4 +1,4 @@
-extends CharacterState
+extends PlayerState
 
 #region DEFS
 #region CONSTANTS
@@ -21,6 +21,7 @@ func _enter():
 	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 	char.sprite.self_modulate = Color(0,0,0,200)
 	char.set_collision_layer_value(2,0)
+	char.spend_stamina(char.DASH_STAMINA_COST)
 
 func _update(delta: float) -> void:
 	

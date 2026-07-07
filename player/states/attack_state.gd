@@ -1,4 +1,4 @@
-extends CharacterState
+extends PlayerState
 
 #region DEFS
 #region CONSTANTS
@@ -8,13 +8,15 @@ const STOP_SPEED : int = 10
 #region @EXPORTS
 @export var damage : int
 @export var next_attack : CharacterState = null
-@export var combo_reset_timer : Timer
 @export var DIR_LOCKOUT_FRAME : int
 @export var SPEED : int = 100
 @export var hitzone : Area2D
+## tha last parry frame of the animation
+@export var parry_frames : int = -1
 #endregion
 
 #region @ONREADY
+@onready var combo_reset_timer : Timer = %combo_reset_timer
 #endregion
 
 #region VARS
@@ -58,5 +60,11 @@ func _on_combo_reset_timer_timeout() -> void:
 
 func _exit() -> void:
 	char.sprite.animation_finished.disconnect(_on_sprite_animation_finished)
+	combo_reset_timer.stop()
 	combo_reset_timer.timeout.disconnect(_on_combo_reset_timer_timeout)
 	
+func take_damage(_dmg, _dir):
+	if parry_frames != -1 and char.sprite.frame <= parry_frames:
+		dispatch("to_parry")
+	else:
+		super(_dmg, _dir)
