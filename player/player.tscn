@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://civbn82tcb1i3"]
+[gd_scene load_steps=88 format=3 uid="uid://civbn82tcb1i3"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nyopi"]
 [ext_resource type="Texture2D" uid="uid://dxmcjwueyfui7" path="res://Assets/SkeletonKnight/RELEASE/DOWN_SWING.png" id="2_8xs2s"]
@@ -14,6 +14,9 @@
 [ext_resource type="Script" path="res://player/states/hurt_state.gd" id="12_8bogr"]
 [ext_resource type="Script" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
 [ext_resource type="Script" path="res://player/states/dash_state.gd" id="13_etibh"]
+[ext_resource type="Script" path="res://player/states/parry_state.gd" id="15_gr6ba"]
+[ext_resource type="Texture2D" uid="uid://b6rn73xiuh7wq" path="res://Assets/VFX/sparks.png" id="16_x26u5"]
+[ext_resource type="AudioStream" uid="uid://c6diaaufj2qar" path="res://Assets/VFX/new_audio_stream_ogg_vorbis.tres" id="17_qtsum"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mc3e4"]
 atlas = ExtResource("3_f8ymr")
@@ -403,10 +406,10 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_ioui3")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_gihsw")
 }, {
 "duration": 1.0,
@@ -432,6 +435,76 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxtt8"]
 size = Vector2(38.25, 51.5)
 
+[sub_resource type="Theme" id="Theme_jmpam"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chkcn"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8s7qa"]
+bg_color = Color(0, 0.620209, 0.22054, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th1o6"]
+atlas = ExtResource("16_x26u5")
+region = Rect2(291, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0jnf"]
+atlas = ExtResource("16_x26u5")
+region = Rect2(582, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ui5pf"]
+atlas = ExtResource("16_x26u5")
+region = Rect2(873, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f32lt"]
+atlas = ExtResource("16_x26u5")
+region = Rect2(1164, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l447o"]
+atlas = ExtResource("16_x26u5")
+region = Rect2(1455, 301, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l84fd"]
+atlas = ExtResource("16_x26u5")
+region = Rect2(0, 602, 291, 301)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fopk3"]
+atlas = ExtResource("16_x26u5")
+region = Rect2(291, 602, 291, 301)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_70xxi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th1o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0jnf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ui5pf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f32lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l447o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l84fd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fopk3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i7edg"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("17_qtsum")
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_80cd1"]
 radius = 33.0
 height = 98.0
@@ -453,10 +526,8 @@ hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"final_swing"
 animation = &"idle"
 autoplay = "idle"
-frame = 1
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-32.875, -7)
@@ -479,53 +550,26 @@ animation_name = &"idle"
 script = ExtResource("8_lm05a")
 animation_name = &"run"
 
-[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
+[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
 script = ExtResource("11_qkeca")
 next_attack = NodePath("../combo2_state")
-combo_reset_timer = NodePath("../../timers/combo_reset_timer")
-DIR_LOCKOUT_FRAME = 2
-hitzone = NodePath("Area2D")
-animation_name = &"down_swing"
-
-[node name="Area2D" type="Area2D" parent="HSM/combo1_state"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HSM/combo1_state/Area2D"]
-position = Vector2(8, -15)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_80cd1")
-next_attack = NodePath("../combo2_state")
-combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 DIR_LOCKOUT_FRAME = 2
 hitzone = NodePath("../../attack_hitzones/attack1")
 animation_name = &"down_swing"
 
-[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "combo_reset_timer", "hitzone")]
+[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
 script = ExtResource("11_qkeca")
 damage = 20
 next_attack = NodePath("../combo3_state")
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 DIR_LOCKOUT_FRAME = 1
-hitzone = NodePath("Area2D")
-next_attack = NodePath("../combo3_state")
-combo_reset_timer = NodePath("../../timers/combo_reset_timer")
-DIR_LOCKOUT_FRAME = 1
 hitzone = NodePath("../../attack_hitzones/attack2")
+parry_frames = 1
 animation_name = &"up_swing"
-
-[node name="Area2D" type="Area2D" parent="HSM/combo2_state"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HSM/combo2_state/Area2D"]
-position = Vector2(-6, -18)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_adjok")
 
 [node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("combo_reset_timer", "hitzone")]
 script = ExtResource("11_qkeca")
 damage = 50
-combo_reset_timer = NodePath("../../timers/combo_reset_timer")
-hitzone = NodePath("Area2D")
 combo_reset_timer = NodePath("../../timers/combo_reset_timer")
 hitzone = NodePath("../../attack_hitzones/attack3")
 animation_name = &"final_swing"
@@ -544,6 +588,41 @@ animation_name = &"death"
 script = ExtResource("13_etibh")
 animation_name = &"dash"
 
+[node name="parry_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("sparks_vfx")]
+script = ExtResource("15_gr6ba")
+sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
+
+[node name="riposte_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("hitzone")]
+script = ExtResource("11_qkeca")
+damage = 50
+hitzone = NodePath("../../attack_hitzones/attack3")
+animation_name = &"final_swing"
+
+[node name="stamina_bar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -78.0
+offset_top = -96.0
+offset_right = 52.0
+offset_bottom = -66.0
+theme = SubResource("Theme_jmpam")
+theme_override_styles/background = SubResource("StyleBoxFlat_chkcn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8s7qa")
+max_value = 120.0
+value = 120.0
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="stamina_bar"]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 45.0
+offset_bottom = 30.0
+
+[node name="ColorRect2" type="ColorRect" parent="stamina_bar"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 90.0
+offset_bottom = 30.0
+
 [node name="sound_effects" type="Node" parent="."]
 
 [node name="attack-sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
@@ -558,21 +637,33 @@ metadata/_edit_lock_ = true
 [node name="timers" type="Node" parent="."]
 
 [node name="combo_reset_timer" type="Timer" parent="timers"]
-wait_time = 0.5
+unique_name_in_owner = true
+wait_time = 3.0
 one_shot = true
 
 [node name="stamina_regen_timer" type="Timer" parent="timers"]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true
+
+[node name="parry_reset_timer" type="Timer" parent="timers"]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="VFXs" type="Node" parent="."]
 
 [node name="parry_sparks_vfx" type="Node2D" parent="VFXs"]
-metadata/_edit_lock_ = true
 
 [node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx"]
-metadata/_edit_lock_ = true
+visible = false
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_70xxi")
+frame = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VFXs/parry_sparks_vfx"]
-metadata/_edit_lock_ = true
+stream = SubResource("AudioStreamRandomizer_i7edg")
+volume_db = -3.96
+pitch_scale = 0.9
 
 [node name="attack_hitzones" type="Node2D" parent="."]
 visible = false
@@ -599,3 +690,4 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_83x2s")
 
 [connection signal="timeout" from="timers/combo_reset_timer" to="HSM/combo1_state" method="_on_combo_reset_timer_timeout"]
+[connection signal="timeout" from="timers/parry_reset_timer" to="HSM/parry_state" method="_on_parry_reset_timer_timeout"]

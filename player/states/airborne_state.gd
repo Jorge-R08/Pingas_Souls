@@ -1,4 +1,4 @@
-extends CharacterState
+extends PlayerState
 
 #region DEFS
 #region CONSTANTS
