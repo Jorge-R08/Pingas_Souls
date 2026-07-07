@@ -11,6 +11,7 @@ const MAX_HEALTH : int = 100
 @export var sprite : AnimatedSprite2D
 @export var facing_right : bool = false
 @export var hitzones : Node2D
+@export var debug : bool = true
 #endregion
 
 #region @ONREADY

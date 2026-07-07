@@ -8,13 +8,14 @@ var char: baseChar
 func _enter() -> void:
 	char = agent as baseChar
 	
-	print("entered state: ", name)
+	if char.debug:
+		print("entered state: ", name)
 
 	if char == null:
 		push_error("Agent is not Character")
 		return
 
-	if animation_name != char.sprite.animation:
+	if animation_name != "" and animation_name != char.sprite.animation:
 		char.sprite.play(animation_name)
 
 	_setup_exports()

@@ -1,6 +1,7 @@
 class_name BaseBoss
 extends baseChar
 
+@export var freeze : bool = false
 @export var speed: float = 100.0
 @export var target: CharacterBody2D
 @export var health: int

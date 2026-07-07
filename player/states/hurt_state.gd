@@ -1,4 +1,4 @@
-extends CharacterState
+extends PlayerState
 
 #region DEFS
 #region CONSTANTS
@@ -28,4 +28,5 @@ func _update(delta : float) -> void:
 	super(delta)
 	
 func _on_sprite_animation_finished():
+	char.sprite.animation_finished.disconnect(_on_sprite_animation_finished)
 	dispatch("to_idle")
