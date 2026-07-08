@@ -23,7 +23,7 @@ func _update(delta : float) -> void:
 		dispatch("to_combo1_state")
 	elif Input.is_action_just_pressed("jump") and char.is_on_floor():
 		char.velocity.y = JUMP_VELOCITY
-	elif Input.is_action_just_pressed("dash") and char.is_on_floor() and char.curr_stamina > char.DASH_STAMINA_COST:
+	elif Input.is_action_just_pressed("dash") and char.is_on_floor() and char.curr_stamina >= char.DASH_STAMINA_COST:
 		dispatch("to_dash")
 		
 	if !char.is_on_floor():
@@ -36,3 +36,6 @@ func _update(delta : float) -> void:
 		char.velocity.x = move_toward(char.velocity.x, 0, 300)
 	
 	char.move_and_slide()
+	
+func _exit() -> void:
+	super()
