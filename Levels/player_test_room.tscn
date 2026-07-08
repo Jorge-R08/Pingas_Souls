@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://b7qd2w0vvx4ib"]
 
-[ext_resource type="PackedScene" uid="uid://civbn82tcb1i3" path="res://player/player.tscn" id="1_xinu5"]
+[ext_resource type="PackedScene" uid="uid://jaxjrk4odqml" path="res://player/player.tscn" id="1_xinu5"]
 [ext_resource type="Texture2D" uid="uid://cyfoa8iy5abik" path="res://Assets/environment/Graveyard1.png" id="2_70ud4"]
 [ext_resource type="PackedScene" uid="uid://bovqfstsw35m8" path="res://Levels/TutorialBoss/boss_#1.tscn" id="3_prbjx"]
 
@@ -298,3 +298,19 @@ freeze = true
 target = NodePath("../Player")
 health = 100
 debug = false
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+offset_left = 407.0
+offset_top = 143.0
+offset_right = 447.0
+offset_bottom = 166.0
+text = "K to restart"
+
+[node name="Label2" type="Label" parent="."]
+z_index = 1
+offset_left = 408.0
+offset_top = 118.0
+offset_right = 615.0
+offset_bottom = 141.0
+text = "Z to gain mana (blue bar)"

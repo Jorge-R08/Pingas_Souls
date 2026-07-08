@@ -33,6 +33,7 @@ func _enter():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _update(delta: float) -> void:
+	#TODO: Attack needs to connect in order to be able to combo
 	if Input.is_action_just_pressed("attack") and (next_attack != null) and !combo_reset_timer.is_stopped():
 		print(next_attack.name)
 		dispatch("to_" + next_attack.name)
@@ -59,9 +60,10 @@ func _on_combo_reset_timer_timeout() -> void:
 	dispatch("to_idle")
 
 func _exit() -> void:
-	char.sprite.animation_finished.disconnect(_on_sprite_animation_finished)
+	super()
 	combo_reset_timer.stop()
 	combo_reset_timer.timeout.disconnect(_on_combo_reset_timer_timeout)
+	char.sprite.self_modulate = Color(1,1,1,1)
 	
 func take_damage(_dmg, _dir):
 	if parry_frames != -1 and char.sprite.frame <= parry_frames:
