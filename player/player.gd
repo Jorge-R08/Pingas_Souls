@@ -15,6 +15,8 @@ const DASH_STAMINA_COST = 40
 @onready var stamina_bar: ProgressBar = %stamina_bar
 @onready var stamina_regen_timer : Timer = %stamina_regen_timer
 @onready var mana_meter : ProgressBar = %mana_meter
+@onready var coyote_time_buffer: Timer = %coyote_time_buffer
+
 #endregion
 
 #region VARS

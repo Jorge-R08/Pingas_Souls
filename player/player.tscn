@@ -233,7 +233,10 @@ region = Rect2(1020, 0, 170, 125)
 [sub_resource type="SpriteFrames" id="SpriteFrames_tank4"]
 animations = [{
 "frames": [{
-"duration": 1.8,
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mc3e4")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mc3e4")
 }],
 "loop": false,
@@ -532,7 +535,7 @@ hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"idle"
+animation = &"dash"
 autoplay = "idle"
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
@@ -675,6 +678,11 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
+[node name="coyote_time_buffer" type="Timer" parent="timers"]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
 [node name="VFXs" type="Node" parent="."]
 
 [node name="parry_sparks_vfx" type="Node2D" parent="VFXs"]
@@ -716,3 +724,4 @@ shape = SubResource("CapsuleShape2D_83x2s")
 
 [connection signal="timeout" from="timers/combo_reset_timer" to="HSM/combo1_state" method="_on_combo_reset_timer_timeout"]
 [connection signal="timeout" from="timers/parry_reset_timer" to="HSM/parry_state" method="_on_parry_reset_timer_timeout"]
+[connection signal="timeout" from="timers/coyote_time_buffer" to="HSM/idle_state" method="_on_coyote_time_buffer_timeout"]
