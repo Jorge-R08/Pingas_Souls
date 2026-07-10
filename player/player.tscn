@@ -535,7 +535,7 @@ hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"dash"
+animation = &"up_swing"
 autoplay = "idle"
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
@@ -583,18 +583,21 @@ next_attack = NodePath("../combo3_state")
 DIR_LOCKOUT_FRAME = 1
 hitzone = NodePath("../../attack_hitzones/attack2")
 parry_frames = 1
+hit_frame = 2
 animation_name = &"up_swing"
 
 [node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("hitzone")]
 script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/attack3")
+hit_frame = 1
 animation_name = &"final_swing"
 
 [node name="riposte_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("hitzone")]
 script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/attack3")
+hit_frame = 1
 animation_name = &"final_swing"
 
 [node name="parry_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("sparks_vfx")]
@@ -702,6 +705,7 @@ pitch_scale = 0.9
 [node name="attack_hitzones" type="Node2D" parent="."]
 
 [node name="attack1" type="Area2D" parent="attack_hitzones"]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack1"]
 position = Vector2(8, -15)
@@ -710,6 +714,7 @@ shape = SubResource("CapsuleShape2D_80cd1")
 
 [node name="attack2" type="Area2D" parent="attack_hitzones"]
 visible = false
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack2"]
 visible = false
@@ -719,6 +724,7 @@ shape = SubResource("CapsuleShape2D_adjok")
 
 [node name="attack3" type="Area2D" parent="attack_hitzones"]
 visible = false
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack3"]
 visible = false
