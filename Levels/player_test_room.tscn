@@ -282,8 +282,9 @@ sources/2 = SubResource("TileSetAtlasSource_acure")
 
 [node name="PlayerTestRoom" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_xinu5")]
+[node name="Player" parent="." node_paths=PackedStringArray("boss_target") instance=ExtResource("1_xinu5")]
 position = Vector2(37, 7)
+boss_target = NodePath("../Boss #1")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
@@ -293,7 +294,7 @@ tile_map_data = PackedByteArray("AAD5/wIAAgADAAAAAAD6/wIAAgADAAAAAAD7/wIAAgADAAA
 tile_set = SubResource("TileSet_vshyp")
 
 [node name="Boss #1" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_prbjx")]
-position = Vector2(579, -191)
+position = Vector2(576, -100)
 collision_layer = 4
 freeze = true
 target = NodePath("../Player")
