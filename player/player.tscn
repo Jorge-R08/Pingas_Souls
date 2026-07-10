@@ -539,6 +539,7 @@ animation = &"dash"
 autoplay = "idle"
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-32.875, -7)
 scale = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_jxtt8")
@@ -572,6 +573,7 @@ damage = 10
 next_attack = NodePath("../combo2_state")
 DIR_LOCKOUT_FRAME = 2
 hitzone = NodePath("../../attack_hitzones/attack1")
+hit_frame = 3
 animation_name = &"down_swing"
 
 [node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
@@ -698,7 +700,6 @@ volume_db = -3.96
 pitch_scale = 0.9
 
 [node name="attack_hitzones" type="Node2D" parent="."]
-visible = false
 
 [node name="attack1" type="Area2D" parent="attack_hitzones"]
 
@@ -708,15 +709,19 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_80cd1")
 
 [node name="attack2" type="Area2D" parent="attack_hitzones"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack2"]
+visible = false
 position = Vector2(-6, -18)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_adjok")
 
 [node name="attack3" type="Area2D" parent="attack_hitzones"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack3"]
+visible = false
 position = Vector2(37, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_83x2s")

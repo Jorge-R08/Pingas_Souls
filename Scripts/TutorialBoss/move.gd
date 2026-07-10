@@ -6,11 +6,11 @@ func _update(delta: float) -> void:
 		return
 
 	var x_diff: float = boss.target.global_position.x - boss.global_position.x
-	var direction_x: float = sign(x_diff)
+	
+	boss.dir = int(sign(x_diff))
+	boss._flip_sprite()
 
-	boss.sprite.flip_h = direction_x > 0
-	if !boss.freeze:
-		boss.velocity = Vector2(direction_x * boss.speed, 0)
+	boss.velocity = Vector2(boss.dir * boss.speed, 0)
 
 	var ray_length: float = 200.0
 	var direction_right: Vector2 = (boss.target.global_position - boss.ray_cast_right.global_position).normalized()

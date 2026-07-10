@@ -11,6 +11,7 @@ const DASH_STAMINA_COST = 40
 #endregion
 
 #region @EXPORTS
+@export var boss_target: CharacterBody2D
 #endregion
 
 #region @ONREADY

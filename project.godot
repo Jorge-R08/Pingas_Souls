@@ -24,6 +24,10 @@ SignalBus="*res://Scripts/signal_bus.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script_tabs/plugin.cfg")
+
 [input]
 
 attack={
