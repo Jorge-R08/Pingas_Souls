@@ -7,9 +7,6 @@ var char: baseChar
 
 func _enter() -> void:
 	char = agent as baseChar
-	
-	if char.debug:
-		print("entered state: ", name)
 
 	if char == null:
 		push_error("Agent is not Character")

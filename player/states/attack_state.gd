@@ -13,6 +13,8 @@ const STOP_SPEED : int = 10
 @export var hitzone : Area2D
 ## tha last parry frame of the animation
 @export var parry_frames : int = -1
+
+@export var hit_frame : int
 #endregion
 
 #region @ONREADY
@@ -26,10 +28,13 @@ var post_attack : bool = false
 
 func _enter():
 	super()
+	print(char.boss_target)
 	post_attack = false
 	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
 	combo_reset_timer.stop()
+	
+	hitzone.monitoring = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _update(delta: float) -> void:
@@ -47,6 +52,14 @@ func _update(delta: float) -> void:
 		
 		char._flip_sprite()
 		char.move_and_slide()
+	
+	if char.sprite.frame == hit_frame:
+		if hitzone.has_overlapping_bodies():
+			print(char.sprite.frame)
+			hitzone.monitoring = false
+			print(char.boss_target.health)
+			char.boss_target.health = 50
+			print(char.boss_target.health)
 	
 func _on_sprite_animation_finished():
 	post_attack = true
