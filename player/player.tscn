@@ -568,6 +568,7 @@ animation_name = &"dash"
 
 [node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
 script = ExtResource("11_qkeca")
+damage = 10
 next_attack = NodePath("../combo2_state")
 DIR_LOCKOUT_FRAME = 2
 hitzone = NodePath("../../attack_hitzones/attack1")
