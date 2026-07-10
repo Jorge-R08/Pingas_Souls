@@ -20,44 +20,16 @@ const DASH_STAMINA_COST = 40
 @onready var mana_meter : ProgressBar = %mana_meter
 @onready var coyote_time_buffer: Timer = %coyote_time_buffer
 
-@onready var stamina_bar: ProgressBar = %stamina_bar
-@onready var stamina_regen_timer : Timer = %stamina_regen_timer
-@onready var mana_meter : ProgressBar = %mana_meter
-@onready var coyote_time_buffer: Timer = %coyote_time_buffer
-
 #endregion
 
 #region VARS
 var curr_stamina : float = MAX_STAMINA
 var stamina_regen : bool = false
 var curr_mana : int = 1
-var curr_stamina : float = MAX_STAMINA
-var stamina_regen : bool = false
-var curr_mana : int = 1
 #endregion
 
 
 #endregion
-
-func _ready():
-	super()
-	hsm.add_event_handler(&"to_hurt", $HSM/hurt_state._on_hurt_enter)
-	hsm.add_transition($HSM/combo2_state, $HSM/parry_state, "to_parry")
-	hsm.add_transition($HSM/parry_state, $HSM/idle_state, "to_idle")
-	hsm.add_transition($HSM/parry_state, $HSM/hurt_state, "to_hurt")
-	hsm.add_transition($HSM/parry_state, $HSM/riposte_state, "to_riposte")
-	hsm.add_transition($HSM/riposte_state, $HSM/idle_state, "to_idle")
-	hsm.add_transition($HSM/riposte_state, $HSM/hurt_state, "to_hurt")
-	hsm.add_transition($HSM/dash_state, $HSM/combo2_state, "to_combo2_state")
-	
-	hsm.add_transition($HSM/running_state, $HSM/combo1_state, &"to_combo1_state")
-	hsm.add_transition($HSM/idle_state, $HSM/combo1_state, &"to_combo1_state")
-	hsm.add_transition($HSM/combo1_state, $HSM/combo2_state, &"to_combo2_state")
-	hsm.add_transition($HSM/combo2_state, $HSM/combo3_state, &"to_combo3_state")
-	
-	stamina_regen_timer.timeout.connect(_on_stamina_regen_timer_timeout)
-	
-	mana_meter.value = curr_mana
 	
 func _ready():
 	super()
