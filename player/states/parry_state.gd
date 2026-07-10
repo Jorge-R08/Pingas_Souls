@@ -30,6 +30,8 @@ func _enter() -> void:
 	sparks_sprite.animation_finished.connect(_on_spark_animation_finished)
 	parry_reset_timer.timeout.connect(_on_parry_reset_timer_timeout)
 	
+	char.gain_mana(1)
+	
 	play_sparks_vfx(Vector2(char.position.x, char.position.y), "parry")
 
 func _update(delta : float) -> void:
@@ -65,4 +67,7 @@ func _on_spark_animation_finished():
 func _on_parry_reset_timer_timeout() -> void:
 	dispatch("to_idle")
 
+func _exit() -> void:
+	super()
+	
 #endregion

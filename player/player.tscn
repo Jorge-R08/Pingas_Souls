@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://civbn82tcb1i3"]
+[gd_scene load_steps=90 format=3 uid="uid://jaxjrk4odqml"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nyopi"]
 [ext_resource type="Texture2D" uid="uid://dxmcjwueyfui7" path="res://Assets/SkeletonKnight/RELEASE/DOWN_SWING.png" id="2_8xs2s"]
@@ -233,7 +233,10 @@ region = Rect2(1020, 0, 170, 125)
 [sub_resource type="SpriteFrames" id="SpriteFrames_tank4"]
 animations = [{
 "frames": [{
-"duration": 1.8,
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mc3e4")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mc3e4")
 }],
 "loop": false,
@@ -443,6 +446,12 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8s7qa"]
 bg_color = Color(0, 0.620209, 0.22054, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iemw7"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8onb"]
+bg_color = Color(0.0352941, 0.717647, 0.933333, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_th1o6"]
 atlas = ExtResource("16_x26u5")
 region = Rect2(291, 301, 291, 301)
@@ -526,10 +535,8 @@ hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"down_swing"
+animation = &"dash"
 autoplay = "idle"
-frame = 6
-frame_progress = 1.0
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
 visible = false
@@ -552,6 +559,13 @@ animation_name = &"idle"
 [node name="running_state" type="LimboState" parent="HSM"]
 script = ExtResource("8_lm05a")
 animation_name = &"run"
+
+[node name="airborne_state" type="LimboState" parent="HSM"]
+script = ExtResource("12_qdo0p")
+
+[node name="dash_state" type="LimboState" parent="HSM"]
+script = ExtResource("13_etibh")
+animation_name = &"dash"
 
 [node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
 script = ExtResource("11_qkeca")
@@ -577,29 +591,21 @@ damage = 50
 hitzone = NodePath("../../attack_hitzones/attack3")
 animation_name = &"final_swing"
 
-[node name="hurt_state" type="LimboState" parent="HSM"]
-script = ExtResource("12_8bogr")
-animation_name = &"hurt"
-
-[node name="death_state" type="LimboState" parent="HSM"]
-
-[node name="airborne_state" type="LimboState" parent="HSM"]
-script = ExtResource("12_qdo0p")
-animation_name = &"death"
-
-[node name="dash_state" type="LimboState" parent="HSM"]
-script = ExtResource("13_etibh")
-animation_name = &"dash"
-
-[node name="parry_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("sparks_vfx")]
-script = ExtResource("15_gr6ba")
-sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
-
 [node name="riposte_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("hitzone")]
 script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/attack3")
 animation_name = &"final_swing"
+
+[node name="parry_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("sparks_vfx")]
+script = ExtResource("15_gr6ba")
+sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
+
+[node name="hurt_state" type="LimboState" parent="HSM"]
+script = ExtResource("12_8bogr")
+animation_name = &"hurt"
+
+[node name="death_state" type="LimboState" parent="HSM"]
 
 [node name="stamina_bar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
@@ -626,6 +632,26 @@ offset_left = 85.0
 offset_right = 90.0
 offset_bottom = 30.0
 
+[node name="mana_meter" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+z_index = 1
+offset_left = -50.0
+offset_top = 70.0
+offset_right = 50.0
+offset_bottom = 110.0
+theme_override_styles/background = SubResource("StyleBoxFlat_iemw7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_l8onb")
+max_value = 2.0
+value = 1.0
+show_percentage = false
+
+[node name="ColorRect3" type="ColorRect" parent="mana_meter"]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 51.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
 [node name="sound_effects" type="Node" parent="."]
 
 [node name="attack-sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
@@ -651,6 +677,11 @@ one_shot = true
 
 [node name="parry_reset_timer" type="Timer" parent="timers"]
 unique_name_in_owner = true
+one_shot = true
+
+[node name="coyote_time_buffer" type="Timer" parent="timers"]
+unique_name_in_owner = true
+wait_time = 0.1
 one_shot = true
 
 [node name="VFXs" type="Node" parent="."]
@@ -697,3 +728,4 @@ shape = SubResource("CapsuleShape2D_83x2s")
 
 [connection signal="timeout" from="timers/combo_reset_timer" to="HSM/combo1_state" method="_on_combo_reset_timer_timeout"]
 [connection signal="timeout" from="timers/parry_reset_timer" to="HSM/parry_state" method="_on_parry_reset_timer_timeout"]
+[connection signal="timeout" from="timers/coyote_time_buffer" to="HSM/idle_state" method="_on_coyote_time_buffer_timeout"]

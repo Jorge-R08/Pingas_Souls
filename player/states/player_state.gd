@@ -28,5 +28,11 @@ func _update(delta : float) -> void:
 	
 func take_damage(_dmg: int, _dmg_dir: int) -> void:
 	dispatch(&"to_hurt", {"dmg":_dmg,"dmg_dir":_dmg_dir})
+	
+func _on_sprite_animation_finished():
+	pass
+		
+func _exit() -> void:
+	char.sprite.animation_finished.disconnect(_on_sprite_animation_finished)
 
 #endregion

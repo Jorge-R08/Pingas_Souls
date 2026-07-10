@@ -60,11 +60,6 @@ func initiate_state_machine():
 	
 	hsm.add_transition($HSM/idle_state, $HSM/airborne_state, &"to_airborne")
 	hsm.add_transition($HSM/running_state, $HSM/airborne_state, &"to_airborne")	
-	
-	hsm.add_transition($HSM/running_state, $HSM/combo1_state, &"to_combo1_state")
-	hsm.add_transition($HSM/idle_state, $HSM/combo1_state, &"to_combo1_state")
-	hsm.add_transition($HSM/combo1_state, $HSM/combo2_state, &"to_combo2_state")
-	hsm.add_transition($HSM/combo2_state, $HSM/combo3_state, &"to_combo3_state")
 
 	hsm.add_transition($HSM/running_state, $HSM/hurt_state, &"to_hurt")
 	hsm.add_transition($HSM/combo1_state, $HSM/hurt_state, &"to_hurt")
@@ -85,4 +80,3 @@ func _adjust_hitboxes():
 		hitzones.scale.x = -1
 	else:
 		hitzones.scale.x = 1
-		
