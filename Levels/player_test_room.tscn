@@ -283,7 +283,7 @@ sources/2 = SubResource("TileSetAtlasSource_acure")
 [node name="PlayerTestRoom" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_xinu5")]
-position = Vector2(-147, -243)
+position = Vector2(37, 7)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
@@ -315,3 +315,10 @@ offset_top = 118.0
 offset_right = 615.0
 offset_bottom = 141.0
 text = "Z to gain mana (blue bar)"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 407.0
+offset_top = 94.0
+offset_right = 554.0
+offset_bottom = 117.0
+text = "X to gain stamina"

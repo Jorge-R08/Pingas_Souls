@@ -1,6 +1,9 @@
 extends baseChar
 class_name player
 
+#TODO MOVEMENT/CONTROL: FIX DASH OFF LEDGE, ADD INPUT BUFFERING
+#TODO COMBAT: SHOULD NOT RECOVER MANA WHEN PARRY AFTER DASH??? IDK MAN MAYBE
+
 #region DEFS
 #region CONSTANTS
 const MAX_STAMINA : int = 120
@@ -52,13 +55,14 @@ func _ready():
 func _process(delta : float) -> void:
 	#super(delta)
 	if stamina_regen:
-		curr_stamina = min(MAX_STAMINA, curr_stamina+delta*10)
-	stamina_bar.value = curr_stamina
+		gain_stamina(delta*10)
 	
 	if Input.is_action_just_pressed("gain_mana"):
 		gain_mana(1)
 	elif Input.is_action_just_pressed("restart"):
 		get_tree().reload_current_scene()
+	elif Input.is_action_just_pressed("gain_stamina"):
+		gain_stamina(40)
 
 func take_damage(_dmg: int, _dmg_dir: int) -> void:
 	super(_dmg, _dmg_dir)
@@ -67,14 +71,20 @@ func take_damage(_dmg: int, _dmg_dir: int) -> void:
 func _on_stamina_regen_timer_timeout() -> void:
 	stamina_regen = true
 	
+func gain_stamina(amnt : float):
+	curr_stamina = min(curr_stamina+amnt, stamina_bar.max_value)
+	stamina_bar.value = curr_stamina
+	
 func spend_stamina(cost : int):
 	curr_stamina -= cost
 	stamina_regen_timer.start()
 	stamina_regen = false
+	stamina_bar.value = curr_stamina
 	
 func gain_mana(amnt : int):
-	curr_mana += min(curr_mana+amnt, mana_meter.max_value)
+	curr_mana = min(curr_mana+amnt, mana_meter.max_value)
 	mana_meter.value = curr_mana
+	Input
 	
 func spend_mana(amnt : int) -> bool:
 	if curr_mana >= amnt:
