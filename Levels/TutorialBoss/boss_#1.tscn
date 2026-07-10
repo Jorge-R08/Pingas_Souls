@@ -290,6 +290,7 @@ height = 196.0
 [node name="Boss #1" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitzones")]
 collision_layer = 4
 script = ExtResource("1_rwvuq")
+freeze = true
 sprite = NodePath("AnimatedSprite2D")
 hitzones = NodePath("attack_hitzones")
 
