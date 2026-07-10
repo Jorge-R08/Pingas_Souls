@@ -8,6 +8,7 @@ const DASH_STAMINA_COST = 40
 #endregion
 
 #region @EXPORTS
+@export var boss_target: CharacterBody2D
 #endregion
 
 #region @ONREADY
@@ -42,8 +43,8 @@ func _process(delta : float) -> void:
 	if stamina_regen:
 		print("AAAAAAAAAA")
 		curr_stamina = min(MAX_STAMINA, curr_stamina+delta*10)
-	print(delta)
-	print(curr_stamina)
+	#print(delta)
+	#print(curr_stamina)
 	stamina_bar.value = curr_stamina
 
 func take_damage(_dmg: int, _dmg_dir: int) -> void:
