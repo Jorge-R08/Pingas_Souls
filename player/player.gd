@@ -65,6 +65,8 @@ func _process(delta : float) -> void:
 		get_tree().reload_current_scene()
 	elif Input.is_action_just_pressed("gain_stamina"):
 		gain_stamina(40)
+	elif Input.is_action_just_pressed("secret_debug_funny_button'"):
+		scale.x = 2
 
 func take_damage(_dmg: int, _dmg_dir: int) -> void:
 	super(_dmg, _dmg_dir)

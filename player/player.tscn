@@ -537,10 +537,11 @@ hitzones = NodePath("attack_hitzones")
 sprite_frames = SubResource("SpriteFrames_tank4")
 animation = &"up_swing"
 autoplay = "idle"
+frame = 2
+offset = Vector2(30, 0)
 
 [node name="body_hitbox" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-32.875, -7)
+position = Vector2(-1, -6)
 scale = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_jxtt8")
 
@@ -578,7 +579,6 @@ animation_name = &"down_swing"
 
 [node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
 script = ExtResource("11_qkeca")
-damage = 20
 next_attack = NodePath("../combo3_state")
 DIR_LOCKOUT_FRAME = 1
 hitzone = NodePath("../../attack_hitzones/attack2")
@@ -694,6 +694,7 @@ one_shot = true
 [node name="parry_sparks_vfx" type="Node2D" parent="VFXs"]
 
 [node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx"]
+position = Vector2(42, -30)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_70xxi")
 frame = 1
@@ -706,6 +707,7 @@ pitch_scale = 0.9
 [node name="attack_hitzones" type="Node2D" parent="."]
 
 [node name="attack1" type="Area2D" parent="attack_hitzones"]
+position = Vector2(32, 3)
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack1"]
@@ -718,8 +720,7 @@ visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack2"]
-visible = false
-position = Vector2(-6, -18)
+position = Vector2(25, -22)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_adjok")
 
@@ -728,13 +729,8 @@ visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack3"]
-visible = false
-position = Vector2(37, -6)
+position = Vector2(66, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_83x2s")
 
-[connection signal="mouse_entered" from="." to="HSM/hurt_state" method="_on_player_mouse_entered"]
 [connection signal="changed" from="UI/stamina_bar" to="." method="_on_stamina_bar_changed"]
-[connection signal="timeout" from="timers/combo_reset_timer" to="HSM/combo1_state" method="_on_combo_reset_timer_timeout"]
-[connection signal="timeout" from="timers/parry_reset_timer" to="HSM/parry_state" method="_on_parry_reset_timer_timeout"]
-[connection signal="timeout" from="timers/coyote_time_buffer" to="HSM/idle_state" method="_on_coyote_time_buffer_timeout"]

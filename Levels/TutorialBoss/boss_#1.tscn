@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://Scripts/TutorialBoss/move.gd" id="4_pt446"]
 [ext_resource type="Script" path="res://Scripts/TutorialBoss/slash.gd" id="5_odio0"]
 [ext_resource type="Script" path="res://Scripts/TutorialBoss/teleport.gd" id="6_gg46q"]
-[ext_resource type="Script" path="res://ai/tasks/should_slash.gd" id="7_1jcie"]
-[ext_resource type="Script" path="res://ai/tasks/should_teleport.gd" id="7_uvpf4"]
-[ext_resource type="Script" path="res://ai/tasks/move_to_player.gd" id="8_libr5"]
+[ext_resource type="Script" path="res://ai/tasks/move_to_player.gd" id="7_65mog"]
+[ext_resource type="Script" path="res://ai/tasks/should_slash.gd" id="8_t5tfg"]
+[ext_resource type="Script" path="res://ai/tasks/should_teleport.gd" id="9_rd7bw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0q0m"]
 atlas = ExtResource("2_76vtm")
@@ -262,26 +262,25 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
 size = Vector2(147.5, 155.266)
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_wq565"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_g5n2i"]
 
-[sub_resource type="BTAction" id="BTAction_vuuv8"]
-script = ExtResource("7_uvpf4")
+[sub_resource type="BTAction" id="BTAction_sn5vn"]
+script = ExtResource("7_65mog")
 
-[sub_resource type="BTAction" id="BTAction_8bcb8"]
-custom_name = "ShouldSlash"
-script = ExtResource("7_1jcie")
+[sub_resource type="BTAction" id="BTAction_a0g6j"]
+script = ExtResource("8_t5tfg")
 
-[sub_resource type="BTAction" id="BTAction_233tn"]
-script = ExtResource("8_libr5")
+[sub_resource type="BTAction" id="BTAction_cc086"]
+script = ExtResource("9_rd7bw")
 
-[sub_resource type="BTSelector" id="BTSelector_64uhu"]
-children = [SubResource("BTAction_vuuv8"), SubResource("BTAction_8bcb8"), SubResource("BTAction_233tn")]
+[sub_resource type="BTSelector" id="BTSelector_u7lht"]
+children = [SubResource("BTAction_sn5vn"), SubResource("BTAction_a0g6j"), SubResource("BTAction_cc086")]
 
-[sub_resource type="BehaviorTree" id="BehaviorTree_xxdix"]
-blackboard_plan = SubResource("BlackboardPlan_wq565")
-root_task = SubResource("BTSelector_64uhu")
+[sub_resource type="BehaviorTree" id="BehaviorTree_5ud04"]
+blackboard_plan = SubResource("BlackboardPlan_g5n2i")
+root_task = SubResource("BTSelector_u7lht")
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_rfpxg"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_2sr4l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jile0"]
 radius = 62.0
@@ -330,8 +329,8 @@ animation_name = &"Slash"
 script = ExtResource("6_gg46q")
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
-behavior_tree = SubResource("BehaviorTree_xxdix")
-blackboard_plan = SubResource("BlackboardPlan_rfpxg")
+behavior_tree = SubResource("BehaviorTree_5ud04")
+blackboard_plan = SubResource("BlackboardPlan_2sr4l")
 
 [node name="attack_hitzones" type="Node2D" parent="."]
 

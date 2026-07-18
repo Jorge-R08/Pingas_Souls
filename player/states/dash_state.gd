@@ -24,9 +24,8 @@ func _enter():
 
 func _update(delta: float) -> void:
 	
-	char.dir = -1 if char.sprite.flip_h else 1
-	if char.dir:
-		char.velocity.x = char.dir * SPEED
+	char.dir = char.transform.x.x
+	char.velocity.x = char.dir * SPEED
 		
 	if Input.is_action_just_pressed("attack") and char.spend_mana(1):
 		dispatch("to_combo2_state")

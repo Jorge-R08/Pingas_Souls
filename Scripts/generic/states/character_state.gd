@@ -15,7 +15,8 @@ func _enter() -> void:
 	if animation_name != "" and animation_name != char.sprite.animation:
 		char.sprite.play(animation_name)
 
-	print("entered state: ", name)
+	if char.debug:
+		print("entered state: ", name)
 
 	_setup_exports()
 	char._flip_sprite()

@@ -24,23 +24,19 @@ var curr_health : int = MAX_HEALTH
 #endregion
 #endregion
 
-func _char_ready():
-	push_error("WARNING MOB DID NOT OVERRIDE THE _mob_ready() FUNCTION")
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sprite.flip_h = true if !facing_right else false
+	dir = 1 if facing_right else -1
 	initiate_state_machine()
+	_flip_sprite()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	_adjust_hitboxes()
+	pass
 	
 func _flip_sprite():
-	if dir == 1:
-		sprite.flip_h = false
-	elif dir == -1:
-		sprite.flip_h = true
+	if dir != 0:
+		transform.x.x = dir
 	
 func initiate_state_machine():
 	hsm.initial_state = $HSM/idle_state
@@ -74,9 +70,3 @@ func initiate_state_machine():
 
 func take_damage(_dmg: int, _dmg_direction: int) -> void:
 	curr_health = max(0, curr_health - _dmg)
-		
-func _adjust_hitboxes():
-	if sprite.flip_h:
-		hitzones.scale.x = -1
-	else:
-		hitzones.scale.x = 1

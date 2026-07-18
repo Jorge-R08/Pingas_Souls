@@ -46,7 +46,7 @@ func _update(delta : float) -> void:
 		dispatch("to_riposte")
 	
 func play_sparks_vfx(spark_type: String = "default"):
-	sparks_vfx.global_position = char.global_position + Vector2(sparks_x_offset, sparks_y_offset)*(-1 if char.sprite.flip_h else 1)
+	sparks_vfx.global_position = char.global_position + Vector2(sparks_x_offset, sparks_y_offset)
 	sparks_sprite.visible = true
 	
 	match spark_type:
