@@ -283,7 +283,7 @@ sources/2 = SubResource("TileSetAtlasSource_acure")
 [node name="PlayerTestRoom" type="Node2D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("boss_target") instance=ExtResource("1_xinu5")]
-position = Vector2(0, 10)
+position = Vector2(36, 0)
 boss_target = NodePath("../Boss #1")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
