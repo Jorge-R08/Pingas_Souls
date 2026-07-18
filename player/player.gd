@@ -2,7 +2,6 @@ extends baseChar
 class_name player
 
 #TODO MOVEMENT/CONTROL: FIX DASH OFF LEDGE, ADD INPUT BUFFERING
-#TODO COMBAT: SHOULD NOT RECOVER MANA WHEN PARRY AFTER DASH??? IDK MAN MAYBE
 
 #region DEFS
 #region CONSTANTS
@@ -35,6 +34,7 @@ var curr_stamina : float = MAX_STAMINA
 var stamina_regen : bool = false
 var curr_mana : int = 1
 #endregion
+
 
 
 #endregion
@@ -137,7 +137,7 @@ func initiate_aggro_state_machine():
 	aggro_hsm.add_transition(%A_combo2_state, %A_combo3_state, &"to_A_combo3_state")
 	aggro_hsm.add_transition(%A_dash_state, %A_combo2_state, "to_A_combo2_state")
 	aggro_hsm.add_transition(%A_combo2_state, %A_parry_state, "to_parry")
-	aggro_hsm.add_transition(%A_parry_state, %A_riposte_state, "to_A_riposte")
+	aggro_hsm.add_transition(%A_parry_state, %A_riposte_state, "to_A_riposte_state")
 	
 	aggro_hsm.add_transition(%A_hurt_state, %A_death_state, &"to_death")
 		
@@ -148,9 +148,9 @@ func initiate_chill_state_machine():
 	
 	chill_hsm.add_transition(%C_running_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_hurt_state, %C_idle_state, &"to_idle")
-	chill_hsm.add_transition(%C_combo1_state, %C_idle_state, &"to_idle")
-	chill_hsm.add_transition(%C_combo2_state, %C_idle_state, &"to_idle")
-	chill_hsm.add_transition(%C_combo3_state, %C_idle_state, &"to_idle")
+	#chill_hsm.add_transition(%C_combo1_state, %C_idle_state, &"to_idle")
+	#chill_hsm.add_transition(%C_combo2_state, %C_idle_state, &"to_idle")
+	#chill_hsm.add_transition(%C_combo3_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_airborne_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_dash_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_parry_state, %C_idle_state, "to_idle")
@@ -165,20 +165,20 @@ func initiate_chill_state_machine():
 	chill_hsm.add_transition(%C_running_state, %C_airborne_state, &"to_airborne")	
 
 	chill_hsm.add_transition(%C_running_state, %C_hurt_state, &"to_hurt")
-	chill_hsm.add_transition(%C_combo1_state, %C_hurt_state, &"to_hurt")
-	chill_hsm.add_transition(%C_combo2_state, %C_hurt_state, &"to_hurt")
-	chill_hsm.add_transition(%C_combo3_state, %C_hurt_state, &"to_hurt")
+	#chill_hsm.add_transition(%C_combo1_state, %C_hurt_state, &"to_hurt")
+	#chill_hsm.add_transition(%C_combo2_state, %C_hurt_state, &"to_hurt")
+	#chill_hsm.add_transition(%C_combo3_state, %C_hurt_state, &"to_hurt")
 	chill_hsm.add_transition(%C_idle_state, %C_hurt_state, &"to_hurt")
 	chill_hsm.add_transition(%C_parry_state, %C_hurt_state, "to_hurt")
 	chill_hsm.add_transition(%C_riposte_state, %C_hurt_state, "to_hurt")
 	chill_hsm.add_event_handler(&"to_hurt", %C_hurt_state._on_hurt_enter)
 	
-	chill_hsm.add_transition(%C_running_state, %C_combo1_state, &"to_C_combo1_state")
-	chill_hsm.add_transition(%C_idle_state, %C_combo1_state, &"to_C_combo1_state")
-	chill_hsm.add_transition(%C_combo1_state, %C_combo2_state, &"to_C_combo2_state")
-	chill_hsm.add_transition(%C_combo2_state, %C_combo3_state, &"to_C_combo3_state")
-	chill_hsm.add_transition(%C_dash_state, %C_combo2_state, "to_C_combo2_state")
-	chill_hsm.add_transition(%C_combo2_state, %C_parry_state, "to_parry")
+	#chill_hsm.add_transition(%C_running_state, %C_combo1_state, &"to_C_combo1_state")
+	#chill_hsm.add_transition(%C_idle_state, %C_combo1_state, &"to_C_combo1_state")
+	#chill_hsm.add_transition(%C_combo1_state, %C_combo2_state, &"to_C_combo2_state")
+	#chill_hsm.add_transition(%C_combo2_state, %C_combo3_state, &"to_C_combo3_state")
+	#chill_hsm.add_transition(%C_dash_state, %C_combo2_state, "to_C_combo2_state")
+	#chill_hsm.add_transition(%C_combo2_state, %C_parry_state, "to_parry")
 	chill_hsm.add_transition(%C_parry_state, %C_riposte_state, "to_C_riposte")
 	
 	chill_hsm.add_transition(%C_hurt_state, %C_death_state, &"to_death")

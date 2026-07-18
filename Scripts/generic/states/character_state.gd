@@ -3,6 +3,7 @@ class_name CharacterState
 
 @export var animation_name: StringName
 
+@warning_ignore("shadowed_global_identifier")
 var char: baseChar
 
 func _enter() -> void:

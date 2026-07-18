@@ -27,9 +27,6 @@ func _update(delta : float) -> void:
 	else:
 		dispatch("to_idle")
 		
-	if Input.is_action_just_pressed("attack"):
-		dispatch("to_A_combo1_state")
-		
 	if !char.is_on_floor() and char.coyote_time_buffer.is_stopped():
 		char.coyote_time_buffer.start()
 	elif !char.is_on_floor() and !char.coyote_time_buffer.is_stopped():

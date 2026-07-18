@@ -1,4 +1,5 @@
 extends PlayerState
+class_name parryState
 
 #region DEFS
 #region CONSTANTS
@@ -6,8 +7,8 @@ extends PlayerState
 
 #region @EXPORTS
 @export var sparks_vfx : Node2D 
-@export var sparks_x_offset : int = 20
-@export var sparks_y_offset : int = -35
+@export var sparks_x_offset : int = 42
+@export var sparks_y_offset : int = -30
 #endregion
 
 #region @ONREADY
@@ -29,6 +30,7 @@ func _enter() -> void:
 	
 	sparks_sprite.animation_finished.connect(_on_spark_animation_finished)
 	parry_reset_timer.timeout.connect(_on_parry_reset_timer_timeout)
+	parry_reset_timer.start()
 	
 	char.gain_mana(1)
 	
@@ -36,10 +38,6 @@ func _enter() -> void:
 
 func _update(delta : float) -> void:
 	super(delta)
-	
-	if Input.is_action_just_pressed("attack"):
-		char.sprite.self_modulate = Color(0,0,0,200)
-		dispatch("to_A_riposte")
 	
 func play_sparks_vfx(spark_type: String = "default"):
 	sparks_vfx.global_position = char.global_position + Vector2(sparks_x_offset, sparks_y_offset)
@@ -60,14 +58,16 @@ func play_sparks_vfx(spark_type: String = "default"):
 	sparks_audio.play()
 	
 
-
 func _on_spark_animation_finished():
-	sparks_vfx.visible = false
+	sparks_sprite.visible = false
 
 func _on_parry_reset_timer_timeout() -> void:
 	dispatch("to_idle")
 
 func _exit() -> void:
 	super()
-	
+	parry_reset_timer.timeout.disconnect(_on_parry_reset_timer_timeout)
+	sparks_sprite.animation_finished.disconnect(_on_spark_animation_finished)
+	parry_reset_timer.stop()
+
 #endregion

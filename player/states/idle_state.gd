@@ -1,4 +1,5 @@
 extends PlayerState
+class_name idleState
 
 #region DEFS
 #region CONSTANTS
@@ -21,11 +22,8 @@ func _enter():
 		dispatch("to_airborne")
 	char.coyote_time_buffer.timeout.connect(_on_coyote_time_buffer_timeout)
 
-
 func _update(delta : float) -> void:
 	super(delta)
-	if Input.is_action_just_pressed("attack"):
-		dispatch("to_A_combo1_state")
 
 	if !char.is_on_floor() and char.coyote_time_buffer.is_stopped():
 		char.coyote_time_buffer.start()

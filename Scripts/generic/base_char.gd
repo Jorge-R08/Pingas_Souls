@@ -31,10 +31,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
+
 func _flip_sprite():
 	if dir != 0:
 		transform.x.x = dir
-	
+
 func take_damage(_dmg: int, _dmg_direction: int) -> void:
 	curr_health = max(0, curr_health - _dmg)

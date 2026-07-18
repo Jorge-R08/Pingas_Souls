@@ -1,6 +1,6 @@
-[gd_scene load_steps=90 format=3 uid="uid://jaxjrk4odqml"]
+[gd_scene format=3 uid="uid://jaxjrk4odqml"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_nyopi"]
+[ext_resource type="Script" uid="uid://c227htvvrwr6s" path="res://player/player.gd" id="1_nyopi"]
 [ext_resource type="Texture2D" uid="uid://dxmcjwueyfui7" path="res://Assets/SkeletonKnight/RELEASE/DOWN_SWING.png" id="2_8xs2s"]
 [ext_resource type="Texture2D" uid="uid://ccws1b5fgt4xp" path="res://Assets/SkeletonKnight/RELEASE/DEATH.png" id="2_y3s37"]
 [ext_resource type="Texture2D" uid="uid://jgs42gjm34w7" path="res://Assets/SkeletonKnight/RELEASE/FWD_SWING.png" id="3_f8ymr"]
@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://db75qkjrdssxa" path="res://Assets/SkeletonKnight/RELEASE/HURT.png" id="5_6fopc"]
 [ext_resource type="Texture2D" uid="uid://b4cs7j2l1yy56" path="res://Assets/SkeletonKnight/RELEASE/SIDE_SWING.png" id="5_et1is"]
 [ext_resource type="Texture2D" uid="uid://b8mx3u1l03sc3" path="res://Assets/SkeletonKnight/RELEASE/WALK.png" id="6_wg0p0"]
-[ext_resource type="Script" path="res://player/states/idle_state.gd" id="7_jq37t"]
-[ext_resource type="Script" path="res://player/states/running_state.gd" id="8_lm05a"]
-[ext_resource type="Script" path="res://player/states/attack_state.gd" id="11_qkeca"]
-[ext_resource type="Script" path="res://player/states/hurt_state.gd" id="12_8bogr"]
-[ext_resource type="Script" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
-[ext_resource type="Script" path="res://player/states/dash_state.gd" id="13_etibh"]
-[ext_resource type="Script" path="res://player/states/parry_state.gd" id="15_gr6ba"]
+[ext_resource type="Script" uid="uid://bavcn22bicpg6" path="res://player/states/idle_state.gd" id="7_jq37t"]
+[ext_resource type="Script" uid="uid://dp6fpulcby66y" path="res://player/states/running_state.gd" id="8_lm05a"]
+[ext_resource type="Script" uid="uid://c07xq5hu6jpgi" path="res://player/states/attack_state.gd" id="11_qkeca"]
+[ext_resource type="Script" uid="uid://dsdnvw4tkj13d" path="res://player/states/hurt_state.gd" id="12_8bogr"]
+[ext_resource type="Script" uid="uid://ca8e8kfmcndqg" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
+[ext_resource type="Script" uid="uid://dxc6hoh0cuy6n" path="res://player/states/dash_state.gd" id="13_etibh"]
+[ext_resource type="Script" uid="uid://0aokx6o30c8r" path="res://player/states/parry_state.gd" id="15_gr6ba"]
 [ext_resource type="Texture2D" uid="uid://b6rn73xiuh7wq" path="res://Assets/VFX/sparks.png" id="16_x26u5"]
 [ext_resource type="AudioStream" uid="uid://c6diaaufj2qar" path="res://Assets/VFX/new_audio_stream_ogg_vorbis.tres" id="17_qtsum"]
 
@@ -239,7 +239,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mc3e4")
 }],
-"loop": false,
+"loop": 0,
 "name": &"dash",
 "speed": 5.0
 }, {
@@ -271,7 +271,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rpjnc")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -297,7 +297,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8ksse")
 }],
-"loop": false,
+"loop": 0,
 "name": &"down_swing",
 "speed": 5.0
 }, {
@@ -323,7 +323,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r1oya")
 }],
-"loop": false,
+"loop": 0,
 "name": &"final_swing",
 "speed": 5.0
 }, {
@@ -334,7 +334,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lxs3o")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hurt",
 "speed": 5.0
 }, {
@@ -372,7 +372,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cur01")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -404,7 +404,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rhoij")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 8.0
 }, {
@@ -430,7 +430,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlqy7")
 }],
-"loop": false,
+"loop": 0,
 "name": &"up_swing",
 "speed": 5.0
 }]
@@ -504,7 +504,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fopk3")
 }],
-"loop": false,
+"loop": 0,
 "name": &"default",
 "speed": 12.0
 }]
@@ -526,81 +526,77 @@ height = 116.0
 radius = 13.0
 height = 102.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "hitzones")]
+[node name="Player" type="CharacterBody2D" unique_id=948481981 node_paths=PackedStringArray("sprite", "hitzones")]
 collision_layer = 2
 script = ExtResource("1_nyopi")
 sprite = NodePath("sprite")
 facing_right = true
 hitzones = NodePath("attack_hitzones")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=2111754002]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"up_swing"
+animation = &"hurt"
 autoplay = "idle"
-frame = 2
 offset = Vector2(30, 0)
 
-[node name="body_hitbox" type="CollisionShape2D" parent="."]
+[node name="body_hitbox" type="CollisionShape2D" parent="." unique_id=50072780]
 position = Vector2(-1, -6)
 scale = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_jxtt8")
 
-[node name="interact_area" type="Area2D" parent="."]
+[node name="interact_area" type="Area2D" parent="." unique_id=2075241952]
 metadata/_edit_lock_ = true
 
-[node name="interact_shape" type="CollisionShape2D" parent="interact_area"]
+[node name="interact_shape" type="CollisionShape2D" parent="interact_area" unique_id=663726953]
 metadata/_edit_lock_ = true
 
-[node name="aggro_HSM" type="LimboHSM" parent="."]
+[node name="aggro_HSM" type="LimboHSM" parent="." unique_id=908382900]
 
-[node name="A_idle_state" type="LimboState" parent="aggro_HSM"]
+[node name="A_idle_state" type="LimboState" parent="aggro_HSM" unique_id=781937774 node_paths=PackedStringArray("attack_action")]
 unique_name_in_owner = true
 script = ExtResource("7_jq37t")
 can_move = true
 can_jump = true
 can_dash = true
+attack_action = {
+NodePath("../A_combo1_state"): 0
+}
 animation_name = &"idle"
 
-[node name="A_running_state" type="LimboState" parent="aggro_HSM"]
+[node name="A_running_state" type="LimboState" parent="aggro_HSM" unique_id=1750411362 node_paths=PackedStringArray("attack_action")]
 unique_name_in_owner = true
 script = ExtResource("8_lm05a")
 can_move = true
 can_jump = true
 can_dash = true
+attack_action = {
+NodePath("../A_combo1_state"): 0
+}
 animation_name = &"run"
 
-[node name="A_airborne_state" type="LimboState" parent="aggro_HSM"]
+[node name="A_airborne_state" type="LimboState" parent="aggro_HSM" unique_id=1482309786]
 unique_name_in_owner = true
 script = ExtResource("12_qdo0p")
 can_move = true
 
-[node name="A_dash_state" type="LimboState" parent="aggro_HSM"]
+[node name="A_dash_state" type="LimboState" parent="aggro_HSM" unique_id=1547201440 node_paths=PackedStringArray("attack_action")]
 unique_name_in_owner = true
 script = ExtResource("13_etibh")
+attack_action = {
+NodePath("../A_combo2_state"): 1
+}
+debug_black_effect = true
 animation_name = &"dash"
 
-[node name="A_riposte_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("hitzone")]
-unique_name_in_owner = true
-script = ExtResource("11_qkeca")
-damage = 50
-hitzone = NodePath("../../attack_hitzones/attack3")
-hit_frame = 1
-animation_name = &"final_swing"
-
-[node name="A_parry_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("sparks_vfx")]
-unique_name_in_owner = true
-script = ExtResource("15_gr6ba")
-sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
-
-[node name="A_hurt_state" type="LimboState" parent="aggro_HSM"]
+[node name="A_hurt_state" type="LimboState" parent="aggro_HSM" unique_id=1873472819]
 unique_name_in_owner = true
 script = ExtResource("12_8bogr")
 animation_name = &"hurt"
 
-[node name="A_death_state" type="LimboState" parent="aggro_HSM"]
+[node name="A_death_state" type="LimboState" parent="aggro_HSM" unique_id=374590811]
 unique_name_in_owner = true
 
-[node name="A_combo1_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
+[node name="A_combo1_state" type="LimboState" parent="aggro_HSM" unique_id=2078595062 node_paths=PackedStringArray("next_attack", "hitzone")]
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 10
@@ -610,7 +606,7 @@ hitzone = NodePath("../../attack_hitzones/attack1")
 hit_frame = 3
 animation_name = &"down_swing"
 
-[node name="A_combo2_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
+[node name="A_combo2_state" type="LimboState" parent="aggro_HSM" unique_id=448320568 node_paths=PackedStringArray("next_attack", "hitzone")]
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 next_attack = NodePath("../A_combo3_state")
@@ -620,7 +616,7 @@ parry_frames = 1
 hit_frame = 2
 animation_name = &"up_swing"
 
-[node name="A_combo3_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("hitzone")]
+[node name="A_combo3_state" type="LimboState" parent="aggro_HSM" unique_id=353280030 node_paths=PackedStringArray("hitzone")]
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
@@ -628,9 +624,26 @@ hitzone = NodePath("../../attack_hitzones/attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="chill_HSM" type="LimboHSM" parent="."]
+[node name="A_parry_state" type="LimboState" parent="aggro_HSM" unique_id=922235396 node_paths=PackedStringArray("sparks_vfx", "attack_action")]
+unique_name_in_owner = true
+script = ExtResource("15_gr6ba")
+sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
+attack_action = {
+NodePath("../A_riposte_state"): 0
+}
 
-[node name="C_idle_state" type="LimboState" parent="chill_HSM"]
+[node name="A_riposte_state" type="LimboState" parent="aggro_HSM" unique_id=1663637875 node_paths=PackedStringArray("hitzone")]
+unique_name_in_owner = true
+script = ExtResource("11_qkeca")
+damage = 50
+hitzone = NodePath("../../attack_hitzones/attack3")
+hit_frame = 1
+debug_black_effect = true
+animation_name = &"final_swing"
+
+[node name="chill_HSM" type="LimboHSM" parent="." unique_id=462532478]
+
+[node name="C_idle_state" type="LimboState" parent="chill_HSM" unique_id=2139730333]
 unique_name_in_owner = true
 script = ExtResource("7_jq37t")
 can_move = true
@@ -638,7 +651,7 @@ can_jump = true
 can_dash = true
 animation_name = &"idle"
 
-[node name="C_running_state" type="LimboState" parent="chill_HSM"]
+[node name="C_running_state" type="LimboState" parent="chill_HSM" unique_id=1402766795]
 unique_name_in_owner = true
 script = ExtResource("8_lm05a")
 can_move = true
@@ -646,17 +659,17 @@ can_jump = true
 can_dash = true
 animation_name = &"run"
 
-[node name="C_airborne_state" type="LimboState" parent="chill_HSM"]
+[node name="C_airborne_state" type="LimboState" parent="chill_HSM" unique_id=211341680]
 unique_name_in_owner = true
 script = ExtResource("12_qdo0p")
 can_move = true
 
-[node name="C_dash_state" type="LimboState" parent="chill_HSM"]
+[node name="C_dash_state" type="LimboState" parent="chill_HSM" unique_id=1297588779]
 unique_name_in_owner = true
 script = ExtResource("13_etibh")
 animation_name = &"dash"
 
-[node name="C_riposte_state" type="LimboState" parent="chill_HSM" node_paths=PackedStringArray("hitzone")]
+[node name="C_riposte_state" type="LimboState" parent="chill_HSM" unique_id=1685517924 node_paths=PackedStringArray("hitzone")]
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
@@ -664,22 +677,22 @@ hitzone = NodePath("../../attack_hitzones/attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="C_parry_state" type="LimboState" parent="chill_HSM" node_paths=PackedStringArray("sparks_vfx")]
+[node name="C_parry_state" type="LimboState" parent="chill_HSM" unique_id=1190165498 node_paths=PackedStringArray("sparks_vfx")]
 unique_name_in_owner = true
 script = ExtResource("15_gr6ba")
 sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
 
-[node name="C_hurt_state" type="LimboState" parent="chill_HSM"]
+[node name="C_hurt_state" type="LimboState" parent="chill_HSM" unique_id=802976259]
 unique_name_in_owner = true
 script = ExtResource("12_8bogr")
 animation_name = &"hurt"
 
-[node name="C_death_state" type="LimboState" parent="chill_HSM"]
+[node name="C_death_state" type="LimboState" parent="chill_HSM" unique_id=1775738887]
 unique_name_in_owner = true
 
-[node name="berk_HSM" type="LimboHSM" parent="."]
+[node name="berk_HSM" type="LimboHSM" parent="." unique_id=1744147815]
 
-[node name="B_idle_state" type="LimboState" parent="berk_HSM"]
+[node name="B_idle_state" type="LimboState" parent="berk_HSM" unique_id=1526872032]
 unique_name_in_owner = true
 script = ExtResource("7_jq37t")
 can_move = true
@@ -687,7 +700,7 @@ can_jump = true
 can_dash = true
 animation_name = &"idle"
 
-[node name="B_running_state" type="LimboState" parent="berk_HSM"]
+[node name="B_running_state" type="LimboState" parent="berk_HSM" unique_id=123243061]
 unique_name_in_owner = true
 script = ExtResource("8_lm05a")
 can_move = true
@@ -695,17 +708,17 @@ can_jump = true
 can_dash = true
 animation_name = &"run"
 
-[node name="B_airborne_state" type="LimboState" parent="berk_HSM"]
+[node name="B_airborne_state" type="LimboState" parent="berk_HSM" unique_id=542177083]
 unique_name_in_owner = true
 script = ExtResource("12_qdo0p")
 can_move = true
 
-[node name="B_dash_state" type="LimboState" parent="berk_HSM"]
+[node name="B_dash_state" type="LimboState" parent="berk_HSM" unique_id=1968011324]
 unique_name_in_owner = true
 script = ExtResource("13_etibh")
 animation_name = &"dash"
 
-[node name="B_riposte_state" type="LimboState" parent="berk_HSM" node_paths=PackedStringArray("hitzone")]
+[node name="B_riposte_state" type="LimboState" parent="berk_HSM" unique_id=1712908174 node_paths=PackedStringArray("hitzone")]
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
@@ -713,22 +726,22 @@ hitzone = NodePath("../../attack_hitzones/attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="B_parry_state" type="LimboState" parent="berk_HSM" node_paths=PackedStringArray("sparks_vfx")]
+[node name="B_parry_state" type="LimboState" parent="berk_HSM" unique_id=245919687 node_paths=PackedStringArray("sparks_vfx")]
 unique_name_in_owner = true
 script = ExtResource("15_gr6ba")
 sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
 
-[node name="B_hurt_state" type="LimboState" parent="berk_HSM"]
+[node name="B_hurt_state" type="LimboState" parent="berk_HSM" unique_id=1525245843]
 unique_name_in_owner = true
 script = ExtResource("12_8bogr")
 animation_name = &"hurt"
 
-[node name="B_death_state" type="LimboState" parent="berk_HSM"]
+[node name="B_death_state" type="LimboState" parent="berk_HSM" unique_id=2066118535]
 unique_name_in_owner = true
 
-[node name="UI" type="Node2D" parent="."]
+[node name="UI" type="Node2D" parent="." unique_id=112292909]
 
-[node name="mana_meter" type="ProgressBar" parent="UI"]
+[node name="mana_meter" type="ProgressBar" parent="UI" unique_id=1452064433]
 unique_name_in_owner = true
 z_index = 1
 offset_left = -50.0
@@ -741,14 +754,14 @@ max_value = 2.0
 value = 1.0
 show_percentage = false
 
-[node name="ColorRect3" type="ColorRect" parent="UI/mana_meter"]
+[node name="ColorRect3" type="ColorRect" parent="UI/mana_meter" unique_id=447736820]
 layout_mode = 0
 offset_left = 48.0
 offset_right = 51.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
-[node name="stamina_bar" type="ProgressBar" parent="UI"]
+[node name="stamina_bar" type="ProgressBar" parent="UI" unique_id=1213810449]
 unique_name_in_owner = true
 offset_left = -78.0
 offset_top = -96.0
@@ -761,90 +774,88 @@ max_value = 120.0
 value = 120.0
 show_percentage = false
 
-[node name="ColorRect" type="ColorRect" parent="UI/stamina_bar"]
+[node name="ColorRect" type="ColorRect" parent="UI/stamina_bar" unique_id=268699681]
 layout_mode = 0
 offset_left = 40.0
 offset_right = 45.0
 offset_bottom = 30.0
 
-[node name="ColorRect2" type="ColorRect" parent="UI/stamina_bar"]
+[node name="ColorRect2" type="ColorRect" parent="UI/stamina_bar" unique_id=1681024217]
 layout_mode = 0
 offset_left = 85.0
 offset_right = 90.0
 offset_bottom = 30.0
 
-[node name="sound_effects" type="Node" parent="."]
+[node name="sound_effects" type="Node" parent="." unique_id=1976418849]
 
-[node name="attack-sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
+[node name="attack-sounds" type="AudioStreamPlayer2D" parent="sound_effects" unique_id=1077174457]
 metadata/_edit_lock_ = true
 
-[node name="hurt_sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
+[node name="hurt_sounds" type="AudioStreamPlayer2D" parent="sound_effects" unique_id=607899957]
 metadata/_edit_lock_ = true
 
-[node name="death_sounds" type="AudioStreamPlayer2D" parent="sound_effects"]
+[node name="death_sounds" type="AudioStreamPlayer2D" parent="sound_effects" unique_id=835519825]
 metadata/_edit_lock_ = true
 
-[node name="timers" type="Node" parent="."]
+[node name="timers" type="Node" parent="." unique_id=28997410]
 
-[node name="combo_reset_timer" type="Timer" parent="timers"]
+[node name="combo_reset_timer" type="Timer" parent="timers" unique_id=831473162]
 unique_name_in_owner = true
-wait_time = 3.0
 one_shot = true
 
-[node name="stamina_regen_timer" type="Timer" parent="timers"]
+[node name="stamina_regen_timer" type="Timer" parent="timers" unique_id=1290825598]
 unique_name_in_owner = true
 wait_time = 4.0
 one_shot = true
 
-[node name="parry_reset_timer" type="Timer" parent="timers"]
+[node name="parry_reset_timer" type="Timer" parent="timers" unique_id=1629336464]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="coyote_time_buffer" type="Timer" parent="timers"]
+[node name="coyote_time_buffer" type="Timer" parent="timers" unique_id=479341647]
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
 
-[node name="VFXs" type="Node2D" parent="."]
+[node name="VFXs" type="Node2D" parent="." unique_id=259959908]
 
-[node name="parry_sparks_vfx" type="Node2D" parent="VFXs"]
+[node name="parry_sparks_vfx" type="Node2D" parent="VFXs" unique_id=1865089135]
 
-[node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx"]
-position = Vector2(42, -30)
+[node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx" unique_id=672821266]
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_70xxi")
 frame = 1
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VFXs/parry_sparks_vfx"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VFXs/parry_sparks_vfx" unique_id=658413760]
 stream = SubResource("AudioStreamRandomizer_i7edg")
 volume_db = -3.96
 pitch_scale = 0.9
 
-[node name="attack_hitzones" type="Node2D" parent="."]
+[node name="attack_hitzones" type="Node2D" parent="." unique_id=874769873]
 
-[node name="attack1" type="Area2D" parent="attack_hitzones"]
+[node name="attack1" type="Area2D" parent="attack_hitzones" unique_id=1406657670]
 position = Vector2(32, 3)
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack1" unique_id=1048895035]
 position = Vector2(8, -15)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_80cd1")
 
-[node name="attack2" type="Area2D" parent="attack_hitzones"]
+[node name="attack2" type="Area2D" parent="attack_hitzones" unique_id=38098007]
 visible = false
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack2" unique_id=1013775516]
 position = Vector2(25, -22)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_adjok")
 
-[node name="attack3" type="Area2D" parent="attack_hitzones"]
+[node name="attack3" type="Area2D" parent="attack_hitzones" unique_id=483644177]
 visible = false
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack3" unique_id=84314790]
 position = Vector2(66, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_83x2s")

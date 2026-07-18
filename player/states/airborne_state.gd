@@ -21,6 +21,7 @@ func _enter():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _update(delta: float) -> void:
+	super(delta)
 	if not char.is_on_floor():
 		char.velocity += char.get_gravity() * delta
 	else:
