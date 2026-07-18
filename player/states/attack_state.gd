@@ -28,7 +28,6 @@ var post_attack : bool = false
 
 func _enter():
 	super()
-	print(char.boss_target)
 	post_attack = false
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
 	combo_reset_timer.stop()

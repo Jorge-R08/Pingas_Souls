@@ -43,7 +43,7 @@ func _update(delta : float) -> void:
 	
 	if Input.is_action_just_pressed("attack"):
 		char.sprite.self_modulate = Color(0,0,0,200)
-		dispatch("to_riposte")
+		dispatch("to_A_riposte")
 	
 func play_sparks_vfx(spark_type: String = "default"):
 	sparks_vfx.global_position = char.global_position + Vector2(sparks_x_offset, sparks_y_offset)

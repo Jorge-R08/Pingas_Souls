@@ -18,12 +18,7 @@ func _enter() -> void:
 	if char.debug:
 		print("entered state: ", name)
 
-	_setup_exports()
 	char._flip_sprite()
 	
 func _update(delta: float) -> void:
-	pass
-
-#to be overwritten if needed
-func _setup_exports():
 	pass

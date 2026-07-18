@@ -287,6 +287,7 @@ position = Vector2(0, 10)
 boss_target = NodePath("../Boss #1")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -335,3 +336,17 @@ offset_top = 145.0
 offset_right = 746.0
 offset_bottom = 168.0
 text = "F to attack"
+
+[node name="Label6" type="Label" parent="."]
+offset_left = -204.0
+offset_top = 152.0
+offset_right = -83.0
+offset_bottom = 175.0
+text = "Press P to winw"
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 662.0
+offset_top = 104.0
+offset_right = 817.0
+offset_bottom = 127.0
+text = "O to switch stance"

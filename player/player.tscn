@@ -551,64 +551,180 @@ metadata/_edit_lock_ = true
 [node name="interact_shape" type="CollisionShape2D" parent="interact_area"]
 metadata/_edit_lock_ = true
 
-[node name="HSM" type="LimboHSM" parent="."]
+[node name="aggro_HSM" type="LimboHSM" parent="."]
 
-[node name="idle_state" type="LimboState" parent="HSM"]
+[node name="A_idle_state" type="LimboState" parent="aggro_HSM"]
+unique_name_in_owner = true
 script = ExtResource("7_jq37t")
+can_move = true
+can_jump = true
+can_dash = true
 animation_name = &"idle"
 
-[node name="running_state" type="LimboState" parent="HSM"]
+[node name="A_running_state" type="LimboState" parent="aggro_HSM"]
+unique_name_in_owner = true
 script = ExtResource("8_lm05a")
+can_move = true
+can_jump = true
+can_dash = true
 animation_name = &"run"
 
-[node name="airborne_state" type="LimboState" parent="HSM"]
+[node name="A_airborne_state" type="LimboState" parent="aggro_HSM"]
+unique_name_in_owner = true
 script = ExtResource("12_qdo0p")
+can_move = true
 
-[node name="dash_state" type="LimboState" parent="HSM"]
+[node name="A_dash_state" type="LimboState" parent="aggro_HSM"]
+unique_name_in_owner = true
 script = ExtResource("13_etibh")
 animation_name = &"dash"
 
-[node name="combo1_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
+[node name="A_riposte_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("hitzone")]
+unique_name_in_owner = true
+script = ExtResource("11_qkeca")
+damage = 50
+hitzone = NodePath("../../attack_hitzones/attack3")
+hit_frame = 1
+animation_name = &"final_swing"
+
+[node name="A_parry_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("sparks_vfx")]
+unique_name_in_owner = true
+script = ExtResource("15_gr6ba")
+sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
+
+[node name="A_hurt_state" type="LimboState" parent="aggro_HSM"]
+unique_name_in_owner = true
+script = ExtResource("12_8bogr")
+animation_name = &"hurt"
+
+[node name="A_death_state" type="LimboState" parent="aggro_HSM"]
+unique_name_in_owner = true
+
+[node name="A_combo1_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
+unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 10
-next_attack = NodePath("../combo2_state")
+next_attack = NodePath("../A_combo2_state")
 DIR_LOCKOUT_FRAME = 2
 hitzone = NodePath("../../attack_hitzones/attack1")
 hit_frame = 3
 animation_name = &"down_swing"
 
-[node name="combo2_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
+[node name="A_combo2_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("next_attack", "hitzone")]
+unique_name_in_owner = true
 script = ExtResource("11_qkeca")
-next_attack = NodePath("../combo3_state")
+next_attack = NodePath("../A_combo3_state")
 DIR_LOCKOUT_FRAME = 1
 hitzone = NodePath("../../attack_hitzones/attack2")
 parry_frames = 1
 hit_frame = 2
 animation_name = &"up_swing"
 
-[node name="combo3_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("hitzone")]
+[node name="A_combo3_state" type="LimboState" parent="aggro_HSM" node_paths=PackedStringArray("hitzone")]
+unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="riposte_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("hitzone")]
+[node name="chill_HSM" type="LimboHSM" parent="."]
+
+[node name="C_idle_state" type="LimboState" parent="chill_HSM"]
+unique_name_in_owner = true
+script = ExtResource("7_jq37t")
+can_move = true
+can_jump = true
+can_dash = true
+animation_name = &"idle"
+
+[node name="C_running_state" type="LimboState" parent="chill_HSM"]
+unique_name_in_owner = true
+script = ExtResource("8_lm05a")
+can_move = true
+can_jump = true
+can_dash = true
+animation_name = &"run"
+
+[node name="C_airborne_state" type="LimboState" parent="chill_HSM"]
+unique_name_in_owner = true
+script = ExtResource("12_qdo0p")
+can_move = true
+
+[node name="C_dash_state" type="LimboState" parent="chill_HSM"]
+unique_name_in_owner = true
+script = ExtResource("13_etibh")
+animation_name = &"dash"
+
+[node name="C_riposte_state" type="LimboState" parent="chill_HSM" node_paths=PackedStringArray("hitzone")]
+unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="parry_state" type="LimboState" parent="HSM" node_paths=PackedStringArray("sparks_vfx")]
+[node name="C_parry_state" type="LimboState" parent="chill_HSM" node_paths=PackedStringArray("sparks_vfx")]
+unique_name_in_owner = true
 script = ExtResource("15_gr6ba")
 sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
 
-[node name="hurt_state" type="LimboState" parent="HSM"]
+[node name="C_hurt_state" type="LimboState" parent="chill_HSM"]
+unique_name_in_owner = true
 script = ExtResource("12_8bogr")
 animation_name = &"hurt"
 
-[node name="death_state" type="LimboState" parent="HSM"]
+[node name="C_death_state" type="LimboState" parent="chill_HSM"]
+unique_name_in_owner = true
+
+[node name="berk_HSM" type="LimboHSM" parent="."]
+
+[node name="B_idle_state" type="LimboState" parent="berk_HSM"]
+unique_name_in_owner = true
+script = ExtResource("7_jq37t")
+can_move = true
+can_jump = true
+can_dash = true
+animation_name = &"idle"
+
+[node name="B_running_state" type="LimboState" parent="berk_HSM"]
+unique_name_in_owner = true
+script = ExtResource("8_lm05a")
+can_move = true
+can_jump = true
+can_dash = true
+animation_name = &"run"
+
+[node name="B_airborne_state" type="LimboState" parent="berk_HSM"]
+unique_name_in_owner = true
+script = ExtResource("12_qdo0p")
+can_move = true
+
+[node name="B_dash_state" type="LimboState" parent="berk_HSM"]
+unique_name_in_owner = true
+script = ExtResource("13_etibh")
+animation_name = &"dash"
+
+[node name="B_riposte_state" type="LimboState" parent="berk_HSM" node_paths=PackedStringArray("hitzone")]
+unique_name_in_owner = true
+script = ExtResource("11_qkeca")
+damage = 50
+hitzone = NodePath("../../attack_hitzones/attack3")
+hit_frame = 1
+animation_name = &"final_swing"
+
+[node name="B_parry_state" type="LimboState" parent="berk_HSM" node_paths=PackedStringArray("sparks_vfx")]
+unique_name_in_owner = true
+script = ExtResource("15_gr6ba")
+sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
+
+[node name="B_hurt_state" type="LimboState" parent="berk_HSM"]
+unique_name_in_owner = true
+script = ExtResource("12_8bogr")
+animation_name = &"hurt"
+
+[node name="B_death_state" type="LimboState" parent="berk_HSM"]
+unique_name_in_owner = true
 
 [node name="UI" type="Node2D" parent="."]
 

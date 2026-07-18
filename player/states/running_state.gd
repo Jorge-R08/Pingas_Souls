@@ -2,7 +2,6 @@ extends PlayerState
 
 #region DEFS
 #region CONSTANTS
-const JUMP_VELOCITY = -400.0
 #endregion
 
 #region @EXPORTS
@@ -20,8 +19,8 @@ func _enter():
 	super()
 	char.coyote_time_buffer.timeout.connect(_on_coyote_time_buffer_timeout)
 
-	
 func _update(delta : float) -> void:
+	super(delta)
 	char.dir = Input.get_axis("left", "right")
 	if char.dir:
 		char.velocity.x = char.dir * SPEED
@@ -29,13 +28,7 @@ func _update(delta : float) -> void:
 		dispatch("to_idle")
 		
 	if Input.is_action_just_pressed("attack"):
-		dispatch("to_combo1_state")
-	elif Input.is_action_just_pressed("jump") and (char.is_on_floor() or !char.coyote_time_buffer.is_stopped()):
-		char.velocity.y = JUMP_VELOCITY
-		char.coyote_time_buffer.stop()
-		dispatch("to_airborne")
-	elif Input.is_action_just_pressed("dash") and char.is_on_floor() and char.curr_stamina >= char.DASH_STAMINA_COST:
-		dispatch("to_dash")
+		dispatch("to_A_combo1_state")
 		
 	if !char.is_on_floor() and char.coyote_time_buffer.is_stopped():
 		char.coyote_time_buffer.start()
