@@ -36,7 +36,7 @@ func _enter() -> void:
 	
 	char.gain_mana(1)
 	
-	play_sparks_vfx(Vector2(char.position.x, char.position.y), "parry")
+	play_sparks_vfx("parry")
 
 func _update(delta : float) -> void:
 	super(delta)
@@ -45,8 +45,8 @@ func _update(delta : float) -> void:
 		char.sprite.self_modulate = Color(0,0,0,200)
 		dispatch("to_riposte")
 	
-func play_sparks_vfx(spark_position: Vector2, spark_type: String = "default"):
-	sparks_vfx.global_position = spark_position + Vector2(sparks_x_offset, sparks_y_offset)*(-1 if char.sprite.flip_h else 1)
+func play_sparks_vfx(spark_type: String = "default"):
+	sparks_vfx.global_position = char.global_position + Vector2(sparks_x_offset, sparks_y_offset)*(-1 if char.sprite.flip_h else 1)
 	sparks_sprite.visible = true
 	
 	match spark_type:

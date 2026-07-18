@@ -321,3 +321,17 @@ offset_top = 94.0
 offset_right = 554.0
 offset_bottom = 117.0
 text = "X to gain stamina"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 665.0
+offset_top = 125.0
+offset_right = 736.0
+offset_bottom = 148.0
+text = "E to dash"
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 664.0
+offset_top = 145.0
+offset_right = 746.0
+offset_bottom = 168.0
+text = "F to attack"
