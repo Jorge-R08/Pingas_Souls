@@ -25,7 +25,11 @@ var sparks_audio : AudioStreamPlayer2D
 func _enter() -> void:
 	super()
 	sparks_sprite = sparks_vfx.get_children().filter(func(xd): return xd is AnimatedSprite2D)[0]
+	sparks_sprite = sparks_vfx.get_children().filter(func(xd): return xd is AnimatedSprite2D)[0]
+	
 	sparks_audio = sparks_vfx.get_children().filter(func(xd): return xd is AudioStreamPlayer2D)[0]
+	if sparks_audio == null or sparks_sprite == null:
+		push_error("SPARKS VFX NOT INITIATED")
 	
 	sparks_sprite.animation_finished.connect(_on_spark_animation_finished)
 	parry_reset_timer.timeout.connect(_on_parry_reset_timer_timeout)

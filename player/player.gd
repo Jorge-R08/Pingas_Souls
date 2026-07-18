@@ -77,6 +77,7 @@ func gain_stamina(amnt : float):
 	curr_stamina = min(curr_stamina+amnt, stamina_bar.max_value)
 	stamina_bar.value = curr_stamina
 	
+	
 func spend_stamina(cost : int):
 	curr_stamina -= cost
 	stamina_regen_timer.start()
@@ -86,7 +87,6 @@ func spend_stamina(cost : int):
 func gain_mana(amnt : int):
 	curr_mana = min(curr_mana+amnt, mana_meter.max_value)
 	mana_meter.value = curr_mana
-	Input
 	
 func spend_mana(amnt : int) -> bool:
 	if curr_mana >= amnt:

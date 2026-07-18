@@ -297,7 +297,8 @@ hitzones = NodePath("attack_hitzones")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.33333, 2.60117)
 sprite_frames = SubResource("SpriteFrames_y8bso")
-animation = &"Slash"
+animation = &"Move"
+frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-8, 46.6329)

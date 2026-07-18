@@ -10,7 +10,8 @@ func _update(delta: float) -> void:
 	boss.dir = int(sign(x_diff))
 	boss._flip_sprite()
 
-	boss.velocity = Vector2(boss.dir * boss.speed, 0)
+	if not boss.freeze:
+		boss.velocity = Vector2(boss.dir * boss.speed, 0)
 
 	var ray_length: float = 200.0
 	var direction_right: Vector2 = (boss.target.global_position - boss.ray_cast_right.global_position).normalized()

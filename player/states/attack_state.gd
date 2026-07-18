@@ -30,7 +30,6 @@ func _enter():
 	super()
 	print(char.boss_target)
 	post_attack = false
-	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
 	combo_reset_timer.stop()
 	

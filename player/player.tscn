@@ -438,6 +438,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxtt8"]
 size = Vector2(38.25, 51.5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iemw7"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8onb"]
+bg_color = Color(0.0352941, 0.717647, 0.933333, 1)
+
 [sub_resource type="Theme" id="Theme_jmpam"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chkcn"]
@@ -445,12 +451,6 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8s7qa"]
 bg_color = Color(0, 0.620209, 0.22054, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iemw7"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l8onb"]
-bg_color = Color(0.0352941, 0.717647, 0.933333, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_th1o6"]
 atlas = ExtResource("16_x26u5")
@@ -610,32 +610,9 @@ animation_name = &"hurt"
 
 [node name="death_state" type="LimboState" parent="HSM"]
 
-[node name="stamina_bar" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-offset_left = -78.0
-offset_top = -96.0
-offset_right = 52.0
-offset_bottom = -66.0
-theme = SubResource("Theme_jmpam")
-theme_override_styles/background = SubResource("StyleBoxFlat_chkcn")
-theme_override_styles/fill = SubResource("StyleBoxFlat_8s7qa")
-max_value = 120.0
-value = 120.0
-show_percentage = false
+[node name="UI" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="stamina_bar"]
-layout_mode = 0
-offset_left = 40.0
-offset_right = 45.0
-offset_bottom = 30.0
-
-[node name="ColorRect2" type="ColorRect" parent="stamina_bar"]
-layout_mode = 0
-offset_left = 85.0
-offset_right = 90.0
-offset_bottom = 30.0
-
-[node name="mana_meter" type="ProgressBar" parent="."]
+[node name="mana_meter" type="ProgressBar" parent="UI"]
 unique_name_in_owner = true
 z_index = 1
 offset_left = -50.0
@@ -648,12 +625,37 @@ max_value = 2.0
 value = 1.0
 show_percentage = false
 
-[node name="ColorRect3" type="ColorRect" parent="mana_meter"]
+[node name="ColorRect3" type="ColorRect" parent="UI/mana_meter"]
 layout_mode = 0
 offset_left = 48.0
 offset_right = 51.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
+
+[node name="stamina_bar" type="ProgressBar" parent="UI"]
+unique_name_in_owner = true
+offset_left = -78.0
+offset_top = -96.0
+offset_right = 52.0
+offset_bottom = -66.0
+theme = SubResource("Theme_jmpam")
+theme_override_styles/background = SubResource("StyleBoxFlat_chkcn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8s7qa")
+max_value = 120.0
+value = 120.0
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="UI/stamina_bar"]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 45.0
+offset_bottom = 30.0
+
+[node name="ColorRect2" type="ColorRect" parent="UI/stamina_bar"]
+layout_mode = 0
+offset_left = 85.0
+offset_right = 90.0
+offset_bottom = 30.0
 
 [node name="sound_effects" type="Node" parent="."]
 
@@ -687,12 +689,11 @@ unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
 
-[node name="VFXs" type="Node" parent="."]
+[node name="VFXs" type="Node2D" parent="."]
 
 [node name="parry_sparks_vfx" type="Node2D" parent="VFXs"]
 
 [node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx"]
-visible = false
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_70xxi")
 frame = 1
@@ -732,6 +733,8 @@ position = Vector2(37, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_83x2s")
 
+[connection signal="mouse_entered" from="." to="HSM/hurt_state" method="_on_player_mouse_entered"]
+[connection signal="changed" from="UI/stamina_bar" to="." method="_on_stamina_bar_changed"]
 [connection signal="timeout" from="timers/combo_reset_timer" to="HSM/combo1_state" method="_on_combo_reset_timer_timeout"]
 [connection signal="timeout" from="timers/parry_reset_timer" to="HSM/parry_state" method="_on_parry_reset_timer_timeout"]
 [connection signal="timeout" from="timers/coyote_time_buffer" to="HSM/idle_state" method="_on_coyote_time_buffer_timeout"]

@@ -21,6 +21,7 @@ class_name PlayerState
 func _enter() -> void:
 	super()
 	char = agent as player
+	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
 
 
 func _update(delta : float) -> void:
