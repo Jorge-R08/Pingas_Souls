@@ -40,6 +40,8 @@ func _enter():
 		char.sprite.frame_changed.connect(_on_frame_changed)
 		char.sprite.sprite_frames.set_frame("down_swing", 2, char.sprite.sprite_frames.get_frame_texture("down_swing", 2), 2.0)
 		char.sprite.sprite_frames.set_frame("down_swing", 1, char.sprite.sprite_frames.get_frame_texture("down_swing", 1), 2.0)
+		char.sprite.sprite_frames.set_frame("down_swing", 3, char.sprite.sprite_frames.get_frame_texture("down_swing", 3), 2.0)
+
 	
 	if hitzone != null: hitzone.monitoring = true
 
@@ -95,7 +97,8 @@ func _exit() -> void:
 	char.sprite.frame_changed.disconnect(_on_frame_changed)
 	char.sprite.sprite_frames.set_frame("down_swing", 2, char.sprite.sprite_frames.get_frame_texture("down_swing", 2), 1.0)
 	char.sprite.sprite_frames.set_frame("down_swing", 1, char.sprite.sprite_frames.get_frame_texture("down_swing", 1), 1.0)
-	
+	char.sprite.sprite_frames.set_frame("down_swing", 3, char.sprite.sprite_frames.get_frame_texture("down_swing", 3), 1.0)
+
 
 func take_damage(_dmg, _dir):
 	if parry_frames != -1 and char.sprite.frame <= parry_frames:
