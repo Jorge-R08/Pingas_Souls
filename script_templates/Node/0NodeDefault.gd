@@ -20,15 +20,25 @@ extends Node
 
 #region FUNCS
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+#func _ready() -> void:
+#	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass
+
+
 # OR (for limboStates)
-#func _update(delta : float) -> void:
-#	pass
+#func _enter() -> void:
+#	super()
 	
+#func _update(delta : float) -> void:
+#	super(delta)
+	
+#func _exit() -> void:
+	#super()
+	
+#func _on_sprite_animation_finished():
+#	pass
 
 #endregion

@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dsdnvw4tkj13d" path="res://player/states/hurt_state.gd" id="12_8bogr"]
 [ext_resource type="Script" uid="uid://ca8e8kfmcndqg" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
 [ext_resource type="Script" uid="uid://dxc6hoh0cuy6n" path="res://player/states/dash_state.gd" id="13_etibh"]
-[ext_resource type="Script" uid="uid://0aokx6o30c8r" path="res://player/states/parry_state.gd" id="15_gr6ba"]
+[ext_resource type="Script" uid="uid://0aokx6o30c8r" path="res://player/states/post_parry_state.gd" id="15_gr6ba"]
 [ext_resource type="Texture2D" uid="uid://b6rn73xiuh7wq" path="res://Assets/VFX/sparks.png" id="16_x26u5"]
 [ext_resource type="AudioStream" uid="uid://c6diaaufj2qar" path="res://Assets/VFX/new_audio_stream_ogg_vorbis.tres" id="17_qtsum"]
 
@@ -165,6 +165,30 @@ region = Rect2(1530, 0, 170, 125)
 [sub_resource type="AtlasTexture" id="AtlasTexture_cur01"]
 atlas = ExtResource("4_5mm1w")
 region = Rect2(1700, 0, 170, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7oew"]
+atlas = ExtResource("5_et1is")
+region = Rect2(0, 0, 170, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c35mf"]
+atlas = ExtResource("5_et1is")
+region = Rect2(170, 0, 170, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65viv"]
+atlas = ExtResource("5_et1is")
+region = Rect2(510, 0, 170, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7c3f"]
+atlas = ExtResource("5_et1is")
+region = Rect2(680, 0, 170, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjvpn"]
+atlas = ExtResource("5_et1is")
+region = Rect2(850, 0, 170, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7qer"]
+atlas = ExtResource("5_et1is")
+region = Rect2(1020, 0, 170, 125)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqvn2"]
 atlas = ExtResource("6_wg0p0")
@@ -378,6 +402,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_e7oew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c35mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65viv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7c3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjvpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7qer")
+}],
+"loop": 0,
+"name": &"parry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nqvn2")
 }, {
 "duration": 1.0,
@@ -535,8 +582,9 @@ hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=2111754002]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"hurt"
+animation = &"parry"
 autoplay = "idle"
+frame = 5
 offset = Vector2(30, 0)
 
 [node name="body_hitbox" type="CollisionShape2D" parent="." unique_id=50072780]
@@ -602,7 +650,7 @@ script = ExtResource("11_qkeca")
 damage = 10
 next_attack = NodePath("../A_combo2_state")
 DIR_LOCKOUT_FRAME = 2
-hitzone = NodePath("../../attack_hitzones/attack1")
+hitzone = NodePath("../../attack_hitzones/A_attack1")
 hit_frame = 3
 animation_name = &"down_swing"
 
@@ -611,7 +659,7 @@ unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 next_attack = NodePath("../A_combo3_state")
 DIR_LOCKOUT_FRAME = 1
-hitzone = NodePath("../../attack_hitzones/attack2")
+hitzone = NodePath("../../attack_hitzones/A_attack2")
 parry_frames = 1
 hit_frame = 2
 animation_name = &"up_swing"
@@ -620,11 +668,11 @@ animation_name = &"up_swing"
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
-hitzone = NodePath("../../attack_hitzones/attack3")
+hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="A_parry_state" type="LimboState" parent="aggro_HSM" unique_id=922235396 node_paths=PackedStringArray("sparks_vfx", "attack_action")]
+[node name="A_post_parry_state" type="LimboState" parent="aggro_HSM" unique_id=922235396 node_paths=PackedStringArray("sparks_vfx", "attack_action")]
 unique_name_in_owner = true
 script = ExtResource("15_gr6ba")
 sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
@@ -636,27 +684,32 @@ NodePath("../A_riposte_state"): 0
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
-hitzone = NodePath("../../attack_hitzones/attack3")
+hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
 debug_black_effect = true
 animation_name = &"final_swing"
 
 [node name="chill_HSM" type="LimboHSM" parent="." unique_id=462532478]
 
-[node name="C_idle_state" type="LimboState" parent="chill_HSM" unique_id=2139730333]
+[node name="C_idle_state" type="LimboState" parent="chill_HSM" unique_id=2139730333 node_paths=PackedStringArray("parry_state", "attack_action")]
 unique_name_in_owner = true
 script = ExtResource("7_jq37t")
 can_move = true
 can_jump = true
 can_dash = true
+parry_state = NodePath("../C_parry_action_state")
+attack_action = {
+NodePath("../C_combo1_state"): 0
+}
 animation_name = &"idle"
 
-[node name="C_running_state" type="LimboState" parent="chill_HSM" unique_id=1402766795]
+[node name="C_running_state" type="LimboState" parent="chill_HSM" unique_id=1402766795 node_paths=PackedStringArray("parry_state")]
 unique_name_in_owner = true
 script = ExtResource("8_lm05a")
 can_move = true
 can_jump = true
 can_dash = true
+parry_state = NodePath("../C_parry_action_state")
 animation_name = &"run"
 
 [node name="C_airborne_state" type="LimboState" parent="chill_HSM" unique_id=211341680]
@@ -673,11 +726,21 @@ animation_name = &"dash"
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
-hitzone = NodePath("../../attack_hitzones/attack3")
+hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="C_parry_state" type="LimboState" parent="chill_HSM" unique_id=1190165498 node_paths=PackedStringArray("sparks_vfx")]
+[node name="C_parry_action_state" type="LimboState" parent="chill_HSM" unique_id=1190165498 node_paths=PackedStringArray("attack_action")]
+unique_name_in_owner = true
+script = ExtResource("11_qkeca")
+parry_frames = 1
+block_frames = 3
+attack_action = {
+NodePath("../C_riposte_state"): 0
+}
+animation_name = &"parry"
+
+[node name="C_post_parry_state" type="LimboState" parent="chill_HSM" unique_id=1950484114 node_paths=PackedStringArray("sparks_vfx")]
 unique_name_in_owner = true
 script = ExtResource("15_gr6ba")
 sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
@@ -688,6 +751,27 @@ script = ExtResource("12_8bogr")
 animation_name = &"hurt"
 
 [node name="C_death_state" type="LimboState" parent="chill_HSM" unique_id=1775738887]
+unique_name_in_owner = true
+
+[node name="C_combo1_state" type="LimboState" parent="chill_HSM" unique_id=361853617 node_paths=PackedStringArray("next_attack", "hitzone")]
+unique_name_in_owner = true
+script = ExtResource("11_qkeca")
+damage = 10
+next_attack = NodePath("../C_combo2_state")
+DIR_LOCKOUT_FRAME = 1
+hitzone = NodePath("../../attack_hitzones/A_attack2")
+hit_frame = 2
+animation_name = &"up_swing"
+
+[node name="C_combo2_state" type="LimboState" parent="chill_HSM" unique_id=1261349654 node_paths=PackedStringArray("hitzone")]
+unique_name_in_owner = true
+script = ExtResource("11_qkeca")
+damage = 30
+hitzone = NodePath("../../attack_hitzones/A_attack3")
+hit_frame = 1
+animation_name = &"final_swing"
+
+[node name="C_charged_attack" type="LimboState" parent="chill_HSM" unique_id=1712346578]
 unique_name_in_owner = true
 
 [node name="berk_HSM" type="LimboHSM" parent="." unique_id=1744147815]
@@ -722,7 +806,7 @@ animation_name = &"dash"
 unique_name_in_owner = true
 script = ExtResource("11_qkeca")
 damage = 50
-hitzone = NodePath("../../attack_hitzones/attack3")
+hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
@@ -833,29 +917,29 @@ pitch_scale = 0.9
 
 [node name="attack_hitzones" type="Node2D" parent="." unique_id=874769873]
 
-[node name="attack1" type="Area2D" parent="attack_hitzones" unique_id=1406657670]
+[node name="A_attack1" type="Area2D" parent="attack_hitzones" unique_id=1406657670]
 position = Vector2(32, 3)
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack1" unique_id=1048895035]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/A_attack1" unique_id=1048895035]
 position = Vector2(8, -15)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_80cd1")
 
-[node name="attack2" type="Area2D" parent="attack_hitzones" unique_id=38098007]
+[node name="A_attack2" type="Area2D" parent="attack_hitzones" unique_id=38098007]
 visible = false
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack2" unique_id=1013775516]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/A_attack2" unique_id=1013775516]
 position = Vector2(25, -22)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_adjok")
 
-[node name="attack3" type="Area2D" parent="attack_hitzones" unique_id=483644177]
+[node name="A_attack3" type="Area2D" parent="attack_hitzones" unique_id=483644177]
 visible = false
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/attack3" unique_id=84314790]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/A_attack3" unique_id=84314790]
 position = Vector2(66, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_83x2s")

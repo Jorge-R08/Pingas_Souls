@@ -9,6 +9,7 @@ class_name PlayerState
 @export var can_move : bool = false
 @export var can_jump : bool = false
 @export var can_dash : bool = false
+@export var parry_state : LimboState = null
 @export var attack_action : Dictionary[PlayerState, int] 
 @export var debug_black_effect : bool = false
 #endregion
@@ -33,8 +34,8 @@ func _update(delta : float) -> void:
 	super(delta)
 	if can_jump: _jump_logic()
 	if can_dash: _dash_logic()
-	if !attack_action.is_empty(): 
-		_attack_logic()
+	if !attack_action.is_empty(): _attack_logic()
+	if parry_state != null: _parry_logic()
 
 func take_damage(_dmg: int, _dmg_dir: int) -> void:
 	dispatch(&"to_hurt", {"dmg":_dmg,"dmg_dir":_dmg_dir})
@@ -51,6 +52,10 @@ func _jump_logic():
 		char.velocity.y = char.JUMP_VELOCITY
 		char.coyote_time_buffer.stop()
 		dispatch("to_airborne")
+
+func _parry_logic():
+	if Input.is_action_just_pressed("parry"):
+		dispatch("to_parry_action")
 
 func _dash_logic():
 	if Input.is_action_just_pressed("dash") and char.is_on_floor() and char.curr_stamina >= char.DASH_STAMINA_COST:

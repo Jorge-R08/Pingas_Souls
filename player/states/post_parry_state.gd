@@ -1,5 +1,7 @@
 extends PlayerState
-class_name parryState
+class_name postParryState
+
+#TODO: Right now, parry/block is functionally an attack, maybe we should change this idk
 
 #region DEFS
 #region CONSTANTS

@@ -350,3 +350,10 @@ offset_top = 104.0
 offset_right = 817.0
 offset_bottom = 127.0
 text = "O to switch stance"
+
+[node name="Label8" type="Label" parent="." unique_id=487007998]
+offset_left = 291.0
+offset_top = 144.0
+offset_right = 370.0
+offset_bottom = 167.0
+text = "Q to parry"

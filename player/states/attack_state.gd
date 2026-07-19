@@ -1,5 +1,7 @@
 extends PlayerState
 
+#TODO: Right now, parry/block is functionally an attack, maybe we should change this idk
+
 #region DEFS
 #region CONSTANTS
 const STOP_SPEED : int = 10
@@ -13,6 +15,7 @@ const STOP_SPEED : int = 10
 @export var hitzone : Area2D
 ## the last parry frame of the animation
 @export var parry_frames : int = -1
+@export var block_frames : int = -1
 @export var hit_frame : int
 #endregion
 
@@ -31,7 +34,7 @@ func _enter():
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
 	combo_reset_timer.stop()
 	
-	hitzone.monitoring = true
+	if hitzone != null: hitzone.monitoring = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _update(delta: float) -> void:
@@ -50,10 +53,10 @@ func _update(delta: float) -> void:
 		char._flip_sprite()
 		char.move_and_slide()
 
-	if char.sprite.frame == hit_frame:
+	if char.sprite.frame == hit_frame and hitzone != null:
 		if hitzone.has_overlapping_bodies():
 			hitzone.monitoring = false
-			char.boss_target.health = 50
+			char.boss_target.health = max(char.boss_target.health - damage, 0)
 	
 func _on_sprite_animation_finished():
 	post_attack = true
@@ -73,5 +76,10 @@ func _exit() -> void:
 func take_damage(_dmg, _dir):
 	if parry_frames != -1 and char.sprite.frame <= parry_frames:
 		dispatch("to_parry")
+	elif block_frames != -1 and char.sprite.frame <= block_frames:
+		super(_dmg/2, _dir)
+		print("attack blocked jijijuju")
+		#TODO: there should be an event handler for the "to_parry" transition
+		# to do different behavior based on if it is a parry or block, see hurt_state
 	else:
 		super(_dmg, _dir)
