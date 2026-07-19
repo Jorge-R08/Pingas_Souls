@@ -300,15 +300,17 @@ target = NodePath("../Player")
 health = 100
 debug = false
 
-[node name="Label" type="Label" parent="." unique_id=1907645496]
+[node name="labels" type="Node" parent="." unique_id=106732809]
+
+[node name="Label" type="Label" parent="labels" unique_id=1907645496]
 z_index = 1
 offset_left = 407.0
 offset_top = 143.0
-offset_right = 447.0
+offset_right = 495.0
 offset_bottom = 166.0
 text = "K to restart"
 
-[node name="Label2" type="Label" parent="." unique_id=1223420801]
+[node name="Label2" type="Label" parent="labels" unique_id=1223420801]
 z_index = 1
 offset_left = 408.0
 offset_top = 118.0
@@ -316,44 +318,51 @@ offset_right = 615.0
 offset_bottom = 141.0
 text = "Z to gain mana (blue bar)"
 
-[node name="Label3" type="Label" parent="." unique_id=1651319271]
+[node name="Label3" type="Label" parent="labels" unique_id=1651319271]
 offset_left = 407.0
 offset_top = 94.0
 offset_right = 554.0
 offset_bottom = 117.0
 text = "X to gain stamina"
 
-[node name="Label4" type="Label" parent="." unique_id=1972594540]
+[node name="Label4" type="Label" parent="labels" unique_id=1972594540]
 offset_left = 665.0
 offset_top = 125.0
 offset_right = 736.0
 offset_bottom = 148.0
 text = "E to dash"
 
-[node name="Label5" type="Label" parent="." unique_id=471621763]
+[node name="Label5" type="Label" parent="labels" unique_id=471621763]
 offset_left = 664.0
 offset_top = 145.0
 offset_right = 746.0
 offset_bottom = 168.0
 text = "F to attack"
 
-[node name="Label6" type="Label" parent="." unique_id=1428380414]
+[node name="Label6" type="Label" parent="labels" unique_id=1428380414]
 offset_left = -204.0
 offset_top = 152.0
 offset_right = -83.0
 offset_bottom = 175.0
 text = "Press P to winw"
 
-[node name="Label7" type="Label" parent="." unique_id=238993302]
+[node name="Label7" type="Label" parent="labels" unique_id=238993302]
 offset_left = 662.0
 offset_top = 104.0
 offset_right = 817.0
 offset_bottom = 127.0
 text = "O to switch stance"
 
-[node name="Label8" type="Label" parent="." unique_id=487007998]
-offset_left = 291.0
-offset_top = 144.0
-offset_right = 370.0
-offset_bottom = 167.0
+[node name="Label8" type="Label" parent="labels" unique_id=487007998]
+offset_left = 212.0
+offset_top = 143.0
+offset_right = 291.0
+offset_bottom = 166.0
 text = "Q to parry"
+
+[node name="Label9" type="Label" parent="labels" unique_id=1301923502]
+offset_left = 212.0
+offset_top = 120.0
+offset_right = 376.0
+offset_bottom = 143.0
+text = "G toCharged Attack"

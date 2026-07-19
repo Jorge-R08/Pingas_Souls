@@ -43,7 +43,7 @@ func _update(delta : float) -> void:
 	
 func play_sparks_vfx(spark_type: String = "default"):
 	sparks_vfx.global_position = char.global_position + Vector2(sparks_x_offset, sparks_y_offset)
-	sparks_sprite.visible = true
+	sparks_vfx.visible = true
 	
 	match spark_type:
 		"parry":
@@ -61,7 +61,7 @@ func play_sparks_vfx(spark_type: String = "default"):
 	
 
 func _on_spark_animation_finished():
-	sparks_sprite.visible = false
+	sparks_vfx.visible = false
 
 func _on_parry_reset_timer_timeout() -> void:
 	dispatch("to_idle")

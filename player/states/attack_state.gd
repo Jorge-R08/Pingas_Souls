@@ -17,6 +17,7 @@ const STOP_SPEED : int = 10
 @export var parry_frames : int = -1
 @export var block_frames : int = -1
 @export var hit_frame : int
+@export var charged : bool = false
 #endregion
 
 #region @ONREADY
@@ -25,14 +26,20 @@ const STOP_SPEED : int = 10
 
 #region VARS
 var post_attack : bool = false
+var charge_complete : bool = false
 #endregion
 #endregion
 
 func _enter():
 	super()
 	post_attack = false
+	charge_complete = false
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
 	combo_reset_timer.stop()
+	if charged: 
+		char.sprite.frame_changed.connect(_on_frame_changed)
+		char.sprite.sprite_frames.set_frame("down_swing", 2, char.sprite.sprite_frames.get_frame_texture("down_swing", 2), 2.0)
+		char.sprite.sprite_frames.set_frame("down_swing", 1, char.sprite.sprite_frames.get_frame_texture("down_swing", 1), 2.0)
 	
 	if hitzone != null: hitzone.monitoring = true
 
@@ -58,6 +65,12 @@ func _update(delta: float) -> void:
 			hitzone.monitoring = false
 			char.boss_target.health = max(char.boss_target.health - damage, 0)
 	
+	if !Input.is_action_pressed("charged_attack"):
+		if charge_complete:
+			charge_complete = false
+			char.sprite.frame_changed.disconnect(_on_frame_changed)
+			char.sprite.frame = 3
+
 func _on_sprite_animation_finished():
 	post_attack = true
 	if next_attack:
@@ -67,12 +80,23 @@ func _on_sprite_animation_finished():
 
 func _on_combo_reset_timer_timeout() -> void:
 	dispatch("to_idle")
+	
+func _on_frame_changed() -> void:
+	if char.sprite.frame == 3 and Input.is_action_pressed("charged_attack"):
+		char.sprite.frame = 1
+		charge_complete = true
+	elif char.sprite.frame == 3:
+		dispatch("to_idle")
 
 func _exit() -> void:
 	super()
 	combo_reset_timer.stop()
 	combo_reset_timer.timeout.disconnect(_on_combo_reset_timer_timeout)
+	char.sprite.frame_changed.disconnect(_on_frame_changed)
+	char.sprite.sprite_frames.set_frame("down_swing", 2, char.sprite.sprite_frames.get_frame_texture("down_swing", 2), 1.0)
+	char.sprite.sprite_frames.set_frame("down_swing", 1, char.sprite.sprite_frames.get_frame_texture("down_swing", 1), 1.0)
 	
+
 func take_damage(_dmg, _dir):
 	if parry_frames != -1 and char.sprite.frame <= parry_frames:
 		dispatch("to_parry")

@@ -64,6 +64,7 @@ func _process(delta : float) -> void:
 	elif Input.is_action_just_pressed("secret_debug_funny_button'"):
 		scale.x = 2
 		take_damage(5, 1)
+	#TODO: Should not be able to interrupt an action by switching stances
 	elif Input.is_action_just_pressed("stance_switch"):
 		if curr_hsm == aggro_hsm:
 			switch_hsms(aggro_hsm, chill_hsm)
@@ -80,7 +81,6 @@ func _on_stamina_regen_timer_timeout() -> void:
 func gain_stamina(amnt : float):
 	curr_stamina = min(curr_stamina+amnt, stamina_bar.max_value)
 	stamina_bar.value = curr_stamina
-	
 	
 func spend_stamina(cost : int):
 	curr_stamina -= cost
@@ -150,6 +150,7 @@ func initiate_chill_state_machine():
 	chill_hsm.add_transition(%C_hurt_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_combo1_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_combo2_state, %C_idle_state, &"to_idle")
+	chill_hsm.add_transition(%C_charged_attack, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_airborne_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_dash_state, %C_idle_state, &"to_idle")
 	chill_hsm.add_transition(%C_parry_state, %C_idle_state, &"to_idle")
@@ -168,11 +169,14 @@ func initiate_chill_state_machine():
 	chill_hsm.add_transition(%C_idle_state, %C_hurt_state, &"to_hurt")
 	chill_hsm.add_transition(%C_parry_state, %C_hurt_state, &"to_hurt")
 	chill_hsm.add_transition(%C_riposte_state, %C_hurt_state, &"to_hurt")
+	chill_hsm.add_transition(%C_charged_attack, %C_hurt_state, &"to_hurt")
 	chill_hsm.add_event_handler(&"to_hurt", %C_hurt_state._on_hurt_enter)
 	
 	chill_hsm.add_transition(%C_running_state, %C_combo1_state, &"to_C_combo1_state")
 	chill_hsm.add_transition(%C_idle_state, %C_combo1_state, &"to_C_combo1_state")
 	chill_hsm.add_transition(%C_combo1_state, %C_combo2_state, &"to_C_combo2_state")
+	chill_hsm.add_transition(%C_idle_state, %C_charged_attack, &"to_C_charged_attack")
+	chill_hsm.add_transition(%C_running_state, %C_charged_attack, &"to_C_charged_attack")
 	chill_hsm.add_transition(%C_idle_state, %C_parry_action_state, &"to_parry_action")
 	chill_hsm.add_transition(%C_running_state, %C_parry_action_state, &"to_parry_action")
 	chill_hsm.add_transition(%C_parry_action_state, %C_post_parry_state, &"to_parry")

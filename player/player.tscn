@@ -582,9 +582,9 @@ hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=2111754002]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"parry"
+animation = &"down_swing"
 autoplay = "idle"
-frame = 5
+frame = 3
 offset = Vector2(30, 0)
 
 [node name="body_hitbox" type="CollisionShape2D" parent="." unique_id=50072780]
@@ -691,7 +691,7 @@ animation_name = &"final_swing"
 
 [node name="chill_HSM" type="LimboHSM" parent="." unique_id=462532478]
 
-[node name="C_idle_state" type="LimboState" parent="chill_HSM" unique_id=2139730333 node_paths=PackedStringArray("parry_state", "attack_action")]
+[node name="C_idle_state" type="LimboState" parent="chill_HSM" unique_id=2139730333 node_paths=PackedStringArray("parry_state", "attack_action", "charged_attack")]
 unique_name_in_owner = true
 script = ExtResource("7_jq37t")
 can_move = true
@@ -701,15 +701,17 @@ parry_state = NodePath("../C_parry_action_state")
 attack_action = {
 NodePath("../C_combo1_state"): 0
 }
+charged_attack = NodePath("../C_charged_attack")
 animation_name = &"idle"
 
-[node name="C_running_state" type="LimboState" parent="chill_HSM" unique_id=1402766795 node_paths=PackedStringArray("parry_state")]
+[node name="C_running_state" type="LimboState" parent="chill_HSM" unique_id=1402766795 node_paths=PackedStringArray("parry_state", "charged_attack")]
 unique_name_in_owner = true
 script = ExtResource("8_lm05a")
 can_move = true
 can_jump = true
 can_dash = true
 parry_state = NodePath("../C_parry_action_state")
+charged_attack = NodePath("../C_charged_attack")
 animation_name = &"run"
 
 [node name="C_airborne_state" type="LimboState" parent="chill_HSM" unique_id=211341680]
@@ -728,6 +730,7 @@ script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
+debug_black_effect = true
 animation_name = &"final_swing"
 
 [node name="C_parry_action_state" type="LimboState" parent="chill_HSM" unique_id=1190165498 node_paths=PackedStringArray("attack_action")]
@@ -740,10 +743,13 @@ NodePath("../C_riposte_state"): 0
 }
 animation_name = &"parry"
 
-[node name="C_post_parry_state" type="LimboState" parent="chill_HSM" unique_id=1950484114 node_paths=PackedStringArray("sparks_vfx")]
+[node name="C_post_parry_state" type="LimboState" parent="chill_HSM" unique_id=1950484114 node_paths=PackedStringArray("sparks_vfx", "attack_action")]
 unique_name_in_owner = true
 script = ExtResource("15_gr6ba")
 sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
+attack_action = {
+NodePath("../C_riposte_state"): 0
+}
 
 [node name="C_hurt_state" type="LimboState" parent="chill_HSM" unique_id=802976259]
 unique_name_in_owner = true
@@ -771,8 +777,14 @@ hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="C_charged_attack" type="LimboState" parent="chill_HSM" unique_id=1712346578]
+[node name="C_charged_attack" type="LimboState" parent="chill_HSM" unique_id=1712346578 node_paths=PackedStringArray("hitzone")]
 unique_name_in_owner = true
+script = ExtResource("11_qkeca")
+damage = 77
+hitzone = NodePath("../../attack_hitzones/A_attack1")
+hit_frame = 3
+charged = true
+animation_name = &"down_swing"
 
 [node name="berk_HSM" type="LimboHSM" parent="." unique_id=1744147815]
 
@@ -904,6 +916,7 @@ one_shot = true
 [node name="VFXs" type="Node2D" parent="." unique_id=259959908]
 
 [node name="parry_sparks_vfx" type="Node2D" parent="VFXs" unique_id=1865089135]
+visible = false
 
 [node name="sparks_sprite" type="AnimatedSprite2D" parent="VFXs/parry_sparks_vfx" unique_id=672821266]
 scale = Vector2(0.3, 0.3)
