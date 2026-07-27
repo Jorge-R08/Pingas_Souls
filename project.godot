@@ -35,7 +35,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/script_tabs/plugin.cfg")
 
 [input]
 

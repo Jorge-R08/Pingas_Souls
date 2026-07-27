@@ -22,16 +22,16 @@ func _enter():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _update(delta: float) -> void:
 	super(delta)
-	if not char.is_on_floor():
-		char.velocity += char.get_gravity() * delta
+	if not player.is_on_floor():
+		player.velocity += player.get_gravity() * delta
 	else:
 		dispatch("to_idle")
 	
-	char.dir = Input.get_axis("left", "right")
-	if char.dir:
-		char.velocity.x = char.dir * SPEED
+	player.dir = Input.get_axis("left", "right")
+	if player.dir:
+		player.velocity.x = player.dir * SPEED
 	else:
-		char.velocity.x = move_toward(char.velocity.x, 0, STOP_SPEED)
+		player.velocity.x = move_toward(player.velocity.x, 0, STOP_SPEED)
 	
-	char.move_and_slide()
-	char._flip_sprite()
+	player.move_and_slide()
+	player._flip_sprite()

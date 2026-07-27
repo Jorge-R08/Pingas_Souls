@@ -9,6 +9,7 @@ class_name BossAttackState
 @export var hit_frame : int
 @export var hitzone : Area2D
 @export var dmg : int
+@export var next_attack : BossAttackState
 #endregion
 
 #region @ONREADY
@@ -26,12 +27,13 @@ func _enter() -> void:
 
 func _update(delta : float) -> void:
 	super(delta)
-	if boss.sprite.frame == hit_frame:
+	if boss.sprite.frame == hit_frame and hitzone.monitoring:
 		if hitzone.has_overlapping_bodies():
 			hitzone.monitoring = false
 			boss.target.take_damage(dmg, -1 if boss.sprite.flip_h else 1)
 
 func _exit() -> void:
-	hitzone.monitoring = false
-
+	super()
+	hitzone.monitoring = true
+	
 #endregion

@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://db75qkjrdssxa" path="res://Assets/SkeletonKnight/RELEASE/HURT.png" id="5_6fopc"]
 [ext_resource type="Texture2D" uid="uid://b4cs7j2l1yy56" path="res://Assets/SkeletonKnight/RELEASE/SIDE_SWING.png" id="5_et1is"]
 [ext_resource type="Texture2D" uid="uid://b8mx3u1l03sc3" path="res://Assets/SkeletonKnight/RELEASE/WALK.png" id="6_wg0p0"]
-[ext_resource type="Script" uid="uid://bavcn22bicpg6" path="res://player/states/idle_state.gd" id="7_jq37t"]
-[ext_resource type="Script" uid="uid://dp6fpulcby66y" path="res://player/states/running_state.gd" id="8_lm05a"]
-[ext_resource type="Script" uid="uid://c07xq5hu6jpgi" path="res://player/states/attack_state.gd" id="11_qkeca"]
-[ext_resource type="Script" uid="uid://dsdnvw4tkj13d" path="res://player/states/hurt_state.gd" id="12_8bogr"]
-[ext_resource type="Script" uid="uid://ca8e8kfmcndqg" path="res://player/states/airborne_state.gd" id="12_qdo0p"]
-[ext_resource type="Script" uid="uid://dxc6hoh0cuy6n" path="res://player/states/dash_state.gd" id="13_etibh"]
-[ext_resource type="Script" uid="uid://0aokx6o30c8r" path="res://player/states/post_parry_state.gd" id="15_gr6ba"]
+[ext_resource type="Script" uid="uid://bavcn22bicpg6" path="res://player/states/idle_state_player.gd" id="7_jq37t"]
+[ext_resource type="Script" uid="uid://dp6fpulcby66y" path="res://player/states/running_state_player.gd" id="8_lm05a"]
+[ext_resource type="Script" uid="uid://c07xq5hu6jpgi" path="res://player/states/attack_state_player.gd" id="11_qkeca"]
+[ext_resource type="Script" uid="uid://dsdnvw4tkj13d" path="res://player/states/hurt_state_player.gd" id="12_8bogr"]
+[ext_resource type="Script" uid="uid://ca8e8kfmcndqg" path="res://player/states/airborne_state_player.gd" id="12_qdo0p"]
+[ext_resource type="Script" uid="uid://dxc6hoh0cuy6n" path="res://player/states/dash_state_player.gd" id="13_etibh"]
+[ext_resource type="Script" uid="uid://0aokx6o30c8r" path="res://player/states/post_parry_state_player.gd" id="15_gr6ba"]
 [ext_resource type="Texture2D" uid="uid://b6rn73xiuh7wq" path="res://Assets/VFX/sparks.png" id="16_x26u5"]
 [ext_resource type="AudioStream" uid="uid://c6diaaufj2qar" path="res://Assets/VFX/new_audio_stream_ogg_vorbis.tres" id="17_qtsum"]
 
@@ -483,7 +483,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxtt8"]
-size = Vector2(38.25, 51.5)
+size = Vector2(20.999996, 41.000004)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iemw7"]
 bg_color = Color(1, 1, 1, 1)
@@ -582,14 +582,14 @@ hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=2111754002]
 sprite_frames = SubResource("SpriteFrames_tank4")
-animation = &"down_swing"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
 offset = Vector2(30, 0)
 
 [node name="body_hitbox" type="CollisionShape2D" parent="." unique_id=50072780]
-position = Vector2(-1, -6)
-scale = Vector2(-1, 1)
+position = Vector2(2.5000005, -1.4999989)
+rotation = -3.1415925
+scale = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_jxtt8")
 
 [node name="interact_area" type="Area2D" parent="." unique_id=2075241952]
@@ -633,8 +633,8 @@ script = ExtResource("13_etibh")
 attack_action = {
 NodePath("../A_combo2_state"): 1
 }
-debug_black_effect = true
 animation_name = &"dash"
+debug_black_effect = true
 
 [node name="A_hurt_state" type="LimboState" parent="aggro_HSM" unique_id=1873472819]
 unique_name_in_owner = true
@@ -672,7 +672,7 @@ hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
 animation_name = &"final_swing"
 
-[node name="A_post_parry_state" type="LimboState" parent="aggro_HSM" unique_id=922235396 node_paths=PackedStringArray("sparks_vfx", "attack_action")]
+[node name="A_parry_state" type="LimboState" parent="aggro_HSM" unique_id=922235396 node_paths=PackedStringArray("sparks_vfx", "attack_action")]
 unique_name_in_owner = true
 script = ExtResource("15_gr6ba")
 sparks_vfx = NodePath("../../VFXs/parry_sparks_vfx")
@@ -686,8 +686,8 @@ script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
-debug_black_effect = true
 animation_name = &"final_swing"
+debug_black_effect = true
 
 [node name="chill_HSM" type="LimboHSM" parent="." unique_id=462532478]
 
@@ -723,6 +723,7 @@ can_move = true
 unique_name_in_owner = true
 script = ExtResource("13_etibh")
 animation_name = &"dash"
+debug_black_effect = true
 
 [node name="C_riposte_state" type="LimboState" parent="chill_HSM" unique_id=1685517924 node_paths=PackedStringArray("hitzone")]
 unique_name_in_owner = true
@@ -730,8 +731,8 @@ script = ExtResource("11_qkeca")
 damage = 50
 hitzone = NodePath("../../attack_hitzones/A_attack3")
 hit_frame = 1
-debug_black_effect = true
 animation_name = &"final_swing"
+debug_black_effect = true
 
 [node name="C_parry_action_state" type="LimboState" parent="chill_HSM" unique_id=1190165498 node_paths=PackedStringArray("attack_action")]
 unique_name_in_owner = true

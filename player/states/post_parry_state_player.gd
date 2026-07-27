@@ -34,7 +34,7 @@ func _enter() -> void:
 	parry_reset_timer.timeout.connect(_on_parry_reset_timer_timeout)
 	parry_reset_timer.start()
 	
-	char.gain_mana(1)
+	player.gain_mana(1)
 	
 	play_sparks_vfx("parry")
 
@@ -42,7 +42,7 @@ func _update(delta : float) -> void:
 	super(delta)
 	
 func play_sparks_vfx(spark_type: String = "default"):
-	sparks_vfx.global_position = char.global_position + Vector2(sparks_x_offset, sparks_y_offset)
+	sparks_vfx.global_position = player.global_position + Vector2(sparks_x_offset, sparks_y_offset)
 	sparks_vfx.visible = true
 	
 	match spark_type:

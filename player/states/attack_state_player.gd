@@ -37,12 +37,11 @@ func _enter():
 	combo_reset_timer.timeout.connect(_on_combo_reset_timer_timeout)
 	combo_reset_timer.stop()
 	if charged: 
-		char.sprite.frame_changed.connect(_on_frame_changed)
-		char.sprite.sprite_frames.set_frame("down_swing", 2, char.sprite.sprite_frames.get_frame_texture("down_swing", 2), 2.0)
-		char.sprite.sprite_frames.set_frame("down_swing", 1, char.sprite.sprite_frames.get_frame_texture("down_swing", 1), 2.0)
-		char.sprite.sprite_frames.set_frame("down_swing", 3, char.sprite.sprite_frames.get_frame_texture("down_swing", 3), 2.0)
+		player.sprite.frame_changed.connect(_on_frame_changed)
+		player.sprite.sprite_frames.set_frame("down_swing", 2, player.sprite.sprite_frames.get_frame_texture("down_swing", 2), 2.0)
+		player.sprite.sprite_frames.set_frame("down_swing", 1, player.sprite.sprite_frames.get_frame_texture("down_swing", 1), 2.0)
+		player.sprite.sprite_frames.set_frame("down_swing", 3, player.sprite.sprite_frames.get_frame_texture("down_swing", 3), 2.0)
 
-	
 	if hitzone != null: hitzone.monitoring = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,27 +50,27 @@ func _update(delta: float) -> void:
 	if Input.is_action_just_pressed("attack") and (next_attack != null) and !combo_reset_timer.is_stopped():
 		dispatch("to_" + next_attack.name)
 
-	if char.sprite.frame < DIR_LOCKOUT_FRAME or post_attack:
-		char.dir = Input.get_axis("left", "right")
+	if player.sprite.frame < DIR_LOCKOUT_FRAME or post_attack:
+		player.dir = Input.get_axis("left", "right")
 		
-		if char.dir:
-			char.velocity.x = char.dir * SPEED
+		if player.dir:
+			player.velocity.x = player.dir * SPEED
 		else:
-			char.velocity.x = move_toward(char.velocity.x, 0, 300)
+			player.velocity.x = move_toward(player.velocity.x, 0, 300)
 
-		char._flip_sprite()
-		char.move_and_slide()
+		player._flip_sprite()
+		player.move_and_slide()
 
-	if char.sprite.frame == hit_frame and hitzone != null:
+	if player.sprite.frame == hit_frame and hitzone != null:
 		if hitzone.has_overlapping_bodies():
 			hitzone.monitoring = false
-			char.boss_target.health = max(char.boss_target.health - damage, 0)
+			player.boss_target.health = max(player.boss_target.curr_health - damage, 0)
 	
 	if !Input.is_action_pressed("charged_attack"):
 		if charge_complete:
 			charge_complete = false
-			char.sprite.frame_changed.disconnect(_on_frame_changed)
-			char.sprite.frame = 3
+			player.sprite.frame_changed.disconnect(_on_frame_changed)
+			player.sprite.frame = 3
 
 func _on_sprite_animation_finished():
 	post_attack = true
@@ -84,26 +83,26 @@ func _on_combo_reset_timer_timeout() -> void:
 	dispatch("to_idle")
 	
 func _on_frame_changed() -> void:
-	if char.sprite.frame == 3 and Input.is_action_pressed("charged_attack"):
-		char.sprite.frame = 1
+	if player.sprite.frame == 3 and Input.is_action_pressed("charged_attack"):
+		player.sprite.frame = 1
 		charge_complete = true
-	elif char.sprite.frame == 3:
+	elif player.sprite.frame == 3:
 		dispatch("to_idle")
 
 func _exit() -> void:
 	super()
 	combo_reset_timer.stop()
 	combo_reset_timer.timeout.disconnect(_on_combo_reset_timer_timeout)
-	char.sprite.frame_changed.disconnect(_on_frame_changed)
-	char.sprite.sprite_frames.set_frame("down_swing", 2, char.sprite.sprite_frames.get_frame_texture("down_swing", 2), 1.0)
-	char.sprite.sprite_frames.set_frame("down_swing", 1, char.sprite.sprite_frames.get_frame_texture("down_swing", 1), 1.0)
-	char.sprite.sprite_frames.set_frame("down_swing", 3, char.sprite.sprite_frames.get_frame_texture("down_swing", 3), 1.0)
+	player.sprite.frame_changed.disconnect(_on_frame_changed)
+	player.sprite.sprite_frames.set_frame("down_swing", 2, player.sprite.sprite_frames.get_frame_texture("down_swing", 2), 1.0)
+	player.sprite.sprite_frames.set_frame("down_swing", 1, player.sprite.sprite_frames.get_frame_texture("down_swing", 1), 1.0)
+	player.sprite.sprite_frames.set_frame("down_swing", 3, player.sprite.sprite_frames.get_frame_texture("down_swing", 3), 1.0)
 
 
 func take_damage(_dmg, _dir):
-	if parry_frames != -1 and char.sprite.frame <= parry_frames:
+	if parry_frames != -1 and player.sprite.frame <= parry_frames:
 		dispatch("to_parry")
-	elif block_frames != -1 and char.sprite.frame <= block_frames:
+	elif block_frames != -1 and player.sprite.frame <= block_frames:
 		super(_dmg/2, _dir)
 		print("attack blocked jijijuju")
 		#TODO: there should be an event handler for the "to_parry" transition

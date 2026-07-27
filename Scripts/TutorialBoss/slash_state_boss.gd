@@ -1,19 +1,17 @@
-extends CharacterState
-class_name BossState
+extends BossAttackState
+class_name Slash
 
 #region DEFS
 #region CONSTANTS
 #endregion
 
 #region @EXPORTS
-@export var wait_on_end : float = 0.5
 #endregion
 
 #region @ONREADY
 #endregion
 
 #region VARS
-var boss: BaseBoss
 #endregion
 #endregion
 
@@ -21,14 +19,17 @@ var boss: BaseBoss
 
 func _enter() -> void:
 	super()
-	boss = char as BaseBoss
-		
+	
 func _update(delta : float) -> void:
 	super(delta)
 	
 func _exit() -> void:
 	super()
-	boss.idle_wait = wait_on_end
 	
 func _on_sprite_animation_finished():
-	pass
+	if next_attack != null and next_attack.hitzone.has_overlapping_bodies():
+		dispatch("to_" + next_attack.name)
+	else:
+		dispatch("to_idle")
+
+#endregion

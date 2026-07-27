@@ -283,7 +283,7 @@ sources/2 = SubResource("TileSetAtlasSource_acure")
 [node name="PlayerTestRoom" type="Node2D" unique_id=717266364]
 
 [node name="Player" parent="." unique_id=2089640586 node_paths=PackedStringArray("boss_target") instance=ExtResource("1_xinu5")]
-position = Vector2(-208, -244)
+position = Vector2(231, 15)
 boss_target = NodePath("../Boss #1")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1183088080]
@@ -297,8 +297,6 @@ tile_set = SubResource("TileSet_vshyp")
 [node name="Boss #1" parent="." unique_id=34240117 node_paths=PackedStringArray("target") instance=ExtResource("3_prbjx")]
 position = Vector2(576, -100)
 target = NodePath("../Player")
-health = 100
-debug = false
 
 [node name="labels" type="Node" parent="." unique_id=106732809]
 

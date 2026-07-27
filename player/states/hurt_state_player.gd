@@ -22,9 +22,9 @@ func _on_hurt_enter(_cargo_dict = null):
 	
 func _enter():
 	super()
-	char.curr_health = max(0, char.curr_health - dmg)
+	player.curr_health = max(0, player.curr_health - dmg)
 	print("DAMAGE TAKEN --- CURR HEALTH is: ", agent.curr_health)
-	char.sprite.animation_finished.connect(_on_sprite_animation_finished)
+	player.sprite.animation_finished.connect(_on_sprite_animation_finished)
 
 func _update(delta : float) -> void:
 	super(delta)

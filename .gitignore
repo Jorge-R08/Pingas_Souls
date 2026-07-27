@@ -5,3 +5,4 @@ addons/
 demo/
 *.import
 *.uid
+*.tmp
