@@ -36,4 +36,13 @@ func _exit() -> void:
 	super()
 	hitzone.monitoring = true
 	
+func _on_sprite_animation_finished():
+	if (next_attack != null):
+		if next_attack.hitzone.has_overlapping_bodies() or (next_attack.next_attack != null and next_attack.next_attack.hitzone.has_overlapping_bodies()):
+			dispatch("to_" + next_attack.name)
+		else:
+			dispatch("to_idle")
+	else:
+		dispatch("to_idle")
+	
 #endregion

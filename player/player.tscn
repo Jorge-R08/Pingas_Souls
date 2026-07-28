@@ -691,7 +691,7 @@ debug_black_effect = true
 
 [node name="chill_HSM" type="LimboHSM" parent="." unique_id=462532478]
 
-[node name="C_idle_state" type="LimboState" parent="chill_HSM" unique_id=2139730333 node_paths=PackedStringArray("parry_state", "attack_action", "charged_attack")]
+[node name="C_idle_state" type="LimboState" parent="chill_HSM" unique_id=2139730333 node_paths=PackedStringArray("parry_state", "attack_action")]
 unique_name_in_owner = true
 script = ExtResource("7_jq37t")
 can_move = true
@@ -701,17 +701,15 @@ parry_state = NodePath("../C_parry_action_state")
 attack_action = {
 NodePath("../C_combo1_state"): 0
 }
-charged_attack = NodePath("../C_charged_attack")
 animation_name = &"idle"
 
-[node name="C_running_state" type="LimboState" parent="chill_HSM" unique_id=1402766795 node_paths=PackedStringArray("parry_state", "charged_attack")]
+[node name="C_running_state" type="LimboState" parent="chill_HSM" unique_id=1402766795 node_paths=PackedStringArray("parry_state")]
 unique_name_in_owner = true
 script = ExtResource("8_lm05a")
 can_move = true
 can_jump = true
 can_dash = true
 parry_state = NodePath("../C_parry_action_state")
-charged_attack = NodePath("../C_charged_attack")
 animation_name = &"run"
 
 [node name="C_airborne_state" type="LimboState" parent="chill_HSM" unique_id=211341680]

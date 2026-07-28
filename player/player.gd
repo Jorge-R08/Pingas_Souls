@@ -64,7 +64,6 @@ func _process(delta : float) -> void:
 	elif Input.is_action_just_pressed("secret_debug_funny_button'"):
 		scale.x = 2
 		take_damage(5, 1)
-	#TODO: Should not be able to interrupt an action by switching stances
 	elif Input.is_action_just_pressed("stance_switch"):
 		if curr_hsm == aggro_hsm:
 			switch_hsms(aggro_hsm, chill_hsm)

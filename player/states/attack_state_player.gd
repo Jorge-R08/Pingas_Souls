@@ -1,7 +1,4 @@
 extends PlayerState
-
-#TODO: Right now, parry/block is functionally an attack, maybe we should change this idk
-
 #region DEFS
 #region CONSTANTS
 const STOP_SPEED : int = 10
@@ -105,7 +102,5 @@ func take_damage(_dmg, _dir):
 	elif block_frames != -1 and player.sprite.frame <= block_frames:
 		super(_dmg/2, _dir)
 		print("attack blocked jijijuju")
-		#TODO: there should be an event handler for the "to_parry" transition
-		# to do different behavior based on if it is a parry or block, see hurt_state
 	else:
 		super(_dmg, _dir)
