@@ -32,7 +32,8 @@ func _update(delta : float) -> void:
 		boss.velocity += boss.get_gravity() * delta
 		
 	boss.velocity.x = move_toward(boss.velocity.x, 0, 300)
-	
+	boss.move_and_slide()
+		
 func _exit() -> void:
 	super()
 	idle_wait_timer.timeout.disconnect(_on_idle_wait_timer_timeout)

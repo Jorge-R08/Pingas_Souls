@@ -8,6 +8,46 @@
 [ext_resource type="Script" uid="uid://r53jq122babc" path="res://Scripts/TutorialBoss/teleport_state_boss.gd" id="6_gg46q"]
 [ext_resource type="Script" uid="uid://bmnmxh5jdhk4" path="res://Scripts/generic/states/boss_attack_state.gd" id="7_1vv0v"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvwo0"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(2304, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vv0v"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(2560, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8kir"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(2816, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oc2b"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(3072, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmv2g"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(3328, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jwpb"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(7168, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3npe"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(7424, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcf3p"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(7680, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5y6l"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(8192, 508, 256, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hug4u"]
+atlas = ExtResource("2_76vtm")
+region = Rect2(7936, 508, 256, 127)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6b57x"]
 atlas = ExtResource("2_76vtm")
 region = Rect2(0, 381, 256, 127)
@@ -240,26 +280,6 @@ region = Rect2(1792, 508, 256, 127)
 atlas = ExtResource("2_76vtm")
 region = Rect2(2048, 508, 256, 127)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jvwo0"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(2304, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1vv0v"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(2560, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g8kir"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(2816, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5oc2b"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(3072, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rmv2g"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(3328, 508, 256, 127)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_q6ub8"]
 atlas = ExtResource("2_76vtm")
 region = Rect2(3584, 508, 256, 127)
@@ -316,28 +336,43 @@ region = Rect2(6656, 508, 256, 127)
 atlas = ExtResource("2_76vtm")
 region = Rect2(6912, 508, 256, 127)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4jwpb"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(7168, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r3npe"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(7424, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pcf3p"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(7680, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hug4u"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(7936, 508, 256, 127)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l5y6l"]
-atlas = ExtResource("2_76vtm")
-region = Rect2(8192, 508, 256, 127)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_y8bso"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvwo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vv0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8kir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oc2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmv2g")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_4jwpb")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_r3npe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcf3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5y6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hug4u")
+}],
+"loop": 0,
+"name": &"backstep",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6b57x")
@@ -615,24 +650,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
-size = Vector2(147.5, 155)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jile0"]
-radius = 62.0
-height = 196.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jvwo0"]
-radius = 82.00001
-height = 320.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vv0v"]
-radius = 135.0
-height = 382.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei0r4"]
-size = Vector2(626, 155)
-
 [sub_resource type="Animation" id="Animation_5oc2b"]
 length = 0.001
 tracks/0/type = "value"
@@ -648,9 +665,42 @@ tracks/0/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_rmv2g"]
+resource_name = "backstep"
+length = 0.900010013411194
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"backstep", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector2(-200, 0), 1.0],
+"method": &"set_position_relative"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_1vv0v"]
 resource_name = "dash_attack"
-length = 2.700010040233284
+length = 2.8
 step = 0.1
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -701,21 +751,48 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g8kir"]
 _data = {
 &"RESET": SubResource("Animation_5oc2b"),
-&"dash": SubResource("Animation_1vv0v"),
+&"backstep_attack": SubResource("Animation_rmv2g"),
+&"dash_attack": SubResource("Animation_1vv0v"),
 &"jump_attack": SubResource("Animation_g8kir")
 }
 
-[node name="Boss #1" type="CharacterBody2D" unique_id=2091557678 node_paths=PackedStringArray("sprite")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
+size = Vector2(147.5, 155)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jile0"]
+radius = 62.0
+height = 196.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jvwo0"]
+radius = 82.00001
+height = 320.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vv0v"]
+radius = 135.0
+height = 382.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ei0r4"]
+radius = 184.0
+height = 376.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei0r4"]
+size = Vector2(626, 155)
+
+[node name="Boss #1" type="CharacterBody2D" unique_id=2091557678 node_paths=PackedStringArray("sprite", "animation_player")]
 position = Vector2(700, 0)
 collision_layer = 4
 script = ExtResource("1_jvwo0")
 sprite = NodePath("AnimatedSprite2D")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=735226874]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_y8bso")
-animation = &"dash_attack"
+animation = &"backstep"
 frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=396853974]
+libraries/ = SubResource("AnimationLibrary_g8kir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352828118]
 position = Vector2(-8, 47)
@@ -777,17 +854,30 @@ unique_name_in_owner = true
 script = ExtResource("6_gg46q")
 animation_name = &"binus"
 
-[node name="dash_attack_state" type="LimboState" parent="HSM" unique_id=632685290]
+[node name="dash_attack_state" type="LimboState" parent="HSM" unique_id=632685290 node_paths=PackedStringArray("hitzone")]
+unique_name_in_owner = true
 script = ExtResource("7_1vv0v")
 hit_frame = 14
+hitzone = NodePath("../../attack_hitzones/dash_attack")
 dmg = 25
+wait_on_end = 2.0
 animation_name = &"dash_attack"
 metadata/_custom_type_script = "uid://bmnmxh5jdhk4"
 
+[node name="backstep_attack_state" type="LimboState" parent="HSM" unique_id=1668130027 node_paths=PackedStringArray("hitzone", "next_attack")]
+unique_name_in_owner = true
+script = ExtResource("7_1vv0v")
+hit_frame = 2
+hitzone = NodePath("../../attack_hitzones/slash2")
+dmg = 15
+next_attack = NodePath("../dash_attack_state")
+animation_name = &"backstep_attack"
+metadata/_custom_type_script = "uid://bmnmxh5jdhk4"
+
 [node name="attack_hitzones" type="Node2D" parent="." unique_id=360788585]
-visible = false
 
 [node name="slash1" type="Area2D" parent="attack_hitzones" unique_id=530914783]
+visible = false
 position = Vector2(-73, 6)
 collision_layer = 0
 collision_mask = 2
@@ -798,6 +888,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jile0")
 
 [node name="slash2" type="Area2D" parent="attack_hitzones" unique_id=306140488]
+visible = false
 modulate = Color(0.84313726, 0.83137256, 0, 1)
 position = Vector2(-136, -50)
 collision_layer = 0
@@ -809,6 +900,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jvwo0")
 
 [node name="slash3" type="Area2D" parent="attack_hitzones" unique_id=2061887833]
+visible = false
 modulate = Color(0.28235295, 0, 1, 1)
 position = Vector2(100, 0)
 collision_layer = 0
@@ -817,6 +909,13 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/slash3" unique_id=1274400376]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1vv0v")
+
+[node name="dash_attack" type="Area2D" parent="attack_hitzones" unique_id=1421418627]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitzones/dash_attack" unique_id=1241594865]
+position = Vector2(80, 93)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ei0r4")
 
 [node name="attack_trigger_zones" type="Node2D" parent="." unique_id=714690015]
 visible = false
@@ -834,8 +933,5 @@ shape = SubResource("RectangleShape2D_ei0r4")
 [node name="idle_wait_timer" type="Timer" parent="timers" unique_id=2006026229]
 unique_name_in_owner = true
 one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=396853974]
-libraries/ = SubResource("AnimationLibrary_g8kir")
 
 [connection signal="timeout" from="timers/idle_wait_timer" to="HSM/idle_state" method="_on_idle_wait_timer_timeout"]

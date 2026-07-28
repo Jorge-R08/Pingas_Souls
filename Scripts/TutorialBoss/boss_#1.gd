@@ -13,7 +13,6 @@ extends baseChar
 
 #region @ONREADY
 @onready var hsm : LimboHSM = $HSM
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 #endregion
 
 #region VARS
@@ -34,9 +33,14 @@ func _ready() -> void:
 	hsm.add_transition(%slash2_state, %idle_state, &"to_idle")
 	hsm.add_transition(%slash3_state, %idle_state, &"to_idle")
 	hsm.add_transition(%slash4_state, %idle_state, &"to_idle")
+	hsm.add_transition(%dash_attack_state, %idle_state, &"to_idle")
 
-	hsm.add_transition(%idle_state, %move_state, &"to_move")
+	#hsm.add_transition(%idle_state, %move_state, &"to_move")
 	hsm.add_transition(%teleport_state, %move_state, &"to_move")
+
+	hsm.add_transition(%backstep_attack_state, %dash_attack_state, &"to_dash_attack_state")
+	hsm.add_transition(%idle_state, %dash_attack_state, &"to_dash_attack_state")
+	hsm.add_transition(%idle_state, %backstep_attack_state, &"to_backstep_attack_state")
 
 	hsm.add_transition(%idle_state, %slash1_state, &"to_slash1_state")
 	hsm.add_transition(%move_state, %slash1_state, &"to_slash1_state")
@@ -54,8 +58,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	if Input.is_action_just_pressed("secret_debug_funny_button'"):
-		print("pene")
-		animation_player.play("dash")
+		#hsm.dispatch("to_dash_attack_state")
+		#animation_player.play("dash")
+		#animation_player.play("backstep")
+		hsm.dispatch("to_backstep_attack_state")
 		
 func set_position_relative(delta_vector : Vector2, duration : float) -> void:
 	var tween = create_tween()

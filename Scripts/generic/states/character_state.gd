@@ -14,8 +14,11 @@ func _enter() -> void:
 		push_error("Agent is not Character")
 		return
 
-	if animation_name != "" and animation_name != char.sprite.animation:
-		char.sprite.play(animation_name)
+	if animation_name != "":
+		if char.animation_player.has_animation(animation_name) and animation_name != char.animation_player.current_animation:
+			char.animation_player.play(animation_name)
+		elif animation_name != char.sprite.animation:
+			char.sprite.play(animation_name)
 
 	if char.debug:
 		print("CHARACTER: ", char.name, " --- ", "entered state: ", name)
