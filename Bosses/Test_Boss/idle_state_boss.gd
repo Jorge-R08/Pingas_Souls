@@ -1,4 +1,4 @@
-extends BossState
+extends bossState
 class_name Idle
 
 #region DEFS
@@ -6,7 +6,7 @@ class_name Idle
 #endregion
 
 #region @EXPORTS
-@export var first_slash_state : BossAttackState
+@export var first_slash_state : bossAttackState
 #endregion
 
 #region @ONREADY@export var idle_wait_timer: Timer

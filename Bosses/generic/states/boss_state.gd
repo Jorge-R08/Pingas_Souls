@@ -1,5 +1,5 @@
-extends CharacterState
-class_name BossState
+extends characterState
+class_name bossState
 
 #region DEFS
 #region CONSTANTS
@@ -13,7 +13,7 @@ class_name BossState
 #endregion
 
 #region VARS
-var boss: BaseBoss
+var boss: baseBoss
 #endregion
 #endregion
 
@@ -21,7 +21,7 @@ var boss: BaseBoss
 
 func _enter() -> void:
 	super()
-	boss = char as BaseBoss
+	boss = character as baseBoss
 		
 func _update(delta : float) -> void:
 	super(delta)

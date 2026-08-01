@@ -1,5 +1,5 @@
-extends CharacterState
-class_name PlayerState
+extends characterState
+class_name playerState
 
 #region DEFS
 #region CONSTANTS
@@ -11,7 +11,7 @@ class_name PlayerState
 @export var can_dash : bool = false
 @export var parry_state : LimboState = null
 ## Dictionary: Key = Attack Action State ----- values = mana cost (if any)
-@export var attack_action : Dictionary[PlayerState, int] 
+@export var attack_action : Dictionary[playerState, int] 
 @export var charged_attack : LimboState 
 #endregion
 

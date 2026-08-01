@@ -179,7 +179,7 @@ func initiate_chill_state_machine():
 	chill_hsm.add_transition(%C_idle_state, %C_parry_action_state, &"to_parry_action")
 	chill_hsm.add_transition(%C_running_state, %C_parry_action_state, &"to_parry_action")
 	chill_hsm.add_transition(%C_parry_action_state, %C_post_parry_state, &"to_parry")
-	chill_hsm.add_transition(%C_parry_action_state, %C_riposte_state, &"to_C_riposte_state")
+	chill_hsm.add_transition(%C_post_parry_state, %C_riposte_state, &"to_C_riposte_state")
 	
 	chill_hsm.add_transition(%C_hurt_state, %C_death_state, &"to_death")
 		

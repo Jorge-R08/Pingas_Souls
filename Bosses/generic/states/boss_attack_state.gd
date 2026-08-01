@@ -1,5 +1,5 @@
-extends BossState
-class_name BossAttackState
+extends bossState
+class_name bossAttackState
 
 #region DEFS
 #region CONSTANTS
@@ -9,7 +9,7 @@ class_name BossAttackState
 @export var hit_frame : int
 @export var hitzone : Area2D
 @export var dmg : int
-@export var next_attack : BossAttackState
+@export var next_attack : bossAttackState
 #endregion
 
 #region @ONREADY

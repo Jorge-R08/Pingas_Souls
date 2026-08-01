@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://bovqfstsw35m8"]
 
-[ext_resource type="Script" uid="uid://b0ys4xfxww6g" path="res://Scripts/TutorialBoss/boss_#1.gd" id="1_jvwo0"]
+[ext_resource type="Script" uid="uid://b0ys4xfxww6g" path="res://Bosses/Test_Boss/test_boss.gd" id="1_n516o"]
 [ext_resource type="Texture2D" uid="uid://cx87boputyog4" path="res://Assets/Boss #1/Bertha-Sheet.png" id="2_76vtm"]
-[ext_resource type="Script" uid="uid://ciegm42caooqx" path="res://Scripts/TutorialBoss/idle_state_boss.gd" id="3_b8nok"]
-[ext_resource type="Script" uid="uid://caltja0u0jhnj" path="res://Scripts/TutorialBoss/move_state_boss.gd" id="4_pt446"]
-[ext_resource type="Script" uid="uid://i4tl1c33ettl" path="res://Scripts/TutorialBoss/slash_state_boss.gd" id="5_odio0"]
-[ext_resource type="Script" uid="uid://r53jq122babc" path="res://Scripts/TutorialBoss/teleport_state_boss.gd" id="6_gg46q"]
-[ext_resource type="Script" uid="uid://bmnmxh5jdhk4" path="res://Scripts/generic/states/boss_attack_state.gd" id="7_1vv0v"]
+[ext_resource type="Texture2D" uid="uid://ca2vyobha6fw" path="res://Assets/Boss #1/spear/spear_01.png" id="3_g8kir"]
+[ext_resource type="Script" uid="uid://ciegm42caooqx" path="res://Bosses/Test_Boss/idle_state_boss.gd" id="4_0rx5r"]
+[ext_resource type="Script" uid="uid://caltja0u0jhnj" path="res://Bosses/Test_Boss/move_state_boss.gd" id="5_7el8u"]
+[ext_resource type="Script" uid="uid://i4tl1c33ettl" path="res://Bosses/Test_Boss/slash_state_boss.gd" id="6_w50it"]
+[ext_resource type="Script" uid="uid://r53jq122babc" path="res://Bosses/Test_Boss/teleport_state_boss.gd" id="7_b1c42"]
+[ext_resource type="Script" uid="uid://bmnmxh5jdhk4" path="res://Bosses/generic/states/boss_attack_state.gd" id="8_n516o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jvwo0"]
 atlas = ExtResource("2_76vtm")
@@ -759,6 +760,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnpof"]
 size = Vector2(147.5, 155)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_laepw"]
+size = Vector2(21, 186)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jile0"]
 radius = 62.0
 height = 196.0
@@ -779,9 +783,8 @@ height = 376.0
 size = Vector2(626, 155)
 
 [node name="Boss #1" type="CharacterBody2D" unique_id=2091557678 node_paths=PackedStringArray("sprite", "animation_player")]
-position = Vector2(700, 0)
 collision_layer = 4
-script = ExtResource("1_jvwo0")
+script = ExtResource("1_n516o")
 sprite = NodePath("AnimatedSprite2D")
 animation_player = NodePath("AnimationPlayer")
 
@@ -798,23 +801,40 @@ libraries/ = SubResource("AnimationLibrary_g8kir")
 position = Vector2(-8, 47)
 shape = SubResource("RectangleShape2D_qnpof")
 
+[node name="spears_sprite" type="Sprite2D" parent="." unique_id=382924971]
+position = Vector2(200, -200)
+rotation = 2.7925267
+scale = Vector2(1.999, 6)
+texture = ExtResource("3_g8kir")
+
+[node name="falling_spears" type="Area2D" parent="spears_sprite" unique_id=1099217365]
+position = Vector2(153.6578, -11.518731)
+rotation = -3.020919
+scale = Vector2(0.4735249, 0.2319528)
+skew = 0.70888174
+
+[node name="Area2D" type="CollisionShape2D" parent="spears_sprite/falling_spears" unique_id=564118524]
+position = Vector2(268.5, -174)
+shape = SubResource("RectangleShape2D_laepw")
+
 [node name="HSM" type="LimboHSM" parent="." unique_id=468082571]
 
-[node name="idle_state" type="LimboState" parent="HSM" unique_id=1573666047 node_paths=PackedStringArray("first_slash_state")]
+[node name="idle_state" type="LimboState" parent="HSM" unique_id=714502612 node_paths=PackedStringArray("first_slash_state")]
 unique_name_in_owner = true
-script = ExtResource("3_b8nok")
+script = ExtResource("4_0rx5r")
 first_slash_state = NodePath("../slash1_state")
 animation_name = &"idle"
+metadata/_custom_type_script = "uid://dcv4xtaobw3os"
 
 [node name="move_state" type="LimboState" parent="HSM" unique_id=2015959560 node_paths=PackedStringArray("first_slash_state")]
 unique_name_in_owner = true
-script = ExtResource("4_pt446")
+script = ExtResource("5_7el8u")
 first_slash_state = NodePath("../slash1_state")
 animation_name = &"move"
 
 [node name="slash1_state" type="LimboState" parent="HSM" unique_id=587246079 node_paths=PackedStringArray("hitzone", "next_attack")]
 unique_name_in_owner = true
-script = ExtResource("5_odio0")
+script = ExtResource("6_w50it")
 hit_frame = 5
 hitzone = NodePath("../../attack_hitzones/slash1")
 dmg = 5
@@ -823,7 +843,7 @@ animation_name = &"slash1"
 
 [node name="slash2_state" type="LimboState" parent="HSM" unique_id=130868043 node_paths=PackedStringArray("hitzone", "next_attack")]
 unique_name_in_owner = true
-script = ExtResource("5_odio0")
+script = ExtResource("6_w50it")
 hit_frame = 2
 hitzone = NodePath("../../attack_hitzones/slash2")
 dmg = 15
@@ -832,41 +852,37 @@ animation_name = &"slash2"
 
 [node name="slash3_state" type="LimboState" parent="HSM" unique_id=2065881826 node_paths=PackedStringArray("hitzone", "next_attack")]
 unique_name_in_owner = true
-script = ExtResource("5_odio0")
+script = ExtResource("6_w50it")
 hit_frame = 7
 hitzone = NodePath("../../attack_hitzones/slash3")
 dmg = 40
 next_attack = NodePath("../slash4_state")
-wait_on_end = 2.0
 animation_name = &"slash3"
 
 [node name="slash4_state" type="LimboState" parent="HSM" unique_id=77198267 node_paths=PackedStringArray("hitzone")]
 unique_name_in_owner = true
-script = ExtResource("5_odio0")
+script = ExtResource("6_w50it")
 hit_frame = 5
 hitzone = NodePath("../../attack_hitzones/slash1")
 dmg = 40
-wait_on_end = 2.0
 animation_name = &"slash1"
 
 [node name="teleport_state" type="LimboState" parent="HSM" unique_id=1377273887]
 unique_name_in_owner = true
-script = ExtResource("6_gg46q")
-animation_name = &"binus"
+script = ExtResource("7_b1c42")
 
 [node name="dash_attack_state" type="LimboState" parent="HSM" unique_id=632685290 node_paths=PackedStringArray("hitzone")]
 unique_name_in_owner = true
-script = ExtResource("7_1vv0v")
+script = ExtResource("8_n516o")
 hit_frame = 14
 hitzone = NodePath("../../attack_hitzones/dash_attack")
 dmg = 25
-wait_on_end = 2.0
 animation_name = &"dash_attack"
 metadata/_custom_type_script = "uid://bmnmxh5jdhk4"
 
 [node name="backstep_attack_state" type="LimboState" parent="HSM" unique_id=1668130027 node_paths=PackedStringArray("hitzone", "next_attack")]
 unique_name_in_owner = true
-script = ExtResource("7_1vv0v")
+script = ExtResource("8_n516o")
 hit_frame = 2
 hitzone = NodePath("../../attack_hitzones/slash2")
 dmg = 15
@@ -933,5 +949,3 @@ shape = SubResource("RectangleShape2D_ei0r4")
 [node name="idle_wait_timer" type="Timer" parent="timers" unique_id=2006026229]
 unique_name_in_owner = true
 one_shot = true
-
-[connection signal="timeout" from="timers/idle_wait_timer" to="HSM/idle_state" method="_on_idle_wait_timer_timeout"]

@@ -1,4 +1,4 @@
-extends BossState
+extends bossState
 class_name Move
 
 #region DEFS
@@ -8,7 +8,7 @@ const MOVE_STOP_DIST : int = 150
 
 #region @EXPORTS
 @export var SPEED : int = 100
-@export var first_slash_state : BossAttackState
+@export var first_slash_state : bossAttackState
 #endregion
 
 #region @ONREADY

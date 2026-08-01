@@ -1,5 +1,5 @@
-extends BossAttackState
-class_name Slash
+extends baseChar
+class_name baseBoss
 
 #region DEFS
 #region CONSTANTS
@@ -16,17 +16,10 @@ class_name Slash
 #endregion
 
 #region FUNCS
+func _ready() -> void:
+	super()
 
-func _enter() -> void:
-	super()
-	
-func _update(delta : float) -> void:
+func _process(delta: float) -> void:
 	super(delta)
-	
-func _exit() -> void:
-	super()
-	
-func _on_sprite_animation_finished():
-	super()
 
 #endregion

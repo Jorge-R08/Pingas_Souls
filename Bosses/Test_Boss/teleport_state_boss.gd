@@ -1,5 +1,5 @@
 class_name Teleport
-extends BossState
+extends bossState
 
 @export var teleport_distance: float = 550.0
 const FIXED_Y: float = -624.0

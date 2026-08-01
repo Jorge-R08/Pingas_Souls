@@ -1,6 +1,5 @@
-class_name BaseBoss
-extends baseChar
-
+extends baseBoss
+class_name testBoss
 
 #region DEFS
 #region CONSTANTS
@@ -61,6 +60,7 @@ func _process(delta: float) -> void:
 		#hsm.dispatch("to_dash_attack_state")
 		#animation_player.play("dash")
 		#animation_player.play("backstep")
+		print("gello")
 		hsm.dispatch("to_backstep_attack_state")
 		
 func set_position_relative(delta_vector : Vector2, duration : float) -> void:

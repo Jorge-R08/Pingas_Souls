@@ -1,4 +1,4 @@
-extends PlayerState
+extends playerState
 class_name postParryState
 
 #region DEFS

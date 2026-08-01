@@ -1,4 +1,5 @@
-extends PlayerState
+extends playerState
+
 #region DEFS
 #region CONSTANTS
 const STOP_SPEED : int = 10
@@ -6,7 +7,7 @@ const STOP_SPEED : int = 10
 
 #region @EXPORTS
 @export var damage : int
-@export var next_attack : CharacterState = null
+@export var next_attack : characterState = null
 @export var DIR_LOCKOUT_FRAME : int
 @export var SPEED : int = 100
 @export var hitzone : Area2D
