@@ -12,7 +12,7 @@ const SPEED : int = 300
 #endregion
 
 #region @EXPORTS
-@export var boss_target: CharacterBody2D
+@export var boss_target: baseBoss
 #endregion
 
 #region @ONREADY

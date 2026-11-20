@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bovqfstsw35m8"]
 
-[ext_resource type="Script" uid="uid://b0ys4xfxww6g" path="res://Bosses/Test_Boss/test_boss.gd" id="1_n516o"]
+[ext_resource type="Script" uid="uid://dpuwum26cuoi" path="res://Scripts/editorScript_test.gd" id="1_b18fa"]
 [ext_resource type="Texture2D" uid="uid://cx87boputyog4" path="res://Assets/Boss #1/Bertha-Sheet.png" id="2_76vtm"]
 [ext_resource type="Texture2D" uid="uid://ca2vyobha6fw" path="res://Assets/Boss #1/spear/spear_01.png" id="3_g8kir"]
 [ext_resource type="Script" uid="uid://ciegm42caooqx" path="res://Bosses/Test_Boss/idle_state_boss.gd" id="4_0rx5r"]
@@ -668,7 +668,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rmv2g"]
 resource_name = "backstep"
-length = 0.900010013411194
+length = 0.90001
 step = 0.1
 tracks/0/type = "method"
 tracks/0/imported = false
@@ -694,7 +694,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [Vector2(-200, 0), 1.0],
+"args": [Vector2(-200, 0), 1.0, "out", "cubic"],
 "method": &"set_position_relative"
 }]
 }
@@ -783,8 +783,12 @@ height = 376.0
 size = Vector2(626, 155)
 
 [node name="Boss #1" type="CharacterBody2D" unique_id=2091557678 node_paths=PackedStringArray("sprite", "animation_player")]
+position = Vector2(1100, 0)
+rotation = -3.1415925
+scale = Vector2(1, -1)
 collision_layer = 4
-script = ExtResource("1_n516o")
+script = ExtResource("1_b18fa")
+animation_sequence = Array[Array]([["animation", "backstep"], ["wait", 0.5], ["movement", Vector2(-200, 0), 1.0, "out", "cubic"]])
 sprite = NodePath("AnimatedSprite2D")
 animation_player = NodePath("AnimationPlayer")
 
@@ -792,12 +796,14 @@ animation_player = NodePath("AnimationPlayer")
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_y8bso")
 animation = &"backstep"
-frame = 5
+frame = 9
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=396853974]
 libraries/ = SubResource("AnimationLibrary_g8kir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1352828118]
+visible = false
 position = Vector2(-8, 47)
 shape = SubResource("RectangleShape2D_qnpof")
 
@@ -891,6 +897,7 @@ animation_name = &"backstep_attack"
 metadata/_custom_type_script = "uid://bmnmxh5jdhk4"
 
 [node name="attack_hitzones" type="Node2D" parent="." unique_id=360788585]
+visible = false
 
 [node name="slash1" type="Area2D" parent="attack_hitzones" unique_id=530914783]
 visible = false

@@ -573,13 +573,12 @@ height = 116.0
 radius = 13.0
 height = 102.0
 
-[node name="Player" type="CharacterBody2D" unique_id=948481981 node_paths=PackedStringArray("sprite", "animation_player", "hitzones")]
+[node name="Player" type="CharacterBody2D" unique_id=948481981 node_paths=PackedStringArray("sprite", "animation_player")]
 collision_layer = 0
 script = ExtResource("1_nyopi")
 sprite = NodePath("sprite")
 animation_player = NodePath("AnimationPlayer")
 facing_right = true
-hitzones = NodePath("attack_hitzones")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=2111754002]
 sprite_frames = SubResource("SpriteFrames_tank4")

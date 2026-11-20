@@ -62,7 +62,7 @@ func _update(delta: float) -> void:
 	if player.sprite.frame == hit_frame and hitzone != null:
 		if hitzone.has_overlapping_bodies():
 			hitzone.monitoring = false
-			player.boss_target.health = max(player.boss_target.curr_health - damage, 0)
+			player.boss_target.curr_health = max(player.boss_target.curr_health - damage, 0)
 	
 	if !Input.is_action_pressed("charged_attack"):
 		if charge_complete:

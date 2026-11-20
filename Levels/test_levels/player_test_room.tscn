@@ -285,6 +285,7 @@ sources/2 = SubResource("TileSetAtlasSource_acure")
 [node name="Player" parent="." unique_id=2089640586 node_paths=PackedStringArray("boss_target") instance=ExtResource("1_27ojs")]
 position = Vector2(-182, -250)
 boss_target = NodePath("../Boss #2")
+debug = false
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1183088080]
 zoom = Vector2(1.5, 1.5)
@@ -295,7 +296,7 @@ tile_map_data = PackedByteArray("AAD5/wIAAgADAAAAAAD6/wIAAgADAAAAAAD7/wIAAgADAAA
 tile_set = SubResource("TileSet_vshyp")
 
 [node name="Boss #2" parent="." unique_id=2091557678 node_paths=PackedStringArray("target") instance=ExtResource("3_27ojs")]
-position = Vector2(523, -92)
+position = Vector2(575, -119)
 target = NodePath("../Player")
 
 [node name="labels" type="Node" parent="." unique_id=106732809]
@@ -363,4 +364,4 @@ offset_left = 212.0
 offset_top = 120.0
 offset_right = 376.0
 offset_bottom = 143.0
-text = "G toCharged Attack"
+text = "G to Charged Attack"

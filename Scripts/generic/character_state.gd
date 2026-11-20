@@ -1,3 +1,4 @@
+#@tool
 extends LimboState
 class_name characterState
 

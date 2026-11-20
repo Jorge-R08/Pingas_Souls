@@ -1,3 +1,4 @@
+#@tool
 extends baseChar
 class_name baseBoss
 
